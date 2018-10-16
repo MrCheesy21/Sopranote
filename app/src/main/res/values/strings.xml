@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Sopranote</string>
+    <string name="enter_numone">Enter numOne</string>
+    <string name="enter_numtwo">Enter numTwo</string>
+    <string name="add_em_boi">Add em boi</string>
+    <string name="heres_the_num">heres the num</string>
 </resources>
