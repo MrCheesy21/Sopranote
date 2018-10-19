@@ -26,7 +26,6 @@ public class MainActivity extends AppCompatActivity {
         playBtn = (Button) findViewById(R.id.play);
         stopBtn.setEnabled(false);
         playBtn.setEnabled(false);
-
         outputFile = Environment.getExternalStorageDirectory().getAbsolutePath() + "/recording.3gp";
         recorder = new MediaRecorder();
         recorder.setAudioSource(MediaRecorder.AudioSource.MIC);
@@ -41,10 +40,8 @@ public class MainActivity extends AppCompatActivity {
                 try {
                     recorder.prepare();
                     recorder.start();
-                } catch (IllegalStateException ise) {
-                    //idk what to do here
-                } catch (IOException ioe) {
-                    //lmao idk exceptions
+                } catch (IllegalStateException | IOException ise) {
+                    Toast.makeText(getApplicationContext(), "error, please try again", Toast.LENGTH_LONG).show();
                 }
                 recordBtn.setEnabled(false);
                 stopBtn.setEnabled(true);
@@ -73,11 +70,10 @@ public class MainActivity extends AppCompatActivity {
                         mediaPlayer.start();
                         Toast.makeText(getApplicationContext(), "playing..", Toast.LENGTH_LONG).show();
                     } catch (Exception e) {
-                        //idk
+                        Toast.makeText(getApplicationContext(), "error, please try again", Toast.LENGTH_LONG).show();
                     }
                 }
             });
-
         }
     }
 
