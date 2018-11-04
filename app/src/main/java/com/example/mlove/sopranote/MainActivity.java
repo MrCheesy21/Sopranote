@@ -16,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
 
     TextView note, pitch;
     private static final double BASE = 440.0;
-    private final String[] notes = {"A", "B", "C", "D", "E", "F", "G"};
+    private final String[] notes = {"A", "A", "B", "C", "C", "D", "D", "E", "F", "F", "G", "G"};
 
 
     @Override
@@ -47,10 +47,9 @@ public class MainActivity extends AppCompatActivity {
     public void processPitch(float pitchInHz) {
         pitch.setText("" + pitchInHz);
         float temp = Math.abs(pitchInHz);
-        int index = (int) determineFreq(temp);
-        if (index > 0 && index < 7) {
-            note.setText(notes[index%7]);
-        }
+        int index = determineFreq(temp);
+        note.setText(notes[Math.abs(index)%12]);
+
     }
 
     static int determineFreq(float pitch) {
