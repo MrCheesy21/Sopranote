@@ -1,7 +1,9 @@
 package com.example.mlove.sopranote;
 
+import android.media.Image;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,9 +18,10 @@ import be.tarsos.dsp.pitch.PitchProcessor;
 public class MainActivity extends AppCompatActivity {
 
     TextView note, pitch;
-    ImageView A, B, C, D, E, F, G, E2, F2;
+    ImageView A, B, C, D, E, F, G;
     private static final double BASE = 440.0;
     private final String[] notes = {"A", "A", "B", "C", "C", "D", "D", "E", "F", "F", "G", "G"};
+    private ImageView[] noteImages;
 
 
     @Override
@@ -32,8 +35,10 @@ public class MainActivity extends AppCompatActivity {
         E = findViewById(R.id.E);
         F = findViewById(R.id.F);
         G = findViewById(R.id.G);
-        E2 = findViewById(R.id.E2);
-        F2 = findViewById(R.id.F2);
+        noteImages = new ImageView[]{A, B, C, D, E, F, G,};
+        for (ImageView e: noteImages) {
+            e.setVisibility(View.GONE);
+        }
         pitch = findViewById(R.id.txtFrequency);
         note = findViewById(R.id.txtNote);
         AudioDispatcher dispatcher = AudioDispatcherFactory.fromDefaultMicrophone(22050,1024,0);
@@ -56,6 +61,9 @@ public class MainActivity extends AppCompatActivity {
 
         }
     public void processPitch(float pitchInHz) {
+        for (ImageView i: noteImages) {
+            i.setVisibility(View.GONE);
+        }
         if (pitchInHz != -1.0) {
             pitch.setText("" + pitchInHz);
             float temp = Math.abs(pitchInHz);
@@ -69,6 +77,30 @@ public class MainActivity extends AppCompatActivity {
                 Thread.sleep(30);
             } catch (InterruptedException e) {
                 e.printStackTrace();
+            }
+
+            for (ImageView e: noteImages) {
+                if (findViewById(R.id.A) == e &&  note.getText().equals("A")) {
+                    e.setVisibility(View.VISIBLE);
+                }
+                if (findViewById(R.id.B) == e &&  note.getText().equals("B")) {
+                    e.setVisibility(View.VISIBLE);
+                }
+                if (findViewById(R.id.C) == e &&  note.getText().equals("C")) {
+                    e.setVisibility(View.VISIBLE);
+                }
+                if (findViewById(R.id.D) == e &&  note.getText().equals("D")) {
+                    e.setVisibility(View.VISIBLE);
+                }
+                if (findViewById(R.id.E) == e &&  note.getText().equals("E")) {
+                    e.setVisibility(View.VISIBLE);
+                }
+                if (findViewById(R.id.F) == e &&  note.getText().equals("F")) {
+                    e.setVisibility(View.VISIBLE);
+                }
+                if (findViewById(R.id.G) == e &&  note.getText().equals("G")) {
+                    e.setVisibility(View.VISIBLE);
+                }
             }
         }
     }
