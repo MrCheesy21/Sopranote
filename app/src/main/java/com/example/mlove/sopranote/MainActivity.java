@@ -2,6 +2,7 @@ package com.example.mlove.sopranote;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import be.tarsos.dsp.AudioDispatcher;
@@ -15,6 +16,7 @@ import be.tarsos.dsp.pitch.PitchProcessor;
 public class MainActivity extends AppCompatActivity {
 
     TextView note, pitch;
+    ImageView A, B, C, D, E, F, G, E2, F2;
     private static final double BASE = 440.0;
     private final String[] notes = {"A", "A", "B", "C", "C", "D", "D", "E", "F", "F", "G", "G"};
 
@@ -23,6 +25,15 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        A = findViewById(R.id.A);
+        B = findViewById(R.id.B);
+        C = findViewById(R.id.C);
+        D = findViewById(R.id.D);
+        E = findViewById(R.id.E);
+        F = findViewById(R.id.F);
+        G = findViewById(R.id.G);
+        E2 = findViewById(R.id.E2);
+        F2 = findViewById(R.id.F2);
         pitch = findViewById(R.id.txtFrequency);
         note = findViewById(R.id.txtNote);
         AudioDispatcher dispatcher = AudioDispatcherFactory.fromDefaultMicrophone(22050,1024,0);
@@ -59,8 +70,5 @@ public class MainActivity extends AppCompatActivity {
     static double log(double x, double base) {
         return Math.log(x)/Math.log(base);
     }
-
 }
-
-
 
