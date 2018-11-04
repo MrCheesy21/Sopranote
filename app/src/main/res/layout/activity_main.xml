@@ -24,7 +24,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="100dp"
         app:srcCompat="@drawable/sharp_quarter_note" />
 
     <ImageView
@@ -47,7 +47,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="40dp"
         app:srcCompat="@drawable/sharp_quarter_note" />
 
     <ImageView
@@ -62,7 +62,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="115dp"
+        android:layout_marginTop="53dp"
         app:srcCompat="@drawable/sharp_quarter_note" />
 
     <ImageView
@@ -85,7 +85,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="85dp"
+        android:layout_marginTop="75dp"
         app:srcCompat="@drawable/sharp_quarter_note" />
 
     <ImageView
@@ -95,12 +95,13 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="100dp"
         app:srcCompat="@drawable/quarter_note" />
+
     <ImageView
         android:id="@+id/Gsharp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="87dp"
         app:srcCompat="@drawable/sharp_quarter_note" />
 
 
