@@ -19,9 +19,9 @@ import be.tarsos.dsp.pitch.PitchProcessor;
 public class MainActivity extends AppCompatActivity {
 
     TextView note, pitch;
-    ImageView A, B, C, D, E, F, G;
+    ImageView A, Asharp, B, C, Csharp,  D, Dsharp, E, F, Fsharp, G, Gsharp;
     private static final double BASE = 440.0;
-    private final String[] notes = {"A", "A", "B", "C", "C", "D", "D", "E", "F", "F", "G", "G"};
+    private final String[] notes = {"A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#"};
     private ImageView[] noteImages;
     private ImageView tempImage;
     private static final String[] allNotes = new String[1001];
@@ -36,13 +36,18 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         A = findViewById(R.id.A);
+        Asharp = findViewById(R.id.Asharp);
         B = findViewById(R.id.B);
         C = findViewById(R.id.C);
+        Csharp = findViewById(R.id.Csharp);
         D = findViewById(R.id.D);
+        Dsharp = findViewById(R.id.Dsharp);
         E = findViewById(R.id.E);
         F = findViewById(R.id.F);
+        Fsharp = findViewById(R.id.Fsharp);
         G = findViewById(R.id.G);
-        noteImages = new ImageView[]{A, B, C, D, E, F, G};
+        Gsharp = findViewById(R.id.Gsharp);
+        noteImages = new ImageView[]{A, Asharp, B, C, Csharp, D, Dsharp, E, F, Fsharp, G, Gsharp};
         tempImage = noteImages[0];
         for (ImageView e: noteImages) {
             e.setVisibility(View.GONE);
@@ -111,6 +116,13 @@ public class MainActivity extends AppCompatActivity {
                         tempImage = e;
                     }
                 }
+                if (findViewById(R.id.Asharp) == e &&  note.getText().equals("A#")) {
+                    if (tempImage != e) {
+                        tempImage.setVisibility(View.INVISIBLE);
+                        e.setVisibility(View.VISIBLE);
+                        tempImage = e;
+                    }
+                }
                 if (findViewById(R.id.B) == e &&  note.getText().equals("B")) {
                     if (tempImage != e) {
                         tempImage.setVisibility(View.INVISIBLE);
@@ -125,7 +137,21 @@ public class MainActivity extends AppCompatActivity {
                         tempImage = e;
                     }
                 }
+                if (findViewById(R.id.Csharp) == e &&  note.getText().equals("C#")) {
+                    if (tempImage != e) {
+                        tempImage.setVisibility(View.INVISIBLE);
+                        e.setVisibility(View.VISIBLE);
+                        tempImage = e;
+                    }
+                }
                 if (findViewById(R.id.D) == e &&  note.getText().equals("D")) {
+                    if (tempImage != e) {
+                        tempImage.setVisibility(View.INVISIBLE);
+                        e.setVisibility(View.VISIBLE);
+                        tempImage = e;
+                    }
+                }
+                if (findViewById(R.id.Dsharp) == e &&  note.getText().equals("D#")) {
                     if (tempImage != e) {
                         tempImage.setVisibility(View.INVISIBLE);
                         e.setVisibility(View.VISIBLE);
@@ -147,6 +173,13 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
                 if (findViewById(R.id.G) == e &&  note.getText().equals("G")) {
+                    if (tempImage != e) {
+                        tempImage.setVisibility(View.INVISIBLE);
+                        e.setVisibility(View.VISIBLE);
+                        tempImage = e;
+                    }
+                }
+                if (findViewById(R.id.Gsharp) == e &&  note.getText().equals("G#")) {
                     if (tempImage != e) {
                         tempImage.setVisibility(View.INVISIBLE);
                         e.setVisibility(View.VISIBLE);
