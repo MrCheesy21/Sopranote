@@ -56,11 +56,21 @@ public class MainActivity extends AppCompatActivity {
 
         }
     public void processPitch(float pitchInHz) {
-        pitch.setText("" + pitchInHz);
-        float temp = Math.abs(pitchInHz);
-        int index = determineFreq(temp);
-        note.setText(notes[Math.abs(index)%12]);
-
+        if (pitchInHz != -1.0) {
+            pitch.setText("" + pitchInHz);
+            float temp = Math.abs(pitchInHz);
+            int index = (int) Math.abs(determineFreq(temp));
+            int tempIndex = index % 12;
+            if (pitchInHz < BASE) {
+                tempIndex = 11 - tempIndex;
+            }
+                note.setText(notes[tempIndex]);
+            try {
+                Thread.sleep(30);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     static int determineFreq(float pitch) {
