@@ -46,12 +46,15 @@ public class MainActivity extends AppCompatActivity {
         }
     public void processPitch(float pitchInHz) {
         pitch.setText("" + pitchInHz);
-        int index = (int) determineFreq(pitchInHz);
-        note.setText(notes[index%12]);
+        float temp = Math.abs(pitchInHz);
+        int index = (int) determineFreq(temp);
+        if (index > 0 && index < 7) {
+            note.setText(notes[index%7]);
+        }
     }
 
-    static double determineFreq(double pitch) {
-        return (double) 12 * log(pitch/BASE, 2);
+    static int determineFreq(float pitch) {
+        return (int) (12 * log(pitch/BASE, 2));
     }
 
     static double log(double x, double base) {
