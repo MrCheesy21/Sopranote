@@ -30,7 +30,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/txtFrequency"
         android:layout_centerHorizontal="true"
-        android:text="waiting" />
+        android:text="note" />
 
     <TextView
         android:id="@+id/txtFrequency"
@@ -38,6 +38,6 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:text="waiting" />
+        android:text="pitch" />
 
 </RelativeLayout>

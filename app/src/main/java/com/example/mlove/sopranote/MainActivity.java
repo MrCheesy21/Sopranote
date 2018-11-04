@@ -1,14 +1,8 @@
 package com.example.mlove.sopranote;
 
-import android.media.MediaRecorder;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import java.io.IOException;
 
 import be.tarsos.dsp.AudioDispatcher;
 import be.tarsos.dsp.AudioEvent;
@@ -27,8 +21,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        pitch = findViewById(R.id.pitch);
-        note = findViewById(R.id.note);
+        pitch = findViewById(R.id.txtFrequency);
+        note = findViewById(R.id.txtNote);
         AudioDispatcher dispatcher = AudioDispatcherFactory.fromDefaultMicrophone(22050,1024,0);
         PitchDetectionHandler pdh = new PitchDetectionHandler() {
             @Override
@@ -80,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
             //G
             note.setText("G");
         }
+
 
     }
 }
