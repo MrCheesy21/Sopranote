@@ -4,5 +4,6 @@
     <string name="play">Play</string>
     <string name="stop">Stop</string>
     <string name="pitch">pitch will display here!</string>
+    <string name="noteName">noteName will display here!</string>
 
 </resources>
