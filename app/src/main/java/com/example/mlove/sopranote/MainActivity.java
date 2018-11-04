@@ -1,6 +1,7 @@
 package com.example.mlove.sopranote;
 
 import android.media.Image;
+import android.opengl.Visibility;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -22,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     private static final double BASE = 440.0;
     private final String[] notes = {"A", "A", "B", "C", "C", "D", "D", "E", "F", "F", "G", "G"};
     private ImageView[] noteImages;
+    private ImageView tempImage;
 
 
     @Override
@@ -35,7 +37,8 @@ public class MainActivity extends AppCompatActivity {
         E = findViewById(R.id.E);
         F = findViewById(R.id.F);
         G = findViewById(R.id.G);
-        noteImages = new ImageView[]{A, B, C, D, E, F, G,};
+        noteImages = new ImageView[]{A, B, C, D, E, F, G};
+        tempImage = noteImages[0];
         for (ImageView e: noteImages) {
             e.setVisibility(View.GONE);
         }
@@ -57,13 +60,9 @@ public class MainActivity extends AppCompatActivity {
         AudioProcessor p = new PitchProcessor(PitchProcessor.PitchEstimationAlgorithm.FFT_YIN, 22050, 1024, pdh);
         dispatcher.addAudioProcessor(p);
         new Thread(dispatcher,"Audio Dispatcher").start();
-
-
         }
+
     public void processPitch(float pitchInHz) {
-        for (ImageView i: noteImages) {
-            i.setVisibility(View.GONE);
-        }
         if (pitchInHz != -1.0) {
             pitch.setText("" + pitchInHz);
             float temp = Math.abs(pitchInHz);
@@ -81,25 +80,53 @@ public class MainActivity extends AppCompatActivity {
 
             for (ImageView e: noteImages) {
                 if (findViewById(R.id.A) == e &&  note.getText().equals("A")) {
-                    e.setVisibility(View.VISIBLE);
+                    if (tempImage != e) {
+                        tempImage.setVisibility(View.INVISIBLE);
+                        e.setVisibility(View.VISIBLE);
+                        tempImage = e;
+                    }
                 }
                 if (findViewById(R.id.B) == e &&  note.getText().equals("B")) {
-                    e.setVisibility(View.VISIBLE);
+                    if (tempImage != e) {
+                        tempImage.setVisibility(View.INVISIBLE);
+                        e.setVisibility(View.VISIBLE);
+                        tempImage = e;
+                    }
                 }
                 if (findViewById(R.id.C) == e &&  note.getText().equals("C")) {
-                    e.setVisibility(View.VISIBLE);
+                    if (tempImage != e) {
+                        tempImage.setVisibility(View.INVISIBLE);
+                        e.setVisibility(View.VISIBLE);
+                        tempImage = e;
+                    }
                 }
                 if (findViewById(R.id.D) == e &&  note.getText().equals("D")) {
-                    e.setVisibility(View.VISIBLE);
+                    if (tempImage != e) {
+                        tempImage.setVisibility(View.INVISIBLE);
+                        e.setVisibility(View.VISIBLE);
+                        tempImage = e;
+                    }
                 }
                 if (findViewById(R.id.E) == e &&  note.getText().equals("E")) {
-                    e.setVisibility(View.VISIBLE);
+                    if (tempImage != e) {
+                        tempImage.setVisibility(View.INVISIBLE);
+                        e.setVisibility(View.VISIBLE);
+                        tempImage = e;
+                    }
                 }
                 if (findViewById(R.id.F) == e &&  note.getText().equals("F")) {
-                    e.setVisibility(View.VISIBLE);
+                    if (tempImage != e) {
+                        tempImage.setVisibility(View.INVISIBLE);
+                        e.setVisibility(View.VISIBLE);
+                        tempImage = e;
+                    }
                 }
                 if (findViewById(R.id.G) == e &&  note.getText().equals("G")) {
-                    e.setVisibility(View.VISIBLE);
+                    if (tempImage != e) {
+                        tempImage.setVisibility(View.INVISIBLE);
+                        e.setVisibility(View.VISIBLE);
+                        tempImage = e;
+                    }
                 }
             }
         }
