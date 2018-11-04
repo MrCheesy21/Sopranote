@@ -45,42 +45,13 @@ public class MainActivity extends AppCompatActivity {
 
         }
     public void processPitch(float pitchInHz) {
-
         pitch.setText("" + pitchInHz);
-
-        if(pitchInHz >= 110 && pitchInHz < 123.47) {
-            //A
-            note.setText("A");
-        }
-        else if(pitchInHz >= 123.47 && pitchInHz < 130.81) {
-            //B
-            note.setText("B");
-        }
-        else if(pitchInHz >= 130.81 && pitchInHz < 146.83) {
-            //C
-            note.setText("C");
-        }
-        else if(pitchInHz >= 146.83 && pitchInHz < 164.81) {
-            //D
-            note.setText("D");
-        }
-        else if(pitchInHz >= 164.81 && pitchInHz <= 174.61) {
-            //E
-            note.setText("E");
-        }
-        else if(pitchInHz >= 174.61 && pitchInHz < 185) {
-            //F
-            note.setText("F");
-        }
-        else if(pitchInHz >= 185 && pitchInHz < 196) {
-            //G
-            note.setText("G");
-        }
-
+        int index = (int) determineFreq(pitchInHz);
+        note.setText(notes[index%12]);
     }
 
-    public double determineFreq(double pitch) {
-        return 12 * log(pitch/BASE, 2);
+    static double determineFreq(double pitch) {
+        return (double) 12 * log(pitch/BASE, 2);
     }
 
     static double log(double x, double base) {
