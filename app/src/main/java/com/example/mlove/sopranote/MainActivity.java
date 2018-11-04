@@ -49,7 +49,11 @@ public class MainActivity extends AppCompatActivity {
             pitch.setText("" + pitchInHz);
             float temp = Math.abs(pitchInHz);
             int index = (int) Math.abs(determineFreq(temp));
-            note.setText(notes[index%12]);
+            int tempIndex = index % 12;
+            if (pitchInHz < BASE) {
+                tempIndex = 11 - tempIndex;
+            }
+                note.setText(notes[tempIndex]);
             try {
                 Thread.sleep(30);
             } catch (InterruptedException e) {
