@@ -49,38 +49,7 @@ public class MainActivity extends AppCompatActivity {
         AudioProcessor p = new PitchProcessor(PitchProcessor.PitchEstimationAlgorithm.FFT_YIN, 22050, 1024, pdh);
         dispatcher.addAudioProcessor(p);
         new Thread(dispatcher,"Audio Dispatcher").start();
-        recordBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                recorder.setAudioSource(MediaRecorder.AudioSource.MIC);
-                recorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
-                recorder.setAudioEncoder(MediaRecorder.OutputFormat.AMR_NB);
-                recorder.setOutputFile("/dev/null");
-                try {
-                    recorder.prepare();
-                    recorder.start();
-                } catch (IllegalStateException | IOException e) {
-                    Toast.makeText(getApplicationContext(), "error, please try again", Toast.LENGTH_LONG).show();
-                    e.printStackTrace();
-                }
-                recordBtn.setEnabled(false);
-                stopBtn.setEnabled(true);
-                Toast.makeText(getApplicationContext(), "recording started!", Toast.LENGTH_LONG).show();
-            }
-        });
-        stopBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                recorder.stop();
-                recorder.reset();
-                //recorder.release();
-                //recorder = null;
-                stopBtn.setEnabled(false);
-                recordBtn.setEnabled(true);
-                playBtn.setEnabled(true);
-                Toast.makeText(getApplicationContext(), "recording stopped, maxAmp = ", Toast.LENGTH_LONG).show();
-            }
-        });
+
     }
 }
 
