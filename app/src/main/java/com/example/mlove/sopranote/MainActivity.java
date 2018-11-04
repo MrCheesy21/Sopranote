@@ -20,18 +20,15 @@ import be.tarsos.dsp.pitch.PitchProcessor;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button recordBtn, stopBtn, playBtn;
-    private MediaRecorder recorder;
+    TextView note, pitch;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        recordBtn = (Button) findViewById(R.id.record);
-        stopBtn = (Button) findViewById(R.id.stop);
-        stopBtn.setEnabled(false);
-        playBtn.setEnabled(false);
-        recorder = new MediaRecorder();
+        pitch = findViewById(R.id.pitch);
+        note = findViewById(R.id.note);
         AudioDispatcher dispatcher = AudioDispatcherFactory.fromDefaultMicrophone(22050,1024,0);
         PitchDetectionHandler pdh = new PitchDetectionHandler() {
             @Override
@@ -40,8 +37,7 @@ public class MainActivity extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        TextView text = (TextView) findViewById(R.id.pitch);
-                        text.setText("" + pitchInHz);
+                        processPitch(pitchInHz);
                     }
                 });
             }
@@ -49,6 +45,41 @@ public class MainActivity extends AppCompatActivity {
         AudioProcessor p = new PitchProcessor(PitchProcessor.PitchEstimationAlgorithm.FFT_YIN, 22050, 1024, pdh);
         dispatcher.addAudioProcessor(p);
         new Thread(dispatcher,"Audio Dispatcher").start();
+
+
+        }
+    public void processPitch(float pitchInHz) {
+
+        pitch.setText("" + pitchInHz);
+
+        if(pitchInHz >= 110 && pitchInHz < 123.47) {
+            //A
+            note.setText("A");
+        }
+        else if(pitchInHz >= 123.47 && pitchInHz < 130.81) {
+            //B
+            note.setText("B");
+        }
+        else if(pitchInHz >= 130.81 && pitchInHz < 146.83) {
+            //C
+            note.setText("C");
+        }
+        else if(pitchInHz >= 146.83 && pitchInHz < 164.81) {
+            //D
+            note.setText("D");
+        }
+        else if(pitchInHz >= 164.81 && pitchInHz <= 174.61) {
+            //E
+            note.setText("E");
+        }
+        else if(pitchInHz >= 174.61 && pitchInHz < 185) {
+            //F
+            note.setText("F");
+        }
+        else if(pitchInHz >= 185 && pitchInHz < 196) {
+            //G
+            note.setText("G");
+        }
 
     }
 }
