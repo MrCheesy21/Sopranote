@@ -24,6 +24,11 @@ public class MainActivity extends AppCompatActivity {
     private final String[] notes = {"A", "A", "B", "C", "C", "D", "D", "E", "F", "F", "G", "G"};
     private ImageView[] noteImages;
     private ImageView tempImage;
+    private static final String[] allNotes = new String[1001];
+    private static final String[] newNotes = new String[1001];
+    private static double previous = 41;
+    private static double current = 41;
+    private static int counter = -40;
 
 
     @Override
@@ -41,6 +46,32 @@ public class MainActivity extends AppCompatActivity {
         tempImage = noteImages[0];
         for (ImageView e: noteImages) {
             e.setVisibility(View.GONE);
+        }
+        for (int i = 40; i <= 1000; i++) {
+            float temp = Math.abs(i);
+            int index = Math.abs(determineFreq(temp));
+            int tempIndex = index % 12;
+            if (i < BASE) {
+                tempIndex = 11 - tempIndex;
+            }
+            String tempNote = notes[tempIndex];
+            allNotes[i] = tempNote;
+        }
+        for (int i = 40; i <= 1000; i++) {
+            if (i < (int)  ((getCurrent() -  getPrevious()) + getPrevious())) {
+                newNotes[i] = allNotes[i];
+            } else if (i == (int)  ((getCurrent() -  getPrevious()) + getPrevious())) {
+                getNextFreq(counter++);
+                int temp = (int)  ((getCurrent() -  getPrevious()) + getPrevious());
+                while (i < temp) {
+                    if (temp > 1000) {
+                        temp = 999;
+                    }
+                    newNotes[i] = allNotes[temp + 1];
+                    i++;
+                }
+                i--;
+            }
         }
         pitch = findViewById(R.id.txtFrequency);
         note = findViewById(R.id.txtNote);
@@ -64,14 +95,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void processPitch(float pitchInHz) {
         if (pitchInHz != -1.0) {
-            pitch.setText("" + pitchInHz);
-            float temp = Math.abs(pitchInHz);
-            int index = (int) Math.abs(determineFreq(temp));
-            int tempIndex = index % 12;
-            if (pitchInHz < BASE) {
-                tempIndex = 11 - tempIndex;
-            }
-                note.setText(notes[tempIndex]);
+            pitch.setText(String.format("%.2f", pitchInHz));
+            note.setText(newNotes[(int) pitchInHz]);
             try {
                 Thread.sleep(30);
             } catch (InterruptedException e) {
@@ -138,6 +163,18 @@ public class MainActivity extends AppCompatActivity {
 
     static double log(double x, double base) {
         return Math.log(x)/Math.log(base);
+    }
+    static void getNextFreq(int index) {
+        previous = current;
+        current = 440.0 * (double) Math.pow(2, (double) ((index + 1.0) / 12.0));
+    }
+
+    static double getCurrent() {
+        return current;
+    }
+
+    static double getPrevious() {
+        return previous;
     }
 }
 
