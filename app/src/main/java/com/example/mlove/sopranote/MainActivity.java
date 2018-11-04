@@ -15,6 +15,8 @@ import be.tarsos.dsp.pitch.PitchProcessor;
 public class MainActivity extends AppCompatActivity {
 
     TextView note, pitch;
+    private static final double BASE = 440.0;
+    private final String[] notes = {"A", "B", "C", "D", "E", "F", "G"};
 
 
     @Override
@@ -75,8 +77,16 @@ public class MainActivity extends AppCompatActivity {
             note.setText("G");
         }
 
-
     }
+
+    public double determineFreq(double pitch) {
+        return 12 * log(pitch/BASE, 2);
+    }
+
+    static double log(double x, double base) {
+        return Math.log(x)/Math.log(base);
+    }
+
 }
 
 
