@@ -2,7 +2,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    android:background="@drawable/parchment">
 
     <ImageView
         android:id="@+id/staff"
@@ -10,7 +11,6 @@
         android:layout_height="296dp"
         android:layout_marginTop="20dp"
         app:srcCompat="@drawable/staff" />
-
 
     <ImageView
         android:id="@+id/F"
@@ -69,15 +69,15 @@
         app:srcCompat="@drawable/quarter_note" />
 
 
-
     <TextView
         android:id="@+id/txtNote"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="478dp"
-        android:text="waiting" />
+        android:layout_marginTop="200dp"
+        android:fontFamily="casual"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="288sp" />
 
     <TextView
         android:id="@+id/txtFrequency"
@@ -86,6 +86,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="36dp"
-        android:text="waiting" />
+        android:fontFamily="cursive"
+        android:textSize="24sp" />
 
 </RelativeLayout>
