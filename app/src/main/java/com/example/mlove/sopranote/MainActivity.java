@@ -19,9 +19,9 @@ import be.tarsos.dsp.pitch.PitchProcessor;
 public class MainActivity extends AppCompatActivity {
 
     TextView note, pitch;
-    ImageView A, B, C, D, E, F, G;
+    ImageView A, Asharp, B, C, Csharp,  D, Dsharp, E, F, Fsharp, G, Gsharp;
     private static final double BASE = 440.0;
-    private final String[] notes = {"A", "A", "B", "C", "C", "D", "D", "E", "F", "F", "G", "G"};
+    private final String[] notes = {"A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#"};
     private ImageView[] noteImages;
     private ImageView tempImage;
 
@@ -31,12 +31,17 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         A = findViewById(R.id.A);
+        Asharp = findViewById(R.id.Asharp);
         B = findViewById(R.id.B);
         C = findViewById(R.id.C);
+        Csharp = findViewById(R.id.Csharp);
         D = findViewById(R.id.D);
+        Dsharp = findViewById(R.id.Dsharp);
         E = findViewById(R.id.E);
         F = findViewById(R.id.F);
+        Fsharp = findViewById(R.id.Fsharp);
         G = findViewById(R.id.G);
+        Gsharp = findViewById(R.id.Gsharp);
         noteImages = new ImageView[]{A, B, C, D, E, F, G};
         tempImage = noteImages[0];
         for (ImageView e: noteImages) {
