@@ -19,7 +19,17 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="70dp"
         app:srcCompat="@drawable/backwards_note" />
+<<<<<<< HEAD
 
+=======
+    <ImageView
+        android:id="@+id/Fsharp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="100dp"
+        app:srcCompat="@drawable/sharp_quarter_note" />
+>>>>>>> ab3b92a3d1a25a4532cec2d483244ea95bc1c102
 
     <ImageView
         android:id="@+id/E"
@@ -36,7 +46,17 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="100dp"
         app:srcCompat="@drawable/backwards_note" />
+<<<<<<< HEAD
 
+=======
+    <ImageView
+        android:id="@+id/Dsharp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        app:srcCompat="@drawable/sharp_quarter_note" />
+>>>>>>> ab3b92a3d1a25a4532cec2d483244ea95bc1c102
 
     <ImageView
         android:id="@+id/C"
@@ -45,6 +65,16 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="115dp"
         app:srcCompat="@drawable/backwards_note" />
+<<<<<<< HEAD
+=======
+    <ImageView
+        android:id="@+id/Csharp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="53dp"
+        app:srcCompat="@drawable/sharp_quarter_note" />
+>>>>>>> ab3b92a3d1a25a4532cec2d483244ea95bc1c102
 
     <ImageView
         android:id="@+id/B"
@@ -61,7 +91,17 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="85dp"
         app:srcCompat="@drawable/quarter_note" />
+<<<<<<< HEAD
 
+=======
+    <ImageView
+        android:id="@+id/Asharp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="75dp"
+        app:srcCompat="@drawable/sharp_quarter_note" />
+>>>>>>> ab3b92a3d1a25a4532cec2d483244ea95bc1c102
 
     <ImageView
         android:id="@+id/G"
@@ -70,6 +110,17 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="100dp"
         app:srcCompat="@drawable/quarter_note" />
+<<<<<<< HEAD
+=======
+
+    <ImageView
+        android:id="@+id/Gsharp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="87dp"
+        app:srcCompat="@drawable/sharp_quarter_note" />
+>>>>>>> ab3b92a3d1a25a4532cec2d483244ea95bc1c102
 
 
     <TextView
