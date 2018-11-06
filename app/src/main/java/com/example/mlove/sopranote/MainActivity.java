@@ -24,8 +24,8 @@ public class MainActivity extends AppCompatActivity {
     private final String[] notes = {"A", "A", "B", "C", "C", "D", "D", "E", "F", "F", "G", "G"};
     private ImageView[] noteImages;
     private ImageView tempImage;
-    private static final String[] allNotes = new String[1001];
-    private static final String[] newNotes = new String[1001];
+    private static final String[] allNotes = new String[5001];
+    private static final String[] newNotes = new String[5001];
     private static double previous = 41;
     private static double current = 41;
     private static int counter = -40;
@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
         for (ImageView e: noteImages) {
             e.setVisibility(View.GONE);
         }
-        for (int i = 40; i <= 1000; i++) {
+        for (int i = 40; i <= 5000; i++) {
             float temp = Math.abs(i);
             int index = Math.abs(determineFreq(temp));
             int tempIndex = index % 12;
@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
             String tempNote = notes[tempIndex];
             allNotes[i] = tempNote;
         }
-        for (int i = 40; i <= 1000; i++) {
+        for (int i = 40; i <= 5000; i++) {
             boolean special = false;
             if (i < (int)  ((getCurrent() -  getPrevious()) + getPrevious())) {
                 newNotes[i] = allNotes[i];
