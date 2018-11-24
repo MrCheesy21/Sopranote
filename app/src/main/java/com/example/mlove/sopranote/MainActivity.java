@@ -1,7 +1,5 @@
 package com.example.mlove.sopranote;
 
-import android.media.Image;
-import android.opengl.Visibility;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -47,52 +45,7 @@ public class MainActivity extends AppCompatActivity {
         for (ImageView e: noteImages) {
             e.setVisibility(View.GONE);
         }
-        for (int i = 40; i <= 5000; i++) {
-            float temp = Math.abs(i);
-            int index = Math.abs(determineFreq(temp));
-            int tempIndex = index % 12;
-            if (i < BASE) {
-                tempIndex = 11 - tempIndex;
-            }
-            String tempNote = notes[tempIndex];
-            allNotes[i] = tempNote;
-        }
-        for (int i = 40; i <= 5000; i++) {
-            boolean special = false;
-            if (i < (int)  ((getCurrent() -  getPrevious()) + getPrevious())) {
-                newNotes[i] = allNotes[i];
-            } else if (i == (int)  ((getCurrent() -  getPrevious()) + getPrevious())) {
-                getNextFreq(counter++);
-                int temp = (int)  ((getCurrent() -  getPrevious()) + getPrevious());
-                if (temp <= 1000) {
-                    if (allNotes[(int)((getCurrent() - getPrevious()) / 2.0 + getPrevious())].equals("B")
-                            || allNotes[(int)((getCurrent() - getPrevious()) / 2.0 + getPrevious())].equals("E")) {
-                        temp = (int) ((getCurrent() - getPrevious()) / 2.0 + getPrevious());
-                        special = true;
-                    }
-                }
-                int holder = temp;
-                while (i < holder) {
-                    if (temp > 1000) {
-                        temp = 999;
-                        holder = temp;
-                    }
-                    if (special) {
-                        while (allNotes[temp].equals("B") || allNotes[temp].equals("E")) {
-                            temp++;
-                        }
-                        special = false;
-                    }
-                    newNotes[i] = allNotes[holder + 1];
-                    i++;
-                }
-                while (i < temp - 1) {
-                    newNotes[i] = allNotes[temp];
-                    i++;
-                }
-                i--;
-            }
-        }
+        shiftPitches();
         pitch = findViewById(R.id.txtFrequency);
         note = findViewById(R.id.txtNote);
         AudioDispatcher dispatcher = AudioDispatcherFactory.fromDefaultMicrophone(22050,1024,0);
@@ -177,6 +130,55 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public void shiftPitches() {
+        for (int i = 40; i <= 5000; i++) {
+            float temp = Math.abs(i);
+            int index = Math.abs(determineFreq(temp));
+            int tempIndex = index % 12;
+            if (i < BASE) {
+                tempIndex = 11 - tempIndex;
+            }
+            String tempNote = notes[tempIndex];
+            allNotes[i] = tempNote;
+        }
+        for (int i = 40; i <= 5000; i++) {
+            boolean special = false;
+            if (i < (int)  (getCurrent())) {
+                newNotes[i] = allNotes[i];
+            } else if (i == (int)  (getCurrent())) {
+                getNextFreq(counter++);
+                int temp = (int)  (getCurrent());
+                if (temp <= 1000) {
+                    if (allNotes[(int)((getCurrent() - getPrevious()) / 2.0 + getPrevious())].equals("B")
+                            || allNotes[(int)((getCurrent() - getPrevious()) / 2.0 + getPrevious())].equals("E")) {
+                        temp = (int) ((getCurrent() - getPrevious()) / 2.0 + getPrevious());
+                        special = true;
+                    }
+                }
+                int holder = temp;
+                while (i < holder) {
+                    if (temp > 1000) {
+                        temp = 999;
+                        holder = temp;
+                    }
+                    if (special) {
+                        while (allNotes[temp].equals("B") || allNotes[temp].equals("E")) {
+                            temp++;
+                        }
+                        special = false;
+                    }
+                    newNotes[i] = allNotes[holder + 1];
+                    i++;
+                }
+                while (i < temp - 1) {
+                    newNotes[i] = allNotes[temp];
+                    i++;
+                }
+                i--;
+            }
+        }
+    }
+
     static int determineFreq(float pitch) {
         return (int) (12 * log(pitch/BASE, 2));
     }
@@ -184,9 +186,10 @@ public class MainActivity extends AppCompatActivity {
     static double log(double x, double base) {
         return Math.log(x)/Math.log(base);
     }
+
     static void getNextFreq(int index) {
         previous = current;
-        current = 440.0 * (double) Math.pow(2, (double) ((index + 1.0) / 12.0));
+        current = 440.0 * Math.pow(2, ((index + 1.0) / 12.0));
     }
 
     static double getCurrent() {
