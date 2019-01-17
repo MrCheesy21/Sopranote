@@ -1,7 +1,5 @@
 package com.example.mlove.sopranote;
 
-import android.media.Image;
-import android.opengl.Visibility;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
