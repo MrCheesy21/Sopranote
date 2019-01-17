@@ -179,24 +179,24 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    static int determineFreq(float pitch) {
+    private static int determineFreq(float pitch) {
         return (int) (12 * log(pitch/BASE, 2));
     }
 
-    static double log(double x, double base) {
+    private static double log(double x, double base) {
         return Math.log(x)/Math.log(base);
     }
 
-    static void getNextFreq(int index) {
+    private static void getNextFreq(int index) {
         previous = current;
         current = 440.0 * Math.pow(2, ((index + 1.0) / 12.0));
     }
 
-    static double getCurrent() {
+    private static double getCurrent() {
         return current;
     }
 
-    static double getPrevious() {
+    private static double getPrevious() {
         return previous;
     }
 }
