@@ -1,5 +1,6 @@
 package com.example.mlove.sopranote;
 
+
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
