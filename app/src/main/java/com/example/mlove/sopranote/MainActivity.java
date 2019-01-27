@@ -3,6 +3,7 @@ package com.example.mlove.sopranote;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
@@ -71,9 +72,10 @@ public class MainActivity extends AppCompatActivity {
         new Thread(dispatcher,"Audio Dispatcher").start();
 
         TempoInputButton.setOnClickListener(new View.OnClickListener() {
+            final int tempo = 0;
             @Override
             public void onClick(View v) {
-
+                DialogFragment TempoInput = new TempoInputDialogFragment();
             }
         });
         }
@@ -206,13 +208,4 @@ public class MainActivity extends AppCompatActivity {
 
 }
 
-public class TempoInputDialogFragment extends DialogFragment {
-    @Override
-    public Dialog onCreateDialog(Bundle savedInstanceState) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        
-                });
-        return builder.create();
-    }
-}
 
