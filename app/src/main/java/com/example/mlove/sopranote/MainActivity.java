@@ -1,9 +1,6 @@
 package com.example.mlove.sopranote;
 
 
-import android.app.AlertDialog;
-import android.app.Dialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
@@ -24,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
 
     TextView note, pitch;
     ImageView A, B, C,  D, E, F, G;
-    private final Button TempoInputButton = findViewById(R.id.TempoInput);
+    private Button TempoInputButton;
     private final String[] noteVals = {"A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#"};
     private ImageView[] noteImages;
     private ImageView tempImage;
@@ -71,6 +68,9 @@ public class MainActivity extends AppCompatActivity {
         dispatcher.addAudioProcessor(p);
         new Thread(dispatcher,"Audio Dispatcher").start();
 
+
+
+        TempoInputButton = findViewById(R.id.TempoInput);
         TempoInputButton.setOnClickListener(new View.OnClickListener() {
             final int tempo = 0;
             @Override
