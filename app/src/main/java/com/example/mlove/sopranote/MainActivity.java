@@ -4,6 +4,7 @@ package com.example.mlove.sopranote;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -19,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
 
     TextView note, pitch;
     ImageView A, B, C,  D, E, F, G;
+    private final Button TempoInputButton = findViewById(R.id.TempoInput);
     private final String[] noteVals = {"A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#"};
     private ImageView[] noteImages;
     private ImageView tempImage;
@@ -181,7 +183,7 @@ public class MainActivity extends AppCompatActivity {
             }
     }
 
-
+    
     private static void nextRange() {
         range *= Math.cbrt(Math.sqrt(Math.sqrt(2)));
     }

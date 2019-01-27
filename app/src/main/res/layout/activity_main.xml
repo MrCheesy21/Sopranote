@@ -87,4 +87,20 @@
         android:fontFamily="cursive"
         android:textSize="24sp" />
 
+    <Button
+        android:id="@+id/TempoInput"
+        style="@style/Widget.AppCompat.Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="416dp"
+        android:layout_marginEnd="161dp"
+        android:layout_marginBottom="267dp"
+        android:backgroundTint="@color/colorPrimaryDark"
+        android:text="Tempo"
+        android:textAppearance="@style/TextAppearance.AppCompat"
+        android:visibility="visible" />
+
 </RelativeLayout>
