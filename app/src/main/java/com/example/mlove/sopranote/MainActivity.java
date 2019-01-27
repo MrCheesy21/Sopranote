@@ -1,7 +1,10 @@
 package com.example.mlove.sopranote;
 
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -66,6 +69,13 @@ public class MainActivity extends AppCompatActivity {
         AudioProcessor p = new PitchProcessor(PitchProcessor.PitchEstimationAlgorithm.FFT_YIN, 22050, 1024, pdh);
         dispatcher.addAudioProcessor(p);
         new Thread(dispatcher,"Audio Dispatcher").start();
+
+        TempoInputButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
         }
 
     public void processPitch(float pitchInHz) {
@@ -169,8 +179,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    
-
     /*
     This algorithm uses the equal tempered tuning system to determine when a note corresponds to
     a certain frequency. Each note's frequencies are exactly the frequency of the note before it
@@ -196,5 +204,15 @@ public class MainActivity extends AppCompatActivity {
         range *= Math.cbrt(Math.sqrt(Math.sqrt(2)));
     }
 
+}
+
+public class TempoInputDialogFragment extends DialogFragment {
+    @Override
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        
+                });
+        return builder.create();
+    }
 }
 
