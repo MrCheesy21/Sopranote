@@ -169,6 +169,14 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    
+
+    /*
+    This algorithm uses the equal tempered tuning system to determine when a note corresponds to
+    a certain frequency. Each note's frequencies are exactly the frequency of the note before it
+    times the 12th root of 2. Since there are 12 possible notes in an octave, A4 will be exactly
+    double the frequency of A3.
+     */
     public void shiftPitches(String[] noteVals) {
             while (index < notes.length) {
                 while (ind < index + range) {
@@ -183,7 +191,7 @@ public class MainActivity extends AppCompatActivity {
             }
     }
 
-    
+
     private static void nextRange() {
         range *= Math.cbrt(Math.sqrt(Math.sqrt(2)));
     }
