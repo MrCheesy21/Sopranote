@@ -7,8 +7,10 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatDialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.EditText;
 
 public class TempoInputDialog extends AppCompatDialogFragment {
+    private EditText tempo;
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder TempoInputBuilder = new AlertDialog.Builder(getActivity());
@@ -31,6 +33,9 @@ public class TempoInputDialog extends AppCompatDialogFragment {
 
                     }
                 });
+
+        tempo = TempoInputView.findViewById(R.id.tempo_input_dialog);
+        return TempoInputBuilder.create();
 
     }
 }
