@@ -4,6 +4,7 @@ package com.example.mlove.sopranote;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -22,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     private final String[] noteVals = {"A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#"};
     private ImageView[] noteImages;
     private ImageView tempImage;
+    private Button TempoInputButton;
     private static final String[] notes = new String[5001];
     private static double range = 1.225;
     private static int cursor = 7;
@@ -40,14 +42,16 @@ public class MainActivity extends AppCompatActivity {
         E = findViewById(R.id.E);
         F = findViewById(R.id.F);
         G = findViewById(R.id.G);
+        pitch = findViewById(R.id.txtFrequency);
+        note = findViewById(R.id.txtNote);
+
         noteImages = new ImageView[]{A, A, B, C, C, D, D, E, F, F, G, G};
         tempImage = noteImages[0];
         for (ImageView e: noteImages) {
             e.setVisibility(View.GONE);
         }
         shiftPitches(noteVals);
-        pitch = findViewById(R.id.txtFrequency);
-        note = findViewById(R.id.txtNote);
+
         AudioDispatcher dispatcher = AudioDispatcherFactory.fromDefaultMicrophone(22050,1024,0);
         PitchDetectionHandler pdh = new PitchDetectionHandler() {
             @Override
