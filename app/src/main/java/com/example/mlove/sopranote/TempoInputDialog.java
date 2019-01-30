@@ -12,6 +12,11 @@ public class TempoInputDialog extends AppCompatDialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder TempoInputBuilder = new AlertDialog.Builder(getActivity());
+
+        LayoutInflater TempoInputInflater = getActivity().getLayoutInflater();
+        View TempoInputView = TempoInputInflater.inflate(R.layout.tempo_input_dialog, null);
+        TempoInputBuilder.setView(TempoInputView);
+
         TempoInputBuilder.setTitle("Tempo Input")
                 .setMessage("Please enter a tempo")
                 .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
@@ -26,7 +31,6 @@ public class TempoInputDialog extends AppCompatDialogFragment {
 
                     }
                 });
-        LayoutInflater TempoInputInflater = getActivity().getLayoutInflater();
-        View TempoInputView = TempoInputInflater.inflate(R.layout.tempo_input_dialog)
+
     }
 }
