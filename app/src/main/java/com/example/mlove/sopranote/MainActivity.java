@@ -44,6 +44,14 @@ public class MainActivity extends AppCompatActivity {
         G = findViewById(R.id.G);
         pitch = findViewById(R.id.txtFrequency);
         note = findViewById(R.id.txtNote);
+        TempoInputButton = findViewById(R.id.TempoInputButton);
+
+        TempoInputButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
 
         noteImages = new ImageView[]{A, A, B, C, C, D, D, E, F, F, G, G};
         tempImage = noteImages[0];
