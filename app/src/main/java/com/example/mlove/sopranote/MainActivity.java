@@ -17,14 +17,15 @@ import be.tarsos.dsp.pitch.PitchDetectionHandler;
 import be.tarsos.dsp.pitch.PitchDetectionResult;
 import be.tarsos.dsp.pitch.PitchProcessor;
 
-public class MainActivity extends AppCompatActivity {
-
-    TextView note, pitch;
-    ImageView A, B, C,  D, E, F, G;
+public class MainActivity extends AppCompatActivity implements TempoInputDialog.TempoInputListener {
+    private TextView note, pitch;
+    private ImageView A, B, C, D, E, F, G;
     private Button TempoInputButton;
     private final String[] noteVals = {"A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#"};
     private ImageView[] noteImages;
     private ImageView tempImage;
+    private Button TempoInputButton;
+    private TextView TempoView;
     private static final String[] notes = new String[5001];
     private static double range = 1.225;
     private static int cursor = 7;
@@ -43,14 +44,25 @@ public class MainActivity extends AppCompatActivity {
         E = findViewById(R.id.E);
         F = findViewById(R.id.F);
         G = findViewById(R.id.G);
+        pitch = findViewById(R.id.txtFrequency);
+        note = findViewById(R.id.txtNote);
+        TempoInputButton = findViewById(R.id.TempoInputButton);
+        TempoView = findViewById(R.id.tempo);
+
+        TempoInputButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openTempoDialog();
+            }
+        });
+
         noteImages = new ImageView[]{A, A, B, C, C, D, D, E, F, F, G, G};
         tempImage = noteImages[0];
         for (ImageView e: noteImages) {
             e.setVisibility(View.GONE);
         }
         shiftPitches(noteVals);
-        pitch = findViewById(R.id.txtFrequency);
-        note = findViewById(R.id.txtNote);
+
         AudioDispatcher dispatcher = AudioDispatcherFactory.fromDefaultMicrophone(22050,1024,0);
         PitchDetectionHandler pdh = new PitchDetectionHandler() {
             @Override
@@ -67,9 +79,7 @@ public class MainActivity extends AppCompatActivity {
         AudioProcessor p = new PitchProcessor(PitchProcessor.PitchEstimationAlgorithm.FFT_YIN, 22050, 1024, pdh);
         dispatcher.addAudioProcessor(p);
         new Thread(dispatcher,"Audio Dispatcher").start();
-
-
-
+      
         TempoInputButton = findViewById(R.id.TempoInput);
         TempoInputButton.setOnClickListener(new View.OnClickListener() {
             final int tempo = 0;
@@ -206,6 +216,10 @@ public class MainActivity extends AppCompatActivity {
         range *= Math.cbrt(Math.sqrt(Math.sqrt(2)));
     }
 
+    @Override
+    public void setTempo(String tempo) {
+        TempoView.setText(tempo);
+    }
 }
 
 
