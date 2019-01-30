@@ -2,6 +2,7 @@ package com.example.mlove.sopranote;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatDialogFragment;
@@ -11,6 +12,8 @@ import android.widget.EditText;
 
 public class TempoInputDialog extends AppCompatDialogFragment {
     private EditText tempo;
+    private TempoInputListener listener;
+
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder TempoInputBuilder = new AlertDialog.Builder(getActivity());
@@ -30,12 +33,21 @@ public class TempoInputDialog extends AppCompatDialogFragment {
                 .setNegativeButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-
+                        String tempo = tempo.getText().toString();
                     }
                 });
 
         tempo = TempoInputView.findViewById(R.id.tempo_input_dialog);
         return TempoInputBuilder.create();
+    }
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        listener = (TempoInputListener) context;
+    }
+
+    public interface TempoInputListener {
+        void setTempo(String tempo);
     }
 }

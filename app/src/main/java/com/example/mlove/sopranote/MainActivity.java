@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
         TempoInputButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                openTempoDialog();
             }
         });
 
@@ -76,7 +76,13 @@ public class MainActivity extends AppCompatActivity {
         AudioProcessor p = new PitchProcessor(PitchProcessor.PitchEstimationAlgorithm.FFT_YIN, 22050, 1024, pdh);
         dispatcher.addAudioProcessor(p);
         new Thread(dispatcher,"Audio Dispatcher").start();
-        }
+    }
+
+    public void openTempoDialog() {
+        TempoInputDialog  tempoInputDialog = new TempoInputDialog();
+        tempoInputDialog.show(getSupportFragmentManager(), "tempo input dialog");
+    }
+
 
     public void processPitch(float pitchInHz) {
         if (pitchInHz != -1.0) {
