@@ -102,6 +102,7 @@
         android:text="@string/TempoInputButtonText"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
+<<<<<<< HEAD
     <TextView
         android:id="@+id/tempo"
         android:layout_width="91dp"
@@ -127,4 +128,6 @@
         android:layout_marginBottom="138dp"
         android:text="Tempo" />
 
+=======
+>>>>>>> parent of 868e44d... set tempoView to update tempo input from dialog
 </RelativeLayout>

@@ -17,15 +17,21 @@ import be.tarsos.dsp.pitch.PitchDetectionHandler;
 import be.tarsos.dsp.pitch.PitchDetectionResult;
 import be.tarsos.dsp.pitch.PitchProcessor;
 
+<<<<<<< HEAD
 public class MainActivity extends AppCompatActivity implements TempoInputDialog.TempoInputListener {
     private TextView note, pitch;
     private ImageView A, B, C, D, E, F, G;
     private Button TempoInputButton;
+=======
+public class MainActivity extends AppCompatActivity {
+
+    TextView note, pitch;
+    ImageView A, B, C,  D, E, F, G;
+>>>>>>> parent of 868e44d... set tempoView to update tempo input from dialog
     private final String[] noteVals = {"A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#"};
     private ImageView[] noteImages;
     private ImageView tempImage;
     private Button TempoInputButton;
-    private TextView TempoView;
     private static final String[] notes = new String[5001];
     private static double range = 1.225;
     private static int cursor = 7;
@@ -47,7 +53,6 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
         pitch = findViewById(R.id.txtFrequency);
         note = findViewById(R.id.txtNote);
         TempoInputButton = findViewById(R.id.TempoInputButton);
-        TempoView = findViewById(R.id.tempo);
 
         TempoInputButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -216,10 +221,6 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
         range *= Math.cbrt(Math.sqrt(Math.sqrt(2)));
     }
 
-    @Override
-    public void setTempo(String tempo) {
-        TempoView.setText(tempo);
-    }
 }
 
 
