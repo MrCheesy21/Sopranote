@@ -1,7 +1,9 @@
 package com.example.mlove.sopranote;
 
 
+import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -25,6 +27,7 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
     private ImageView[] noteImages;
     private ImageView tempImage;
     private Button TempoInputButton;
+    private MediaPlayer tempoPlayer;
     private TextView TempoView;
     private static final String[] notes = new String[5001];
     private static double range = 1.225;
@@ -50,6 +53,7 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
         note = findViewById(R.id.txtNote);
         TempoInputButton = findViewById(R.id.TempoInputButton);
         TempoView = findViewById(R.id.tempo);
+        tempoPlayer = MediaPlayer.create(this, R.raw.metronome_beep);
 
         TempoInputButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -132,6 +136,8 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
     @Override
     public void setTempo(String tempo) {
         TempoView.setText(tempo);
+        tempoPlayer.start();
+        tempoPlayer.setLooping(true);
     }
 }
 
