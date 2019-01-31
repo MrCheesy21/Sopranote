@@ -2,7 +2,6 @@ package com.example.mlove.sopranote;
 
 
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -19,7 +18,9 @@ import be.tarsos.dsp.pitch.PitchProcessor;
 
 <<<<<<< HEAD
 public class MainActivity extends AppCompatActivity implements TempoInputDialog.TempoInputListener {
+
     private TextView note, pitch;
+<<<<<<< HEAD
     private ImageView A, B, C, D, E, F, G;
     private Button TempoInputButton;
 =======
@@ -28,6 +29,9 @@ public class MainActivity extends AppCompatActivity {
     TextView note, pitch;
     ImageView A, B, C,  D, E, F, G;
 >>>>>>> parent of 868e44d... set tempoView to update tempo input from dialog
+=======
+    private ImageView A, B, C,  D, E, F, G;
+>>>>>>> parent of da50455... Merge branch 'master' into master
     private final String[] noteVals = {"A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#"};
     private ImageView[] noteImages;
     private ImageView tempImage;
@@ -84,16 +88,13 @@ public class MainActivity extends AppCompatActivity {
         AudioProcessor p = new PitchProcessor(PitchProcessor.PitchEstimationAlgorithm.FFT_YIN, 22050, 1024, pdh);
         dispatcher.addAudioProcessor(p);
         new Thread(dispatcher,"Audio Dispatcher").start();
-      
-        TempoInputButton = findViewById(R.id.TempoInput);
-        TempoInputButton.setOnClickListener(new View.OnClickListener() {
-            final int tempo = 0;
-            @Override
-            public void onClick(View v) {
-                DialogFragment TempoInput = new TempoInputDialogFragment();
-            }
-        });
-        }
+    }
+
+    public void openTempoDialog() {
+        TempoInputDialog  tempoInputDialog = new TempoInputDialog();
+        tempoInputDialog.show(getSupportFragmentManager(), "tempo input dialog");
+    }
+
 
     public void processPitch(float pitchInHz) {
         if (pitchInHz != -1.0) {
@@ -196,12 +197,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    /*
-    This algorithm uses the equal tempered tuning system to determine when a note corresponds to
-    a certain frequency. Each note's frequencies are exactly the frequency of the note before it
-    times the 12th root of 2. Since there are 12 possible notes in an octave, A4 will be exactly
-    double the frequency of A3.
-     */
     public void shiftPitches(String[] noteVals) {
             while (index < notes.length) {
                 while (ind < index + range) {
@@ -222,5 +217,4 @@ public class MainActivity extends AppCompatActivity {
     }
 
 }
-
 
