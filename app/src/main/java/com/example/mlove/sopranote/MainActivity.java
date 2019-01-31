@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
     private TextView note, pitch;
     private ImageView A, B, C,  D, E, F, G;
     private final String[] noteVals = {"A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#"};
+    private int[] noteIDs;
     private ImageView[] noteImages;
     private ImageView tempImage;
     private Button TempoInputButton;
@@ -43,6 +44,8 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
         E = findViewById(R.id.E);
         F = findViewById(R.id.F);
         G = findViewById(R.id.G);
+        noteIDs = new int[]{R.id.A, R.id.A, R.id.B, R.id.C, R.id.C, R.id.D, R.id.D, R.id.E, R.id.F,
+            R.id.F, R.id.G, R.id.G};
         pitch = findViewById(R.id.txtFrequency);
         note = findViewById(R.id.txtNote);
         TempoInputButton = findViewById(R.id.TempoInputButton);
@@ -95,95 +98,16 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-
-            for (ImageView e: noteImages) {
-                if (findViewById(R.id.A) == e &&  note.getText().equals("A")) {
-                    if (tempImage != e) {
+            for (int i = 0; i < noteImages.length; i++) {
+                if (findViewById(noteIDs[i]) == noteImages[i] && note.getText().equals(noteVals[i])){
+                    if (tempImage != noteImages[i]) {
                         tempImage.setVisibility(View.INVISIBLE);
-                        e.setVisibility(View.VISIBLE);
-                        tempImage = e;
-                    }
-                }
-                if (findViewById(R.id.A) == e &&  note.getText().equals("A#")) {
-                    if (tempImage != e) {
-                        tempImage.setVisibility(View.INVISIBLE);
-                        e.setVisibility(View.VISIBLE);
-                        tempImage = e;
-                    }
-                }
-                if (findViewById(R.id.B) == e &&  note.getText().equals("B")) {
-                    if (tempImage != e) {
-                        tempImage.setVisibility(View.INVISIBLE);
-                        e.setVisibility(View.VISIBLE);
-                        tempImage = e;
-                    }
-                }
-                if (findViewById(R.id.C) == e &&  note.getText().equals("C")) {
-                    if (tempImage != e) {
-                        tempImage.setVisibility(View.INVISIBLE);
-                        e.setVisibility(View.VISIBLE);
-                        tempImage = e;
-                    }
-                }
-                if (findViewById(R.id.C) == e &&  note.getText().equals("C#")) {
-                    if (tempImage != e) {
-                        tempImage.setVisibility(View.INVISIBLE);
-                        e.setVisibility(View.VISIBLE);
-                        tempImage = e;
-                    }
-                }
-                if (findViewById(R.id.D) == e &&  note.getText().equals("D")) {
-                    if (tempImage != e) {
-                        tempImage.setVisibility(View.INVISIBLE);
-                        e.setVisibility(View.VISIBLE);
-                        tempImage = e;
-                    }
-                }
-                if (findViewById(R.id.D) == e &&  note.getText().equals("D#")) {
-                    if (tempImage != e) {
-                        tempImage.setVisibility(View.INVISIBLE);
-                        e.setVisibility(View.VISIBLE);
-                        tempImage = e;
-                    }
-                }
-                if (findViewById(R.id.E) == e &&  note.getText().equals("E")) {
-                    if (tempImage != e) {
-                        tempImage.setVisibility(View.INVISIBLE);
-                        e.setVisibility(View.VISIBLE);
-                        tempImage = e;
-                    }
-                }
-                if (findViewById(R.id.F) == e &&  note.getText().equals("F")) {
-                    if (tempImage != e) {
-                        tempImage.setVisibility(View.INVISIBLE);
-                        e.setVisibility(View.VISIBLE);
-                        tempImage = e;
-                    }
-                }
-                if (findViewById(R.id.F) == e &&  note.getText().equals("F#")) {
-                    if (tempImage != e) {
-                        tempImage.setVisibility(View.INVISIBLE);
-                        e.setVisibility(View.VISIBLE);
-                        tempImage = e;
-                    }
-                }
-                if (findViewById(R.id.G) == e &&  note.getText().equals("G")) {
-
-                    if (tempImage != e) {
-                        tempImage.setVisibility(View.INVISIBLE);
-                        e.setVisibility(View.VISIBLE);
-                        tempImage = e;
-                    }
-                }
-                if (findViewById(R.id.G) == e &&  note.getText().equals("G#")) {
-
-                    if (tempImage != e) {
-                        tempImage.setVisibility(View.INVISIBLE);
-                        e.setVisibility(View.VISIBLE);
-                        tempImage = e;
+                        noteImages[i].setVisibility(View.VISIBLE);
+                        tempImage = noteImages[i];
                     }
                 }
             }
+
         }
     }
 
@@ -200,7 +124,6 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
                 nextRange();
             }
     }
-
 
     private static void nextRange() {
         range *= Math.cbrt(Math.sqrt(Math.sqrt(2)));
