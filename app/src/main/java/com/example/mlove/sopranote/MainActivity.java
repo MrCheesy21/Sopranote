@@ -26,7 +26,8 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
     private int[] noteIDs;
     private ImageView[] noteImages;
     private ImageView tempImage;
-    private Button TempoInputButton;
+    private Button tempoInputButton;
+    private Button tempoStopButton;
     private MediaPlayer tempoPlayer;
     private TextView TempoView;
     private static final String[] notes = new String[5001];
@@ -51,15 +52,23 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
             R.id.F, R.id.G, R.id.G};
         pitch = findViewById(R.id.txtFrequency);
         note = findViewById(R.id.txtNote);
-        TempoInputButton = findViewById(R.id.TempoInputButton);
+        tempoInputButton = findViewById(R.id.TempoInputButton);
         TempoView = findViewById(R.id.tempo);
+        tempoStopButton = findViewById(R.id.tempoStopButton);
         tempoPlayer = MediaPlayer.create(this, R.raw.metronome_beep);
 
-        TempoInputButton.setOnClickListener(new View.OnClickListener() {
+        tempoInputButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 openTempoDialog();
             }
+        });
+
+        tempoStopButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tempoPlayer.pause();
+        }
         });
 
         noteImages = new ImageView[]{A, A, B, C, C, D, D, E, F, F, G, G};
@@ -135,7 +144,7 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
 
     @Override
     public void setTempo(String tempo) {
-        TempoView.setText(tempo);
+        TempoView.setText(tempo + " BPM");
         tempoPlayer.start();
         tempoPlayer.setLooping(true);
     }
