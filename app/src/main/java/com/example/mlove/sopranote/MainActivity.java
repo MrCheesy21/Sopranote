@@ -1,7 +1,9 @@
 package com.example.mlove.sopranote;
 
 
+import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -16,26 +18,18 @@ import be.tarsos.dsp.pitch.PitchDetectionHandler;
 import be.tarsos.dsp.pitch.PitchDetectionResult;
 import be.tarsos.dsp.pitch.PitchProcessor;
 
-<<<<<<< HEAD
 public class MainActivity extends AppCompatActivity implements TempoInputDialog.TempoInputListener {
 
     private TextView note, pitch;
-<<<<<<< HEAD
-    private ImageView A, B, C, D, E, F, G;
-    private Button TempoInputButton;
-=======
-public class MainActivity extends AppCompatActivity {
-
-    TextView note, pitch;
-    ImageView A, B, C,  D, E, F, G;
->>>>>>> parent of 868e44d... set tempoView to update tempo input from dialog
-=======
     private ImageView A, B, C,  D, E, F, G;
->>>>>>> parent of da50455... Merge branch 'master' into master
     private final String[] noteVals = {"A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#"};
+    private int[] noteIDs;
     private ImageView[] noteImages;
     private ImageView tempImage;
-    private Button TempoInputButton;
+    private Button tempoInputButton;
+    private Button tempoStopButton;
+    private MediaPlayer tempoPlayer;
+    private TextView TempoView;
     private static final String[] notes = new String[5001];
     private static double range = 1.225;
     private static int cursor = 7;
@@ -54,14 +48,26 @@ public class MainActivity extends AppCompatActivity {
         E = findViewById(R.id.E);
         F = findViewById(R.id.F);
         G = findViewById(R.id.G);
+        noteIDs = new int[]{R.id.A, R.id.A, R.id.B, R.id.C, R.id.C, R.id.D, R.id.D, R.id.E, R.id.F,
+                R.id.F, R.id.G, R.id.G};
         pitch = findViewById(R.id.txtFrequency);
         note = findViewById(R.id.txtNote);
-        TempoInputButton = findViewById(R.id.TempoInputButton);
+        tempoInputButton = findViewById(R.id.TempoInputButton);
+        TempoView = findViewById(R.id.tempo);
+        tempoStopButton = findViewById(R.id.tempoStopButton);
+        tempoPlayer = MediaPlayer.create(this, R.raw.metronome_beep);
 
-        TempoInputButton.setOnClickListener(new View.OnClickListener() {
+        tempoInputButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 openTempoDialog();
+            }
+        });
+
+        tempoStopButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tempoPlayer.pause();
             }
         });
 
@@ -105,116 +111,41 @@ public class MainActivity extends AppCompatActivity {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-
-            for (ImageView e: noteImages) {
-                if (findViewById(R.id.A) == e &&  note.getText().equals("A")) {
-                    if (tempImage != e) {
+            for (int i = 0; i < noteImages.length; i++) {
+                if (findViewById(noteIDs[i]) == noteImages[i] && note.getText().equals(noteVals[i])){
+                    if (tempImage != noteImages[i]) {
                         tempImage.setVisibility(View.INVISIBLE);
-                        e.setVisibility(View.VISIBLE);
-                        tempImage = e;
-                    }
-                }
-                if (findViewById(R.id.A) == e &&  note.getText().equals("A#")) {
-                    if (tempImage != e) {
-                        tempImage.setVisibility(View.INVISIBLE);
-                        e.setVisibility(View.VISIBLE);
-                        tempImage = e;
-                    }
-                }
-                if (findViewById(R.id.B) == e &&  note.getText().equals("B")) {
-                    if (tempImage != e) {
-                        tempImage.setVisibility(View.INVISIBLE);
-                        e.setVisibility(View.VISIBLE);
-                        tempImage = e;
-                    }
-                }
-                if (findViewById(R.id.C) == e &&  note.getText().equals("C")) {
-                    if (tempImage != e) {
-                        tempImage.setVisibility(View.INVISIBLE);
-                        e.setVisibility(View.VISIBLE);
-                        tempImage = e;
-                    }
-                }
-                if (findViewById(R.id.C) == e &&  note.getText().equals("C#")) {
-                    if (tempImage != e) {
-                        tempImage.setVisibility(View.INVISIBLE);
-                        e.setVisibility(View.VISIBLE);
-                        tempImage = e;
-                    }
-                }
-                if (findViewById(R.id.D) == e &&  note.getText().equals("D")) {
-                    if (tempImage != e) {
-                        tempImage.setVisibility(View.INVISIBLE);
-                        e.setVisibility(View.VISIBLE);
-                        tempImage = e;
-                    }
-                }
-                if (findViewById(R.id.D) == e &&  note.getText().equals("D#")) {
-                    if (tempImage != e) {
-                        tempImage.setVisibility(View.INVISIBLE);
-                        e.setVisibility(View.VISIBLE);
-                        tempImage = e;
-                    }
-                }
-                if (findViewById(R.id.E) == e &&  note.getText().equals("E")) {
-                    if (tempImage != e) {
-                        tempImage.setVisibility(View.INVISIBLE);
-                        e.setVisibility(View.VISIBLE);
-                        tempImage = e;
-                    }
-                }
-                if (findViewById(R.id.F) == e &&  note.getText().equals("F")) {
-                    if (tempImage != e) {
-                        tempImage.setVisibility(View.INVISIBLE);
-                        e.setVisibility(View.VISIBLE);
-                        tempImage = e;
-                    }
-                }
-                if (findViewById(R.id.F) == e &&  note.getText().equals("F#")) {
-                    if (tempImage != e) {
-                        tempImage.setVisibility(View.INVISIBLE);
-                        e.setVisibility(View.VISIBLE);
-                        tempImage = e;
-                    }
-                }
-                if (findViewById(R.id.G) == e &&  note.getText().equals("G")) {
-
-                    if (tempImage != e) {
-                        tempImage.setVisibility(View.INVISIBLE);
-                        e.setVisibility(View.VISIBLE);
-                        tempImage = e;
-                    }
-                }
-                if (findViewById(R.id.G) == e &&  note.getText().equals("G#")) {
-
-                    if (tempImage != e) {
-                        tempImage.setVisibility(View.INVISIBLE);
-                        e.setVisibility(View.VISIBLE);
-                        tempImage = e;
+                        noteImages[i].setVisibility(View.VISIBLE);
+                        tempImage = noteImages[i];
                     }
                 }
             }
+
         }
     }
 
     public void shiftPitches(String[] noteVals) {
-            while (index < notes.length) {
-                while (ind < index + range) {
-                    if (ind < notes.length) {
-                        notes[(int) ind] =  noteVals[cursor % 12];
-                    }
-                    ind++;
+        while (index < notes.length) {
+            while (ind < index + range) {
+                if (ind < notes.length) {
+                    notes[(int) ind] =  noteVals[cursor % 12];
                 }
-                cursor++;
-                index += range * 2;
-                nextRange();
+                ind++;
             }
+            cursor++;
+            index += range * 2;
+            nextRange();
+        }
     }
-
 
     private static void nextRange() {
         range *= Math.cbrt(Math.sqrt(Math.sqrt(2)));
     }
 
+    @Override
+    public void setTempo(String tempo) {
+        TempoView.setText(tempo + " BPM");
+        tempoPlayer.start();
+        tempoPlayer.setLooping(true);
+    }
 }
-
