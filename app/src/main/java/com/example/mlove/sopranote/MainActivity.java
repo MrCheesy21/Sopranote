@@ -106,11 +106,6 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
         if (pitchInHz != -1.0) {
             pitch.setText(String.format("%.2f", pitchInHz));
             note.setText(notes[(int) pitchInHz]);
-            try {
-                Thread.sleep(30);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
             for (int i = 0; i < noteImages.length; i++) {
                 if (findViewById(noteIDs[i]) == noteImages[i] && note.getText().equals(noteVals[i])){
                     if (tempImage != noteImages[i]) {
