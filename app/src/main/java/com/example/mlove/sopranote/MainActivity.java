@@ -3,6 +3,7 @@ package com.example.mlove.sopranote;
 
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -138,10 +139,20 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
     }
 
     @Override
-    public void setTempo(String tempo) {
-        TempoView.setText(tempo + " BPM");
-        tempoPlayer.start();
-        tempoPlayer.setLooping(true);
+    public void setTempo(final String tempo) {
+        if (tempo != "") {
+            TempoView.setText(tempo + " BPM");
+            final Handler tempoHandler = new Handler();
+            final Runnable tempoRunner = new Runnable() {
+                @Override
+                public void run() {
+                    tempoPlayer.start();
+                    tempoHandler.postDelayed(this, 6500/Integer.parseInt(tempo));
+                }
+            };
+            tempoRunner.run();
+        }
+
     }
 }
 
