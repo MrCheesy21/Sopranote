@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
         F = findViewById(R.id.F);
         G = findViewById(R.id.G);
         noteIDs = new int[]{R.id.A, R.id.A, R.id.B, R.id.C, R.id.C, R.id.D, R.id.D, R.id.E, R.id.F,
-            R.id.F, R.id.G, R.id.G};
+                R.id.F, R.id.G, R.id.G};
         pitch = findViewById(R.id.txtFrequency);
         note = findViewById(R.id.txtNote);
         tempoInputButton = findViewById(R.id.TempoInputButton);
@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
             @Override
             public void onClick(View v) {
                 tempoPlayer.pause();
-        }
+            }
         });
 
         noteImages = new ImageView[]{A, A, B, C, C, D, D, E, F, F, G, G};
@@ -125,17 +125,17 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
     }
 
     public void shiftPitches(String[] noteVals) {
-            while (index < notes.length) {
-                while (ind < index + range) {
-                    if (ind < notes.length) {
-                        notes[(int) ind] =  noteVals[cursor % 12];
-                    }
-                    ind++;
+        while (index < notes.length) {
+            while (ind < index + range) {
+                if (ind < notes.length) {
+                    notes[(int) ind] =  noteVals[cursor % 12];
                 }
-                cursor++;
-                index += range * 2;
-                nextRange();
+                ind++;
             }
+            cursor++;
+            index += range * 2;
+            nextRange();
+        }
     }
 
     private static void nextRange() {
@@ -149,4 +149,3 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
         tempoPlayer.setLooping(true);
     }
 }
-
