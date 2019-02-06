@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatDialogFragment;
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
@@ -22,6 +23,7 @@ public class TempoInputDialog extends AppCompatDialogFragment {
         View TempoInputView = TempoInputInflater.inflate(R.layout.tempo_input_dialog, null);
         TempoInputBuilder.setView(TempoInputView);
         tempo = TempoInputView.findViewById(R.id.tempo_input_dialog);
+        tempo.setInputType(InputType.TYPE_CLASS_NUMBER);
 
         TempoInputBuilder.setTitle("Tempo Input")
                 .setMessage("Please enter a tempo")
