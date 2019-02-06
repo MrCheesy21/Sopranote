@@ -2,14 +2,18 @@ package com.example.mlove.sopranote;
 
 
 import android.media.MediaPlayer;
+import android.nfc.Tag;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import java.io.IOException;
 
 import be.tarsos.dsp.AudioDispatcher;
 import be.tarsos.dsp.AudioEvent;
@@ -19,7 +23,7 @@ import be.tarsos.dsp.pitch.PitchDetectionHandler;
 import be.tarsos.dsp.pitch.PitchDetectionResult;
 import be.tarsos.dsp.pitch.PitchProcessor;
 
-public class MainActivity extends AppCompatActivity implements TempoInputDialog.TempoInputListener {
+public class MainActivity extends AppCompatActivity implements TempoInputDialog.TempoInputListener, MediaPlayer.OnPreparedListener, MediaPlayer.OnErrorListener  {
 
     private TextView note, pitch;
     private ImageView A, B, C,  D, E, F, G;
@@ -30,6 +34,7 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
     private Button tempoInputButton;
     private Button tempoStopButton;
     private MediaPlayer tempoPlayer;
+    private Handler tempoHandler;
     private TextView TempoView;
     private static final String[] notes = new String[5001];
     private static double range = 1.225;
@@ -58,19 +63,6 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
         tempoStopButton = findViewById(R.id.tempoStopButton);
         tempoPlayer = MediaPlayer.create(this, R.raw.metronome_beep);
 
-        tempoInputButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openTempoDialog();
-            }
-        });
-
-        tempoStopButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                tempoPlayer.pause();
-        }
-        });
 
         noteImages = new ImageView[]{A, A, B, C, C, D, D, E, F, F, G, G};
         tempImage = noteImages[0];
@@ -95,6 +87,20 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
         AudioProcessor p = new PitchProcessor(PitchProcessor.PitchEstimationAlgorithm.FFT_YIN, 22050, 1024, pdh);
         dispatcher.addAudioProcessor(p);
         new Thread(dispatcher,"Audio Dispatcher").start();
+
+        tempoInputButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openTempoDialog();
+            }
+        });
+
+        tempoStopButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tempoPlayer.stop();
+            }
+        });
     }
 
     public void openTempoDialog() {
@@ -140,18 +146,30 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
 
     @Override
     public void setTempo(final String tempo) {
-        if (tempo != "") {
+        final Runnable tempoRunner;
+        if (tempo != " ") {
+            final int interval = 6000 / Integer.parseInt(tempo);
             TempoView.setText(tempo + " BPM");
-            final Handler tempoHandler = new Handler();
-            final Runnable tempoRunner = new Runnable() {
+            tempoHandler = new Handler();
+            tempoRunner = new Runnable() {
                 @Override
                 public void run() {
+                    tempoPlayer.prepareAsync();
                     tempoPlayer.start();
-                    tempoHandler.postDelayed(this, 6500/Integer.parseInt(tempo));
+                    tempoHandler.postDelayed(this, interval);
                 }
             };
-            tempoRunner.run();
+            tempoHandler.post(tempoRunner);
         }
+    }
+
+    @Override
+    public boolean onError(MediaPlayer mp, int what, int extra) {
+        return false;
+    }
+
+    @Override
+    public void onPrepared(MediaPlayer mp) {
 
     }
 }
