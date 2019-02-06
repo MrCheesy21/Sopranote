@@ -24,7 +24,6 @@ import be.tarsos.dsp.pitch.PitchProcessor;
 public class MainActivity extends AppCompatActivity implements TempoInputDialog.TempoInputListener {
     private TextView note, pitch;
     private ImageView A, B, C, D, E, F, G;
-    private Button TempoInputButton;
     private final String[] noteVals = {"A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#"};
     private int[] noteIDs;
     private ImageView[] noteImages;
