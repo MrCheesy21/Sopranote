@@ -23,7 +23,7 @@ import be.tarsos.dsp.pitch.PitchDetectionHandler;
 import be.tarsos.dsp.pitch.PitchDetectionResult;
 import be.tarsos.dsp.pitch.PitchProcessor;
 
-public class MainActivity extends AppCompatActivity implements TempoInputDialog.TempoInputListener, MediaPlayer.OnPreparedListener, MediaPlayer.OnErrorListener  {
+public class MainActivity extends AppCompatActivity implements TempoInputDialog.TempoInputListener {
 
     private TextView note, pitch;
     private ImageView A, B, C,  D, E, F, G;
@@ -146,31 +146,20 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
 
     @Override
     public void setTempo(final String tempo) {
-        final Runnable tempoRunner;
-        if (tempo != " ") {
-            final int interval = 6000 / Integer.parseInt(tempo);
+        if (!tempo.equals("")) {
+            final int interval = 60000 / Integer.parseInt(tempo);
+            Log.d("da tag", "setTempo: the interval is " + interval);
             TempoView.setText(tempo + " BPM");
             tempoHandler = new Handler();
-            tempoRunner = new Runnable() {
+            final Runnable tempoRunner = new Runnable() {
                 @Override
                 public void run() {
-                    tempoPlayer.prepareAsync();
                     tempoPlayer.start();
                     tempoHandler.postDelayed(this, interval);
                 }
             };
             tempoHandler.post(tempoRunner);
         }
-    }
-
-    @Override
-    public boolean onError(MediaPlayer mp, int what, int extra) {
-        return false;
-    }
-
-    @Override
-    public void onPrepared(MediaPlayer mp) {
-
     }
 }
 
