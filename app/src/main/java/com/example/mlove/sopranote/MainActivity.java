@@ -162,4 +162,3 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
         }
     }
 }
-
