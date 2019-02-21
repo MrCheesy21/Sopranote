@@ -13,6 +13,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 import be.tarsos.dsp.AudioDispatcher;
 import be.tarsos.dsp.AudioEvent;
 import be.tarsos.dsp.AudioProcessor;
@@ -26,6 +28,7 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
     private ImageView A, B, C, D, E, F, G;
     private final String[] noteVals = {"A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#"};
     private int[] noteIDs;
+
     private ImageView[] noteImages;
     private ImageView tempImage;
     private Button tempoInputButton;
@@ -33,6 +36,13 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
     private MediaPlayer tempoPlayer;
     private Handler tempoHandler;
     private TextView TempoView;
+
+    private ArrayList<String> noteChanges;
+    private Button writeArray;
+    private Button stopWriting;
+    private boolean shouldWrite;
+    private TextView noteDisplay;
+
     private static final String[] notes = new String[5001];
     private static double range = 1.225;
     private static int cursor = 7;
@@ -67,6 +77,24 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
             e.setVisibility(View.GONE);
         }
         shiftPitches(noteVals);
+
+        noteChanges = new ArrayList<>();
+        writeArray = findViewById(R.id.WriteArrayButton);
+        stopWriting = findViewById(R.id.StopRecording);
+        shouldWrite = true;
+        stopWriting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                shouldWrite = false;
+                displayNotes();
+            }
+        });
+        writeArray.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                shouldWrite = true;
+            }
+        });
 
         AudioDispatcher dispatcher = AudioDispatcherFactory.fromDefaultMicrophone(22050,1024,0);
         PitchDetectionHandler pdh = new PitchDetectionHandler() {
@@ -109,6 +137,11 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
         if (pitchInHz != -1.0) {
             pitch.setText(String.format("%.2f", pitchInHz));
             note.setText(notes[(int) pitchInHz]);
+
+            if (shouldWrite) {
+                noteChanges.add(notes[(int) pitchInHz]);
+            }
+
             for (int i = 0; i < noteImages.length; i++) {
                 if (findViewById(noteIDs[i]) == noteImages[i] && note.getText().equals(noteVals[i])){
                     if (tempImage != noteImages[i]) {
@@ -140,6 +173,10 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
                 index += range * 2;
                 nextRange();
             }
+    }
+
+    private void displayNotes() {
+
     }
 
     private static void nextRange() {

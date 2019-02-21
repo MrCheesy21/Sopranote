@@ -89,7 +89,7 @@
 
     <Button
         android:id="@+id/TempoInputButton"
-        android:layout_width="107dp"
+        android:layout_width="81dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
@@ -97,7 +97,7 @@
         android:layout_alignParentBottom="true"
         android:layout_marginStart="0dp"
         android:layout_marginTop="578dp"
-        android:layout_marginEnd="304dp"
+        android:layout_marginEnd="330dp"
         android:layout_marginBottom="105dp"
         android:text="@string/TempoInputButtonText"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
@@ -110,10 +110,10 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="200dp"
-        android:layout_marginTop="595dp"
-        android:layout_marginEnd="120dp"
-        android:layout_marginBottom="102dp"
+        android:layout_marginStart="175dp"
+        android:layout_marginTop="593dp"
+        android:layout_marginEnd="145dp"
+        android:layout_marginBottom="103dp"
         android:text="Tempo"
         android:textSize="20dp" />
         android:id="@+id/TempoInput"
@@ -139,6 +139,34 @@
         android:layout_marginTop="576dp"
         android:layout_marginEnd="0dp"
         android:layout_marginBottom="107dp"
-        android:text="Stop" />
+        android:text="@string/StopButtonText" />
+
+    <Button
+        android:id="@+id/WriteArrayButton"
+        android:layout_width="wrap_content"
+        android:layout_height="62dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="505dp"
+        android:layout_marginEnd="305dp"
+        android:layout_marginBottom="165dp"
+        android:text="@string/writeArrayButtonText" />
+
+    <Button
+        android:id="@+id/StopRecording"
+        android:layout_width="wrap_content"
+        android:layout_height="57dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="323dp"
+        android:layout_marginTop="508dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="166dp"
+        android:text="@string/stopWritingButtonText" />
 
 </RelativeLayout>
