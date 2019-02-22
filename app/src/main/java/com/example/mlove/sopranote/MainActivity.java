@@ -81,7 +81,9 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
         noteChanges = new ArrayList<>();
         writeArray = findViewById(R.id.WriteArrayButton);
         stopWriting = findViewById(R.id.StopRecording);
-        shouldWrite = true;
+        shouldWrite = false;
+        noteDisplay = findViewById(R.id.displayNotes);
+
         stopWriting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -152,6 +154,8 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
                 }
             }
 
+        } else if (shouldWrite) {
+            noteChanges.add("No note");
         }
     }
 
@@ -176,7 +180,14 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
     }
 
     private void displayNotes() {
-
+        String tempNote = "";
+        for (int i = 0; i < noteChanges.size(); i++) {
+//            if (!tempNote.equals(noteChanges.get(i))) {
+//                tempNote = noteChanges.get(i);
+//                noteDisplay.append(tempNote);
+//            }
+            Log.d("display array", "index: " + i + ", note value: " + noteChanges.get(i));
+        }
     }
 
     private static void nextRange() {

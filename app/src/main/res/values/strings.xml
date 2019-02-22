@@ -9,5 +9,6 @@
     <string name="StopButtonText">Stop</string>
     <string name="stopWritingButtonText">Display Notes</string>
     <string name="writeArrayButtonText">Start Recording</string>
+    <string name="displayNotesText">Notes will display here</string>
 
 </resources>
