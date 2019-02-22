@@ -154,6 +154,8 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
                 }
             }
 
+        } else if (shouldWrite) {
+            noteChanges.add("No note");
         }
     }
 
@@ -180,10 +182,11 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
     private void displayNotes() {
         String tempNote = "";
         for (int i = 0; i < noteChanges.size(); i++) {
-            if (!tempNote.equals(noteChanges.get(i))) {
-                tempNote = noteChanges.get(i);
-                noteDisplay.append(tempNote);
-            }
+//            if (!tempNote.equals(noteChanges.get(i))) {
+//                tempNote = noteChanges.get(i);
+//                noteDisplay.append(tempNote);
+//            }
+            Log.d("display array", "index: " + i + ", note value: " + noteChanges.get(i));
         }
     }
 
