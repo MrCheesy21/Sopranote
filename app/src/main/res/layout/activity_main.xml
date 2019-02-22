@@ -96,9 +96,9 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_marginStart="0dp"
-        android:layout_marginTop="578dp"
-        android:layout_marginEnd="330dp"
-        android:layout_marginBottom="105dp"
+        android:layout_marginTop="683dp"
+        android:layout_marginEnd="329dp"
+        android:layout_marginBottom="0dp"
         android:text="@string/TempoInputButtonText"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
@@ -116,16 +116,16 @@
         android:layout_marginBottom="103dp"
         android:text="Tempo"
         android:textSize="20dp" />
-        android:id="@+id/TempoInput"
-        android:layout_width="wrap_content"
-        android:layout_height="38dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginTop="555dp"
-        android:layout_marginEnd="156dp"
-        android:layout_marginBottom="138dp"
-        android:text="Tempo" />
+    android:id="@+id/TempoInput"
+    android:layout_width="wrap_content"
+    android:layout_height="38dp"
+    android:layout_alignParentTop="true"
+    android:layout_alignParentEnd="true"
+    android:layout_alignParentBottom="true"
+    android:layout_marginTop="555dp"
+    android:layout_marginEnd="156dp"
+    android:layout_marginBottom="138dp"
+    android:text="Tempo" />
 
     <Button
         android:id="@+id/tempoStopButton"
@@ -136,23 +136,23 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_marginStart="323dp"
-        android:layout_marginTop="576dp"
+        android:layout_marginTop="683dp"
         android:layout_marginEnd="0dp"
-        android:layout_marginBottom="107dp"
+        android:layout_marginBottom="0dp"
         android:text="@string/StopButtonText" />
 
     <Button
         android:id="@+id/WriteArrayButton"
-        android:layout_width="wrap_content"
-        android:layout_height="62dp"
+        android:layout_width="126dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_marginStart="0dp"
-        android:layout_marginTop="505dp"
-        android:layout_marginEnd="305dp"
-        android:layout_marginBottom="165dp"
+        android:layout_marginTop="526dp"
+        android:layout_marginEnd="285dp"
+        android:layout_marginBottom="144dp"
         android:text="@string/writeArrayButtonText" />
 
     <Button
@@ -164,9 +164,23 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_marginStart="323dp"
-        android:layout_marginTop="508dp"
+        android:layout_marginTop="529dp"
         android:layout_marginEnd="0dp"
-        android:layout_marginBottom="166dp"
+        android:layout_marginBottom="145dp"
         android:text="@string/stopWritingButtonText" />
+
+    <TextView
+        android:id="@+id/displayNotes"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="641dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="50dp"
+        android:text="@string/displayNotesText" />
 
 </RelativeLayout>
