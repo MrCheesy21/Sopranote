@@ -36,6 +36,9 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
     private MediaPlayer tempoPlayer;
     private Handler tempoHandler;
     private TextView TempoView;
+    private Runnable tempoRunner;
+    private int interval;
+
 
     private ArrayList<String> noteChanges;
     private Button writeArray;
@@ -70,6 +73,14 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
         tempoStopButton = findViewById(R.id.tempoStopButton);
         tempoPlayer = MediaPlayer.create(this, R.raw.metronome_beep);
 
+        tempoHandler = new Handler();
+        tempoRunner = new Runnable() {
+            @Override
+            public void run() {
+                tempoPlayer.start();
+                tempoHandler.postDelayed(this, interval);
+            }
+        };
 
         noteImages = new ImageView[]{A, A, B, C, C, D, D, E, F, F, G, G};
         tempImage = noteImages[0];
@@ -125,7 +136,7 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
         tempoStopButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                tempoPlayer.stop();
+                tempoHandler.removeCallbacks(tempoRunner);
             }
         });
     }
@@ -197,17 +208,9 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
     @Override
     public void setTempo(final String tempo) {
         if (!tempo.equals("")) {
-            final int interval = 60000 / Integer.parseInt(tempo);
+            interval = 60000 / Integer.parseInt(tempo);
             Log.d("da tag", "setTempo: the interval is " + interval);
             TempoView.setText(tempo + " BPM");
-            tempoHandler = new Handler();
-            final Runnable tempoRunner = new Runnable() {
-                @Override
-                public void run() {
-                    tempoPlayer.start();
-                    tempoHandler.postDelayed(this, interval);
-                }
-            };
             tempoHandler.post(tempoRunner);
         }
     }
