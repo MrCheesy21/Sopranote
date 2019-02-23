@@ -8,3 +8,4 @@ project/
 /build
 /captures
 .externalNativeBuild
+build.gradle
