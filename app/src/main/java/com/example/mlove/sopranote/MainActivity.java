@@ -13,6 +13,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 import be.tarsos.dsp.AudioDispatcher;
 import be.tarsos.dsp.AudioEvent;
 import be.tarsos.dsp.AudioProcessor;
@@ -24,9 +26,9 @@ import be.tarsos.dsp.pitch.PitchProcessor;
 public class MainActivity extends AppCompatActivity implements TempoInputDialog.TempoInputListener {
     private TextView note, pitch;
     private ImageView A, B, C, D, E, F, G;
-    private Button TempoInputButton;
     private final String[] noteVals = {"A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#"};
     private int[] noteIDs;
+
     private ImageView[] noteImages;
     private ImageView tempImage;
     private Button tempoInputButton;
@@ -34,6 +36,16 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
     private MediaPlayer tempoPlayer;
     private Handler tempoHandler;
     private TextView TempoView;
+    private Runnable tempoRunner;
+    private int interval;
+
+
+    private ArrayList<String> noteChanges;
+    private Button writeArray;
+    private Button stopWriting;
+    private boolean shouldWrite;
+    private TextView noteDisplay;
+
     private static final String[] notes = new String[5001];
     private static double range = 1.225;
     private static int cursor = 7;
@@ -61,6 +73,14 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
         tempoStopButton = findViewById(R.id.tempoStopButton);
         tempoPlayer = MediaPlayer.create(this, R.raw.metronome_beep);
 
+        tempoHandler = new Handler();
+        tempoRunner = new Runnable() {
+            @Override
+            public void run() {
+                tempoPlayer.start();
+                tempoHandler.postDelayed(this, interval);
+            }
+        };
 
         noteImages = new ImageView[]{A, A, B, C, C, D, D, E, F, F, G, G};
         tempImage = noteImages[0];
@@ -68,6 +88,26 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
             e.setVisibility(View.GONE);
         }
         shiftPitches(noteVals);
+
+        noteChanges = new ArrayList<>();
+        writeArray = findViewById(R.id.WriteArrayButton);
+        stopWriting = findViewById(R.id.StopRecording);
+        shouldWrite = false;
+        noteDisplay = findViewById(R.id.displayNotes);
+
+        stopWriting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                shouldWrite = false;
+                displayNotes();
+            }
+        });
+        writeArray.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                shouldWrite = true;
+            }
+        });
 
         AudioDispatcher dispatcher = AudioDispatcherFactory.fromDefaultMicrophone(22050,1024,0);
         PitchDetectionHandler pdh = new PitchDetectionHandler() {
@@ -96,7 +136,7 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
         tempoStopButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                tempoPlayer.stop();
+                tempoHandler.removeCallbacks(tempoRunner);
             }
         });
     }
@@ -110,6 +150,11 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
         if (pitchInHz != -1.0) {
             pitch.setText(String.format("%.2f", pitchInHz));
             note.setText(notes[(int) pitchInHz]);
+
+            if (shouldWrite) {
+                noteChanges.add(notes[(int) pitchInHz]);
+            }
+
             for (int i = 0; i < noteImages.length; i++) {
                 if (findViewById(noteIDs[i]) == noteImages[i] && note.getText().equals(noteVals[i])){
                     if (tempImage != noteImages[i]) {
@@ -120,6 +165,8 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
                 }
             }
 
+        } else if (shouldWrite) {
+            noteChanges.add("No note");
         }
     }
 
@@ -143,6 +190,17 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
             }
     }
 
+    private void displayNotes() {
+        String tempNote = "";
+        for (int i = 0; i < noteChanges.size(); i++) {
+//            if (!tempNote.equals(noteChanges.get(i))) {
+//                tempNote = noteChanges.get(i);
+//                noteDisplay.append(tempNote);
+//            }
+            Log.d("display array", "index: " + i + ", note value: " + noteChanges.get(i));
+        }
+    }
+
     private static void nextRange() {
         range *= Math.cbrt(Math.sqrt(Math.sqrt(2)));
     }
@@ -150,17 +208,9 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
     @Override
     public void setTempo(final String tempo) {
         if (!tempo.equals("")) {
-            final int interval = 60000 / Integer.parseInt(tempo);
+            interval = 60000 / Integer.parseInt(tempo);
             Log.d("da tag", "setTempo: the interval is " + interval);
             TempoView.setText(tempo + " BPM");
-            tempoHandler = new Handler();
-            final Runnable tempoRunner = new Runnable() {
-                @Override
-                public void run() {
-                    tempoPlayer.start();
-                    tempoHandler.postDelayed(this, interval);
-                }
-            };
             tempoHandler.post(tempoRunner);
         }
     }

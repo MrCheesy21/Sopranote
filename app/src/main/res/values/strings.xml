@@ -6,5 +6,9 @@
     <string name="pitch">pitch will display here!</string>
     <string name="noteName">noteName will display here!</string>
     <string name="TempoInputButtonText">Tempo</string>
+    <string name="StopButtonText">Stop</string>
+    <string name="stopWritingButtonText">Display Notes</string>
+    <string name="writeArrayButtonText">Start Recording</string>
+    <string name="displayNotesText">Notes will display here</string>
 
 </resources>
