@@ -203,7 +203,6 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
                 }
                 noteDisplay.append(tempNote + "(" + duration + ")   ");
             }
-            Log.d("display array", "index: " + i + ", note value: " + noteChanges.get(i));
         }
     }
 
