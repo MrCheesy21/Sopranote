@@ -28,9 +28,9 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
     private ImageView A, B, C, D, E, F, G;
     private final String[] noteVals = {"A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#"};
     private int[] noteIDs;
-
     private ImageView[] noteImages;
     private ImageView tempImage;
+
     private Button tempoInputButton;
     private Button tempoStopButton;
     private MediaPlayer tempoPlayer;
@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
     private boolean shouldWrite;
     private TextView noteDisplay;
 
-    private static final String[] notes = new String[5001];
+    private static final String[] notes = new String[10001];
     private static double range = 1.225;
     private static int cursor = 7;
     private static double index = 41;
@@ -192,12 +192,17 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
     }
 
     private void displayNotes() {
+        noteDisplay.setText("");
         String tempNote = "";
+        int duration = 0;
         for (int i = 0; i < noteChanges.size(); i++) {
-//            if (!tempNote.equals(noteChanges.get(i))) {
-//                tempNote = noteChanges.get(i);
-//                noteDisplay.append(tempNote);
-//            }
+            if (!noteChanges.get(i).equals("No note") && !tempNote.equals(noteChanges.get(i))) {
+                tempNote = noteChanges.get(i);
+                while(i + duration < noteChanges.size() && noteChanges.get(i + duration).equals(tempNote)) {
+                    duration++;
+                }
+                noteDisplay.append(tempNote + "(" + duration + ")   ");
+            }
             Log.d("display array", "index: " + i + ", note value: " + noteChanges.get(i));
         }
     }
