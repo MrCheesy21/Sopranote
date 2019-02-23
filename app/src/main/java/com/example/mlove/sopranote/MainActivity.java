@@ -28,9 +28,9 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
     private ImageView A, B, C, D, E, F, G;
     private final String[] noteVals = {"A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#"};
     private int[] noteIDs;
-
     private ImageView[] noteImages;
     private ImageView tempImage;
+
     private Button tempoInputButton;
     private Button tempoStopButton;
     private MediaPlayer tempoPlayer;
@@ -105,6 +105,7 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
         writeArray.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                noteChanges.clear();
                 shouldWrite = true;
             }
         });
