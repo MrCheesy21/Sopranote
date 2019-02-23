@@ -105,6 +105,7 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
         writeArray.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                noteChanges.clear();
                 shouldWrite = true;
             }
         });
