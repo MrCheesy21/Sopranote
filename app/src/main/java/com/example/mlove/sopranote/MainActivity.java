@@ -193,11 +193,13 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
     }
 
     private void displayNotes() {
+        final String TAG = "MainActivity";
         noteDisplay.setText("");
         String tempNote = "";
-        int duration = 0;
         for (int i = 0; i < melodyList.size(); i++) {
+            Log.d(TAG, "i: " + i + ", note: " + melodyList.get(i));
             if (!melodyList.get(i).equals("No note") && !tempNote.equals(melodyList.get(i))) {
+                int duration = 0;
                 tempNote = melodyList.get(i);
                 while(i + duration < melodyList.size() && melodyList.get(i + duration).equals(tempNote)) {
                     duration++;
