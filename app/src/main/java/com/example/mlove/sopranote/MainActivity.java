@@ -204,7 +204,9 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
                 while(i + duration < melodyList.size() && melodyList.get(i + duration).equals(tempNote)) {
                     duration++;
                 }
-                noteDisplay.append(tempNote + "(" + duration + ")   ");
+                if (duration > 1) {
+                    noteDisplay.append(tempNote + "(" + duration + ")   ");
+                }
             }
         }
     }
