@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
     private int interval;
 
 
-    private ArrayList<String> noteChanges;
+    private ArrayList<String> melodyList;
     private Button writeArray;
     private Button stopWriting;
     private boolean shouldWrite;
@@ -72,6 +72,7 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
         TempoView = findViewById(R.id.tempo);
         tempoStopButton = findViewById(R.id.tempoStopButton);
         tempoPlayer = MediaPlayer.create(this, R.raw.metronome_beep);
+        openTempoDialog();
 
         tempoHandler = new Handler();
         tempoRunner = new Runnable() {
@@ -89,7 +90,7 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
         }
         shiftPitches(noteVals);
 
-        noteChanges = new ArrayList<>();
+        melodyList = new ArrayList<>(10000);
         writeArray = findViewById(R.id.WriteArrayButton);
         stopWriting = findViewById(R.id.StopRecording);
         shouldWrite = false;
@@ -105,7 +106,7 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
         writeArray.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                noteChanges.clear();
+                melodyList.clear();
                 shouldWrite = true;
             }
         });
@@ -153,7 +154,7 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
             note.setText(notes[(int) pitchInHz]);
 
             if (shouldWrite) {
-                noteChanges.add(notes[(int) pitchInHz]);
+                melodyList.add(notes[(int) pitchInHz]);
             }
 
             for (int i = 0; i < noteImages.length; i++) {
@@ -167,7 +168,7 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
             }
 
         } else if (shouldWrite) {
-            noteChanges.add("No note");
+            melodyList.add("Rest");
         }
     }
 
@@ -177,7 +178,7 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
     times the 12th root of 2. Since there are 12 possible notes in an octave, A4 will be exactly
     double the frequency of A3.
      */
-    public void shiftPitches(String[] noteVals) {
+    private void shiftPitches(String[] noteVals) {
             while (index < notes.length) {
                 while (ind < index + range) {
                     if (ind < notes.length) {
@@ -192,16 +193,20 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
     }
 
     private void displayNotes() {
+        final String TAG = "displaying the notes";
         noteDisplay.setText("");
         String tempNote = "";
-        int duration = 0;
-        for (int i = 0; i < noteChanges.size(); i++) {
-            if (!noteChanges.get(i).equals("No note") && !tempNote.equals(noteChanges.get(i))) {
-                tempNote = noteChanges.get(i);
-                while(i + duration < noteChanges.size() && noteChanges.get(i + duration).equals(tempNote)) {
+        for (int i = 0; i < melodyList.size(); i++) {
+            Log.d(TAG, "i: " + i + ", note: " + melodyList.get(i));
+            if (!tempNote.equals(melodyList.get(i))) {
+                int duration = 0;
+                tempNote = melodyList.get(i);
+                while(i + duration < melodyList.size() && melodyList.get(i + duration).equals(tempNote)) {
                     duration++;
                 }
-                noteDisplay.append(tempNote + "(" + duration + ")   ");
+                if (duration > 1) {
+                    noteDisplay.append(tempNote + "(" + duration + ")   ");
+                }
             }
         }
     }
