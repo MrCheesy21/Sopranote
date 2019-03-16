@@ -2,7 +2,6 @@ package com.example.mlove.sopranote;
 
 
 import android.media.MediaPlayer;
-import android.nfc.Tag;
 import android.os.Bundle;
 
 import android.os.Handler;
@@ -72,8 +71,8 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
         TempoView = findViewById(R.id.tempo);
         tempoStopButton = findViewById(R.id.tempoStopButton);
         tempoPlayer = MediaPlayer.create(this, R.raw.metronome_beep);
-        openTempoDialog();
 
+        openTempoDialog();
         tempoHandler = new Handler();
         tempoRunner = new Runnable() {
             @Override
@@ -96,20 +95,6 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
         shouldWrite = false;
         noteDisplay = findViewById(R.id.displayNotes);
 
-        stopWriting.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                shouldWrite = false;
-                displayNotes();
-            }
-        });
-        writeArray.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                melodyList.clear();
-                shouldWrite = true;
-            }
-        });
 
         AudioDispatcher dispatcher = AudioDispatcherFactory.fromDefaultMicrophone(22050,1024,0);
         PitchDetectionHandler pdh = new PitchDetectionHandler() {
@@ -128,6 +113,22 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
         dispatcher.addAudioProcessor(p);
         new Thread(dispatcher,"Audio Dispatcher").start();
 
+        stopWriting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                shouldWrite = false;
+                displayNotes();
+            }
+        });
+
+        writeArray.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                melodyList.clear();
+                shouldWrite = true;
+            }
+        });
+
         tempoInputButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -143,12 +144,12 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
         });
     }
 
-    public void openTempoDialog() {
+    private void openTempoDialog() {
         TempoInputDialog  tempoInputDialog = new TempoInputDialog();
         tempoInputDialog.show(getSupportFragmentManager(), "tempo input dialog");
     }
 
-    public void processPitch(float pitchInHz) {
+    private void processPitch(float pitchInHz) {
         if (pitchInHz != -1.0) {
             pitch.setText(String.format("%.2f", pitchInHz));
             note.setText(notes[(int) pitchInHz]);
