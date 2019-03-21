@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
         tempoInputButton = findViewById(R.id.TempoInputButton);
         TempoView = findViewById(R.id.tempo);
         tempoStopButton = findViewById(R.id.tempoStopButton);
-        tempoPlayer = MediaPlayer.create(this, R.raw.metronome_beep);
+        tempoPlayer = MediaPlayer.create(this, R.raw.metronome_beep2);
 
         openTempoDialog();
         tempoHandler = new Handler();
