@@ -173,35 +173,25 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
         }
     }
 
-    /*
-    This algorithm uses the equal tempered tuning system to determine when a note corresponds to
-    a certain frequency. Each note's frequencies are exactly the frequency of the note before it
-    times the 12th root of 2. Since there are 12 possible notes in an octave, A4 will be exactly
-    double the frequency of A3.
-     */
-    private void shiftPitches(String[] noteVals) {
-            while (index < notes.length) {
-                while (ind < index + range) {
-                    if (ind < notes.length) {
-                        notes[(int) ind] =  noteVals[cursor % 12];
-                    }
-                    ind++;
-                }
-                cursor++;
-                index += range * 2;
-                nextRange();
-            }
-    }
-
     private void displayNotes() {
         final String TAG = "displaying the notes";
         noteDisplay.setText("");
         String tempNote = "";
-        for (int i = 0; i < melodyList.size(); i++) {
+
+        int startIndex = 0;
+        while(melodyList.get(startIndex).equals("Rest")) {
+            startIndex++;
+        }
+
+        for (int i = startIndex; i < melodyList.size() - 1; i++) {
             Log.d(TAG, "i: " + i + ", note: " + melodyList.get(i));
             if (!tempNote.equals(melodyList.get(i))) {
                 int duration = 0;
                 tempNote = melodyList.get(i);
+                if (!melodyList.get(i -1).equals(tempNote) && !melodyList.get(i +1).equals(tempNote)) {
+                    tempNote = melodyList.get(i + 1);
+                    duration++;
+                }
                 while(i + duration < melodyList.size() && melodyList.get(i + duration).equals(tempNote)) {
                     duration++;
                 }
@@ -212,10 +202,6 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
         }
     }
 
-    private static void nextRange() {
-        range *= Math.cbrt(Math.sqrt(Math.sqrt(2)));
-    }
-
     @Override
     public void setTempo(final String tempo) {
         if (!tempo.equals("")) {
@@ -224,6 +210,30 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
             TempoView.setText(tempo + " BPM");
             tempoHandler.post(tempoRunner);
         }
+    }
+
+    /*
+    This algorithm uses the equal tempered tuning system to determine when a note corresponds to
+    a certain frequency. Each note's frequencies are exactly the frequency of the note before it
+    times the 12th root of 2. Since there are 12 possible notes in an octave, A4 will be exactly
+    double the frequency of A3.
+     */
+    private void shiftPitches(String[] noteVals) {
+        while (index < notes.length) {
+            while (ind < index + range) {
+                if (ind < notes.length) {
+                    notes[(int) ind] =  noteVals[cursor % 12];
+                }
+                ind++;
+            }
+            cursor++;
+            index += range * 2;
+            nextRange();
+        }
+    }
+
+    private static void nextRange() {
+        range *= Math.cbrt(Math.sqrt(Math.sqrt(2)));
     }
 }
 
