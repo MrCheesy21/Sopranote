@@ -50,6 +50,8 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
     private static int cursor = 7;
     private static double index = 41;
     private static double ind = 41;
+    private static int sixteenthNote, eigthNote, quarterNote, halfNote, wholeNote;
+    //private static int[] = {}
 
 
     @Override
@@ -184,11 +186,12 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
         }
 
         for (int i = startIndex; i < melodyList.size() - 1; i++) {
-            Log.d(TAG, "i: " + i + ", note: " + melodyList.get(i));
+            Log.i(TAG, "Note at time " + i * 50 + ": " + melodyList.get(i));
             if (!tempNote.equals(melodyList.get(i))) {
                 int duration = 0;
                 tempNote = melodyList.get(i);
-                if (!melodyList.get(i -1).equals(tempNote) && !melodyList.get(i +1).equals(tempNote)) {
+                if (i != 0
+                        && !melodyList.get(i -1).equals(tempNote) && !melodyList.get(i +1).equals(tempNote)) {
                     tempNote = melodyList.get(i + 1);
                     duration++;
                 }
@@ -196,7 +199,7 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
                     duration++;
                 }
                 if (duration > 1) {
-                    noteDisplay.append(tempNote + "(" + duration + ")   ");
+                    noteDisplay.append(tempNote + "(" + duration * 50 + ")   ");
                 }
             }
         }

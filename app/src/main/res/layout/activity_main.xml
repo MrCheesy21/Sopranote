@@ -89,18 +89,18 @@
 
     <Button
         android:id="@+id/TempoInputButton"
-        android:layout_width="810dp"
-        android:layout_height="wrap_content"
+        android:layout_width="114dp"
+        android:layout_height="68dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="39dp"
-        android:layout_marginTop="580dp"
-        android:layout_marginEnd="290dp"
-        android:layout_marginBottom="103dp"
-        android:text="@string/TempoInputButtonText"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="646dp"
+        android:layout_marginEnd="297dp"
+        android:layout_marginBottom="17dp"
+        android:text="@string/SetMetronomeText"
+        android:textAppearance="@style/TextAppearance.AppCompat" />
 
     <TextView
         android:id="@+id/tempo"
@@ -111,63 +111,56 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_marginStart="175dp"
-        android:layout_marginTop="593dp"
+        android:layout_marginTop="613dp"
         android:layout_marginEnd="145dp"
-        android:layout_marginBottom="103dp"
+        android:layout_marginBottom="80dp"
         android:text="Tempo"
         android:textSize="20dp" />
-    android:id="@+id/TempoInput"
-    android:layout_width="wrap_content"
-    android:layout_height="38dp"
-    android:layout_alignParentTop="true"
-    android:layout_alignParentEnd="true"
-    android:layout_alignParentBottom="true"
-    android:layout_marginTop="555dp"
-    android:layout_marginEnd="156dp"
-    android:layout_marginBottom="138dp"
-    android:text="Tempo" />
 
     <Button
         android:id="@+id/tempoStopButton"
-        android:layout_width="wrap_content"
+        android:layout_width="104dp"
         android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="303dp"
+        android:layout_marginTop="646dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="18dp"
+        android:text="@string/StopMetronomeText"
+        android:textAppearance="@style/TextAppearance.AppCompat" />
+
+    <Button
+        android:id="@+id/WriteArrayButton"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="455dp"
+        android:layout_marginEnd="273dp"
+        android:layout_marginBottom="216dp"
+        android:text="@string/writeArrayButtonText"
+        android:textAppearance="@style/TextAppearance.AppCompat" />
+
+    <Button
+        android:id="@+id/StopRecording"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_marginStart="284dp"
-        android:layout_marginTop="584dp"
-        android:layout_marginEnd="39dp"
-        android:layout_marginBottom="99dp"
-        android:text="@string/StopButtonText" />
-
-    <Button
-        android:id="@+id/WriteArrayButton"
-        android:layout_width="126dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="39dp"
-        android:layout_marginTop="477dp"
-        android:layout_marginEnd="246dp"
-        android:layout_marginBottom="193dp"
-        android:text="@string/writeArrayButtonText" />
-
-    <Button
-        android:id="@+id/StopRecording"
-        android:layout_width="wrap_content"
-        android:layout_height="57dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="267dp"
-        android:layout_marginTop="479dp"
-        android:layout_marginEnd="56dp"
-        android:layout_marginBottom="195dp"
-        android:text="@string/stopWritingButtonText" />
+        android:layout_marginTop="455dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="216dp"
+        android:text="@string/stopRecordingButtonText"
+        android:textAppearance="@style/TextAppearance.AppCompat" />
 
     <TextView
         android:id="@+id/displayNotes"
@@ -178,9 +171,9 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_marginStart="0dp"
-        android:layout_marginTop="420dp"
+        android:layout_marginTop="353dp"
         android:layout_marginEnd="0dp"
-        android:layout_marginBottom="271dp"
+        android:layout_marginBottom="338dp"
         android:text="@string/displayNotesText" />
 
 </RelativeLayout>
