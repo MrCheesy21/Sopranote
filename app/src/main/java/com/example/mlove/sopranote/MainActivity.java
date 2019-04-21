@@ -178,30 +178,41 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
     private void displayNotes() {
         final String TAG = "displaying the notes";
         noteDisplay.setText("");
-        String tempNote = "";
+        Note tempNote = new Note("", 0);
 
         int startIndex = 0;
-        while(melodyList.get(startIndex).equals("Rest")) {
+        while(startIndex < melodyList.size() && melodyList.get(startIndex).equals("Rest")) {
             startIndex++;
         }
-
+        ArrayList<Note> filteredList = new ArrayList<>();
         for (int i = startIndex; i < melodyList.size() - 1; i++) {
             Log.i(TAG, "Note at time " + i * 50 + ": " + melodyList.get(i));
             if (!tempNote.equals(melodyList.get(i))) {
-                int duration = 0;
-                tempNote = melodyList.get(i);
-                if (i != 0
-                        && !melodyList.get(i -1).equals(tempNote) && !melodyList.get(i +1).equals(tempNote)) {
-                    tempNote = melodyList.get(i + 1);
-                    duration++;
+                tempNote = new Note(melodyList.get(i), 0);
+                if (i != 0 && !(tempNote.noteEquals(melodyList.get(i - 1)))
+                        && !(tempNote.noteEquals(melodyList.get(i + 1)))) {
+                    tempNote = new Note(melodyList.get(i + 1), 1);
                 }
-                while(i + duration < melodyList.size() && melodyList.get(i + duration).equals(tempNote)) {
-                    duration++;
+                while(i + tempNote.getDuration() < melodyList.size()
+                        && tempNote.noteEquals(melodyList.get(i + tempNote.getDuration()))) {
+                    tempNote.incrementDurationBy(1);
                 }
-                if (duration > 1) {
-                    noteDisplay.append(tempNote + "(" + duration * 50 + ")   ");
+                if (tempNote.getDuration() > 2) {
+                    filteredList.add(tempNote);
+                }
+                i += tempNote.getDuration();
+            }
+        }
+        for (int i = 0; i < filteredList.size() - 1; i++) {
+            if (filteredList.get(i).noteEquals(filteredList.get(i + 1).getNote())) {
+                filteredList.get(i + 1).incrementDurationBy(filteredList.get(i).getDuration());
+                filteredList.remove(i);
+                if (i != 0) {
+                    i--;
                 }
             }
+            Log.i(TAG, "index: " + i + " " + filteredList.get(i).toString());
+            noteDisplay.append(filteredList.get(i).toString());
         }
     }
 
