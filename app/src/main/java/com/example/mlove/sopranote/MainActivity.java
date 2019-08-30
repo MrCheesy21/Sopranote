@@ -2,7 +2,6 @@ package com.example.mlove.sopranote;
 
 
 import android.media.MediaPlayer;
-import android.nfc.Tag;
 import android.os.Bundle;
 
 import android.os.Handler;
@@ -51,6 +50,8 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
     private static int cursor = 7;
     private static double index = 41;
     private static double ind = 41;
+    private static int sixteenthNote, eigthNote, quarterNote, halfNote, wholeNote;
+    //private static int[] = {}
 
 
     @Override
@@ -71,9 +72,9 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
         tempoInputButton = findViewById(R.id.TempoInputButton);
         TempoView = findViewById(R.id.tempo);
         tempoStopButton = findViewById(R.id.tempoStopButton);
-        tempoPlayer = MediaPlayer.create(this, R.raw.metronome_beep);
-        openTempoDialog();
+        tempoPlayer = MediaPlayer.create(this, R.raw.metronome_beep2);
 
+        openTempoDialog();
         tempoHandler = new Handler();
         tempoRunner = new Runnable() {
             @Override
@@ -96,20 +97,6 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
         shouldWrite = false;
         noteDisplay = findViewById(R.id.displayNotes);
 
-        stopWriting.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                shouldWrite = false;
-                displayNotes();
-            }
-        });
-        writeArray.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                melodyList.clear();
-                shouldWrite = true;
-            }
-        });
 
         AudioDispatcher dispatcher = AudioDispatcherFactory.fromDefaultMicrophone(22050,1024,0);
         PitchDetectionHandler pdh = new PitchDetectionHandler() {
@@ -128,6 +115,22 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
         dispatcher.addAudioProcessor(p);
         new Thread(dispatcher,"Audio Dispatcher").start();
 
+        stopWriting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                shouldWrite = false;
+                displayNotes();
+            }
+        });
+
+        writeArray.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                melodyList.clear();
+                shouldWrite = true;
+            }
+        });
+
         tempoInputButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -143,12 +146,12 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
         });
     }
 
-    public void openTempoDialog() {
+    private void openTempoDialog() {
         TempoInputDialog  tempoInputDialog = new TempoInputDialog();
         tempoInputDialog.show(getSupportFragmentManager(), "tempo input dialog");
     }
 
-    public void processPitch(float pitchInHz) {
+    private void processPitch(float pitchInHz) {
         if (pitchInHz != -1.0) {
             pitch.setText(String.format("%.2f", pitchInHz));
             note.setText(notes[(int) pitchInHz]);
@@ -172,47 +175,45 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
         }
     }
 
-    /*
-    This algorithm uses the equal tempered tuning system to determine when a note corresponds to
-    a certain frequency. Each note's frequencies are exactly the frequency of the note before it
-    times the 12th root of 2. Since there are 12 possible notes in an octave, A4 will be exactly
-    double the frequency of A3.
-     */
-    private void shiftPitches(String[] noteVals) {
-            while (index < notes.length) {
-                while (ind < index + range) {
-                    if (ind < notes.length) {
-                        notes[(int) ind] =  noteVals[cursor % 12];
-                    }
-                    ind++;
-                }
-                cursor++;
-                index += range * 2;
-                nextRange();
-            }
-    }
-
     private void displayNotes() {
         final String TAG = "displaying the notes";
         noteDisplay.setText("");
-        String tempNote = "";
-        for (int i = 0; i < melodyList.size(); i++) {
-            Log.d(TAG, "i: " + i + ", note: " + melodyList.get(i));
+        Note tempNote = new Note("", 0);
+
+        int startIndex = 0;
+        while(startIndex < melodyList.size() && melodyList.get(startIndex).equals("Rest")) {
+            startIndex++;
+        }
+        ArrayList<Note> filteredList = new ArrayList<>();
+        for (int i = startIndex; i < melodyList.size() - 1; i++) {
+            Log.i(TAG, "Note at time " + i * 50 + ": " + melodyList.get(i));
             if (!tempNote.equals(melodyList.get(i))) {
-                int duration = 0;
-                tempNote = melodyList.get(i);
-                while(i + duration < melodyList.size() && melodyList.get(i + duration).equals(tempNote)) {
-                    duration++;
+                tempNote = new Note(melodyList.get(i), 0);
+                if (i != 0 && !(tempNote.noteEquals(melodyList.get(i - 1)))
+                        && !(tempNote.noteEquals(melodyList.get(i + 1)))) {
+                    tempNote = new Note(melodyList.get(i + 1), 1);
                 }
-                if (duration > 1) {
-                    noteDisplay.append(tempNote + "(" + duration + ")   ");
+                while(i + tempNote.getDuration() < melodyList.size()
+                        && tempNote.noteEquals(melodyList.get(i + tempNote.getDuration()))) {
+                    tempNote.incrementDurationBy(1);
                 }
+                if (tempNote.getDuration() > 2) {
+                    filteredList.add(tempNote);
+                }
+                i += tempNote.getDuration();
             }
         }
-    }
-
-    private static void nextRange() {
-        range *= Math.cbrt(Math.sqrt(Math.sqrt(2)));
+        for (int i = 0; i < filteredList.size() - 1; i++) {
+            if (filteredList.get(i).noteEquals(filteredList.get(i + 1).getNote())) {
+                filteredList.get(i + 1).incrementDurationBy(filteredList.get(i).getDuration());
+                filteredList.remove(i);
+                if (i != 0) {
+                    i--;
+                }
+            }
+            Log.i(TAG, "index: " + i + " " + filteredList.get(i).toString());
+            noteDisplay.append(filteredList.get(i).toString());
+        }
     }
 
     @Override
@@ -223,6 +224,30 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
             TempoView.setText(tempo + " BPM");
             tempoHandler.post(tempoRunner);
         }
+    }
+
+    /*
+    This algorithm uses the equal tempered tuning system to determine when a note corresponds to
+    a certain frequency. Each note's frequencies are exactly the frequency of the note before it
+    times the 12th root of 2. Since there are 12 possible notes in an octave, A4 will be exactly
+    double the frequency of A3.
+     */
+    private void shiftPitches(String[] noteVals) {
+        while (index < notes.length) {
+            while (ind < index + range) {
+                if (ind < notes.length) {
+                    notes[(int) ind] =  noteVals[cursor % 12];
+                }
+                ind++;
+            }
+            cursor++;
+            index += range * 2;
+            nextRange();
+        }
+    }
+
+    private static void nextRange() {
+        range *= Math.cbrt(Math.sqrt(Math.sqrt(2)));
     }
 }
 

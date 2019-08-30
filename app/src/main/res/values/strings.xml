@@ -10,5 +10,8 @@
     <string name="stopWritingButtonText">Display Notes</string>
     <string name="writeArrayButtonText">Start Recording</string>
     <string name="displayNotesText">Notes will display here</string>
+    <string name="stopRecordingButtonText">Stop Recording</string>
+    <string name="StopMetronomeText">Stop Metronome</string>
+    <string name="SetMetronomeText">Set Metronome</string>
 
 </resources>
