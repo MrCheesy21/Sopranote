@@ -65,6 +65,19 @@
         app:srcCompat="@drawable/backwards_note" />
 
     <ImageView
+        android:id="@+id/B"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        app:layout_constraintBottom_toBottomOf="@+id/staff"
+        app:layout_constraintEnd_toEndOf="@+id/staff"
+        app:layout_constraintHorizontal_bias="0.515"
+        app:layout_constraintStart_toStartOf="@+id/staff"
+        app:layout_constraintTop_toTopOf="@+id/staff"
+        app:layout_constraintVertical_bias="0.261"
+        app:srcCompat="@drawable/quarter_note" />
+
+    <ImageView
         android:id="@+id/C"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -78,17 +91,30 @@
         app:srcCompat="@drawable/backwards_note" />
 
     <ImageView
-        android:id="@+id/B"
+        android:id="@+id/c2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         app:layout_constraintBottom_toBottomOf="@+id/staff"
         app:layout_constraintEnd_toEndOf="@+id/staff"
-        app:layout_constraintHorizontal_bias="0.515"
+        app:layout_constraintHorizontal_bias="0.745"
         app:layout_constraintStart_toStartOf="@+id/staff"
         app:layout_constraintTop_toTopOf="@+id/staff"
-        app:layout_constraintVertical_bias="0.261"
-        app:srcCompat="@drawable/quarter_note" />
+        app:layout_constraintVertical_bias="0.766"
+        app:srcCompat="@drawable/backwards_note" />
+
+    <ImageView
+        android:id="@+id/c3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        app:layout_constraintBottom_toBottomOf="@+id/staff"
+        app:layout_constraintEnd_toEndOf="@+id/staff"
+        app:layout_constraintHorizontal_bias="0.972"
+        app:layout_constraintStart_toStartOf="@+id/staff"
+        app:layout_constraintTop_toTopOf="@+id/staff"
+        app:layout_constraintVertical_bias="0.766"
+        app:srcCompat="@drawable/backwards_note" />
 
     <ImageView
         android:id="@+id/A"

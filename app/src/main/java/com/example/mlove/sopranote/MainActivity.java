@@ -24,7 +24,7 @@ import be.tarsos.dsp.pitch.PitchProcessor;
 
 public class MainActivity extends AppCompatActivity implements TempoInputDialog.TempoInputListener {
     private TextView note, pitch;
-    private ImageView A, B, C, D, E, F, G;
+    private ImageView A, B, C, D, E, F, G, secondNote, thirdNote;
     private final String[] noteVals = {"A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#"};
     private int[] noteIDs;
     private ImageView[] noteImages;
@@ -65,8 +65,10 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
         E = findViewById(R.id.E);
         F = findViewById(R.id.F);
         G = findViewById(R.id.G);
+        secondNote = findViewById(R.id.c2);
+        thirdNote = findViewById(R.id.c3);
         noteIDs = new int[]{R.id.A, R.id.A, R.id.B, R.id.C, R.id.C, R.id.D, R.id.D, R.id.E, R.id.F,
-            R.id.F, R.id.G, R.id.G};
+            R.id.F, R.id.G, R.id.G, R.id.c2, R.id.c3};
         pitch = findViewById(R.id.txtFrequency);
         note = findViewById(R.id.txtNote);
         tempoInputButton = findViewById(R.id.TempoInputButton);
@@ -84,7 +86,7 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
             }
         };
 
-        noteImages = new ImageView[]{A, A, B, C, C, D, D, E, F, F, G, G};
+        noteImages = new ImageView[]{A, A, B, C, C, D, D, E, F, F, G, G, secondNote, thirdNote};
         tempImage = noteImages[0];
         for (ImageView e: noteImages) {
             e.setVisibility(View.GONE);
