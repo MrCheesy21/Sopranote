@@ -65,10 +65,10 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
         E = findViewById(R.id.E);
         F = findViewById(R.id.F);
         G = findViewById(R.id.G);
-        secondNote = findViewById(R.id.c2);
+        secondNote = findViewById(R.id.f2);
         thirdNote = findViewById(R.id.c3);
         noteIDs = new int[]{R.id.A, R.id.A, R.id.B, R.id.C, R.id.C, R.id.D, R.id.D, R.id.E, R.id.F,
-            R.id.F, R.id.G, R.id.G, R.id.c2, R.id.c3};
+            R.id.F, R.id.G, R.id.G, R.id.f2, R.id.c3};
         pitch = findViewById(R.id.txtFrequency);
         note = findViewById(R.id.txtNote);
         tempoInputButton = findViewById(R.id.TempoInputButton);
