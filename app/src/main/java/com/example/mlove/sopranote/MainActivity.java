@@ -241,13 +241,13 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
     }
 
     public void displaySecondThirdNotes(List<Note> noteDisplayList) {
-        String TAG = "all three notes";
+        clearImages();
         if (!noteDisplayList.isEmpty()) {
             boolean wroteFirst = false, wroteSecond = false, wroteThird = false;
             ImageView firstTempImage = noteImages[0];
             ImageView secondTempImage = secondNoteImages[0];
             ImageView thirdTempImage = thirdNoteImages[0];
-            Note firstNote = null, secondNote = null, thirdNote = null;
+            Note firstNote = new Note("Rest", 0), secondNote = new Note("Rest", 0), thirdNote = new Note("Rest", 0);
             if (noteDisplayList.get(0).noteEquals("Rest")) {
                 index++;
             }
@@ -266,26 +266,38 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
                 }
                 noteDisplayListIndex++;
             }
-            Log.i(TAG, firstNote.getNote() + ", second note is : " + secondNote.getNote() + ", third note is: " + thirdNote.getNote());
             for (int i = 0; i < secondNoteImages.length; i++) {
                 if (firstNote.getNote().equals(noteVals[i])) {
-                    firstTempImage.setVisibility(View.INVISIBLE);
-                    noteImages[i].setVisibility(View.VISIBLE);
-                    firstTempImage = noteImages[i];
-
+                    if (firstTempImage != noteImages[i]) {
+                        firstTempImage.setVisibility(View.INVISIBLE);
+                        noteImages[i].setVisibility(View.VISIBLE);
+                        firstTempImage = noteImages[i];
+                    }
                 }
                 if (secondNote.getNote().equals(noteVals[i])) {
-                    secondTempImage.setVisibility(View.INVISIBLE);
-                    secondNoteImages[i].setVisibility(View.VISIBLE);
-                    secondTempImage = noteImages[i];
+                    if (secondTempImage != secondNoteImages[i]) {
+                        secondTempImage.setVisibility(View.INVISIBLE);
+                        secondNoteImages[i].setVisibility(View.VISIBLE);
+                        secondTempImage = noteImages[i];
+                    }
                 }
                 if (thirdNote.getNote().equals(noteVals[i])) {
-                    thirdTempImage.setVisibility(View.INVISIBLE);
-                    thirdNoteImages[i].setVisibility(View.VISIBLE);
-                    thirdTempImage = thirdNoteImages[i];
-                }
+                    if (thirdTempImage != thirdNoteImages[i]) {
+                        thirdTempImage.setVisibility(View.INVISIBLE);
+                        thirdNoteImages[i].setVisibility(View.VISIBLE);
+                        thirdTempImage = thirdNoteImages[i];
+                        }
+                    }
             }
 
+        }
+    }
+
+    private void clearImages() {
+        for (int i = 0; i < noteImages.length; i++) {
+            noteImages[i].setVisibility(View.GONE);
+            secondNoteImages[i].setVisibility(View.GONE);
+            thirdNoteImages[i].setVisibility(View.GONE);
         }
     }
 
