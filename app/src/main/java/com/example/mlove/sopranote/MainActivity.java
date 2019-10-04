@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import be.tarsos.dsp.AudioDispatcher;
 import be.tarsos.dsp.AudioEvent;
@@ -101,7 +102,6 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
                 tempoHandler.postDelayed(this, interval);
             }
         };
-
         noteImages = new ImageView[]{A, A, B, C, C, D, D, E, F, F, G, G};
         secondNoteImages = new ImageView[]{A2, A2, B2, C2, C2, D2, D2, E2, F2, F2, G2, G2};
         thirdNoteImages = new ImageView[]{A3, A3, B3, C3, C3, D3, D3, E3, F3, F3, G3, G3};
@@ -184,7 +184,7 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
             }
 
             for (int i = 0; i < noteImages.length; i++) {
-                if (findViewById(noteIDs[i]) == noteImages[i] && note.getText().equals(noteVals[i])){
+                if (note.getText().equals(noteVals[i])){
                     if (tempImage != noteImages[i]) {
                         tempImage.setVisibility(View.INVISIBLE);
                         noteImages[i].setVisibility(View.VISIBLE);
@@ -230,20 +230,53 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
             if (filteredList.get(i).noteEquals(filteredList.get(i + 1).getNote())) {
                 filteredList.get(i + 1).incrementDurationBy(filteredList.get(i).getDuration());
                 filteredList.remove(i);
-                if (i != 0) {
-                    i--;
-                }
             }
-            Log.i(TAG, "index: " + i + " " + filteredList.get(i).toString());
             noteDisplay.append(filteredList.get(i).toString());
         }
+        Log.i(TAG, "We got this far");
+        displaySecondThirdNotes(filteredList);
     }
+
+    public void displaySecondThirdNotes(List<Note> noteDisplayList) {
+        if (!noteDisplayList.isEmpty()) {
+            ImageView secondTempImage = secondNoteImages[0];
+            ImageView thirdTempImage = thirdNoteImages[0];
+            Note firstNote = null, secondNote = null, thirdNote = null;
+            int index = 0;
+            while (index < noteDisplayList.size() && !noteDisplayList.get(index).noteEquals("Rest")) {
+                if (noteDisplayList.get(index).noteEquals("Rest")) {
+                    index++;
+                }
+            }
+            if ((noteDisplayList.size() - index) >= 3) {
+                firstNote = noteDisplayList.get(index);
+                secondNote = noteDisplayList.get(index + 1);
+                thirdNote = noteDisplayList.get(index + 2);
+            }
+            for (int i = 0; i < secondNoteImages.length; i++) {
+                if (secondNote.getNote().equals(noteVals[i])){
+                    if (secondTempImage != secondNoteImages[i]) {
+                        secondTempImage.setVisibility(View.INVISIBLE);
+                        secondNoteImages[i].setVisibility(View.VISIBLE);
+                        secondTempImage = noteImages[i];
+                    }
+                }
+                if (thirdNote.getNote().equals(noteVals[i])){
+                    if (thirdTempImage != thirdNoteImages[i]) {
+                        thirdTempImage.setVisibility(View.INVISIBLE);
+                        thirdNoteImages[i].setVisibility(View.VISIBLE);
+                        thirdTempImage = thirdNoteImages[i];
+                    }
+                }
+            }
+        }
+    }
+
 
     @Override
     public void setTempo(final String tempo) {
         if (!tempo.equals("")) {
             interval = 60000 / Integer.parseInt(tempo);
-            Log.d("da tag", "setTempo: the interval is " + interval);
             TempoView.setText(tempo + " BPM");
             tempoHandler.post(tempoRunner);
         }
