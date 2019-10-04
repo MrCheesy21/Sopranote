@@ -1,6 +1,7 @@
 package com.example.mlove.sopranote;
 
 
+import android.media.Image;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 
@@ -24,10 +25,13 @@ import be.tarsos.dsp.pitch.PitchProcessor;
 
 public class MainActivity extends AppCompatActivity implements TempoInputDialog.TempoInputListener {
     private TextView note, pitch;
-    private ImageView A, B, C, D, E, F, G, secondNote, thirdNote;
+    private ImageView A, B, C, D, E, F, G, A2, B2, C2, D2, E2, F2, G2, A3, B3, C3, D3, E3, F3, G3;
     private final String[] noteVals = {"A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#"};
     private int[] noteIDs;
     private ImageView[] noteImages;
+    private ImageView[] secondNoteImages;
+    private ImageView[] thirdNoteImages;
+
     private ImageView tempImage;
 
     private Button tempoInputButton;
@@ -65,10 +69,22 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
         E = findViewById(R.id.E);
         F = findViewById(R.id.F);
         G = findViewById(R.id.G);
-        secondNote = findViewById(R.id.f2);
-        thirdNote = findViewById(R.id.c3);
+        A2= findViewById(R.id.a2);
+        B2 = findViewById(R.id.b2);
+        C2 = findViewById(R.id.c2);
+        D2 = findViewById(R.id.d2);
+        E2 = findViewById(R.id.e2);
+        F2 = findViewById(R.id.f2);
+        G2 = findViewById(R.id.g2);
+        A3 = findViewById(R.id.a3);
+        B3 = findViewById(R.id.b3);
+        C3 = findViewById(R.id.c3);
+        D3 = findViewById(R.id.d3);
+        E3 = findViewById(R.id.e3);
+        F3 = findViewById(R.id.f3);
+        G3 = findViewById(R.id.g3);
         noteIDs = new int[]{R.id.A, R.id.A, R.id.B, R.id.C, R.id.C, R.id.D, R.id.D, R.id.E, R.id.F,
-            R.id.F, R.id.G, R.id.G, R.id.f2, R.id.c3};
+            R.id.F, R.id.G, R.id.G};
         pitch = findViewById(R.id.txtFrequency);
         note = findViewById(R.id.txtNote);
         tempoInputButton = findViewById(R.id.TempoInputButton);
@@ -86,10 +102,15 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
             }
         };
 
-        noteImages = new ImageView[]{A, A, B, C, C, D, D, E, F, F, G, G, secondNote, thirdNote};
+        noteImages = new ImageView[]{A, A, B, C, C, D, D, E, F, F, G, G};
+        secondNoteImages = new ImageView[]{A2, A2, B2, C2, C2, D2, D2, E2, F2, F2, G2, G2};
+        thirdNoteImages = new ImageView[]{A3, A3, B3, C3, C3, D3, D3, E3, F3, F3, G3, G3};
+
         tempImage = noteImages[0];
-        for (ImageView e: noteImages) {
-            e.setVisibility(View.GONE);
+        for (int i = 0; i < noteImages.length; i++) {
+            noteImages[i].setVisibility(View.GONE);
+            secondNoteImages[i].setVisibility(View.GONE);
+            thirdNoteImages[i].setVisibility(View.GONE);
         }
         shiftPitches(noteVals);
 
