@@ -24,7 +24,7 @@ import be.tarsos.dsp.pitch.PitchProcessor;
 
 public class MainActivity extends AppCompatActivity implements TempoInputDialog.TempoInputListener {
     private TextView note, pitch;
-    private ImageView A, B, C, D, E, F, G, secondNote, thirdNote;
+    private ImageView A, B, C, D, E, F, G, A2, B2, C2, D2, E2, F2, G2, A3, B3, C3, D3, E3, F3, G3;
     private final String[] noteVals = {"A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#"};
     private int[] noteIDs;
     private ImageView[] noteImages;
@@ -50,8 +50,6 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
     private static int cursor = 7;
     private static double index = 41;
     private static double ind = 41;
-    private static int sixteenthNote, eigthNote, quarterNote, halfNote, wholeNote;
-    //private static int[] = {}
 
 
     @Override
@@ -65,8 +63,20 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
         E = findViewById(R.id.E);
         F = findViewById(R.id.F);
         G = findViewById(R.id.G);
-        secondNote = findViewById(R.id.f2);
-        thirdNote = findViewById(R.id.c3);
+        A2 = findViewById(R.id.a2);
+        B2 = findViewById(R.id.b2);
+        C2 = findViewById(R.id.c2);
+        D2 = findViewById(R.id.d2);
+        E2 = findViewById(R.id.e2);
+        F2 = findViewById(R.id.f2);
+        G2 = findViewById(R.id.g2);
+        A3 = findViewById(R.id.a3);
+        B3 = findViewById(R.id.b3);
+        C3 = findViewById(R.id.c3);
+        D3 = findViewById(R.id.d3);
+        E3 = findViewById(R.id.e3);
+        F3 = findViewById(R.id.f3);
+        G3 = findViewById(R.id.g3);
         noteIDs = new int[]{R.id.A, R.id.A, R.id.B, R.id.C, R.id.C, R.id.D, R.id.D, R.id.E, R.id.F,
             R.id.F, R.id.G, R.id.G, R.id.f2, R.id.c3};
         pitch = findViewById(R.id.txtFrequency);
@@ -86,7 +96,7 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
             }
         };
 
-        noteImages = new ImageView[]{A, A, B, C, C, D, D, E, F, F, G, G, secondNote, thirdNote};
+        noteImages = new ImageView[]{A, A, B, C, C, D, D, E, F, F, G, G};
         tempImage = noteImages[0];
         for (ImageView e: noteImages) {
             e.setVisibility(View.GONE);
