@@ -63,14 +63,14 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        A = findViewById(R.id.A);
-        B = findViewById(R.id.B);
-        C = findViewById(R.id.C);
-        D = findViewById(R.id.D);
-        E = findViewById(R.id.E);
-        F = findViewById(R.id.F);
-        G = findViewById(R.id.G);
-        A2= findViewById(R.id.a2);
+        A = findViewById(R.id.a1);
+        B = findViewById(R.id.b1);
+        C = findViewById(R.id.c1);
+        D = findViewById(R.id.d1);
+        E = findViewById(R.id.e1);
+        F = findViewById(R.id.f1);
+        G = findViewById(R.id.g1);
+        A2 = findViewById(R.id.a2);
         B2 = findViewById(R.id.b2);
         C2 = findViewById(R.id.c2);
         D2 = findViewById(R.id.d2);
@@ -84,8 +84,8 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
         E3 = findViewById(R.id.e3);
         F3 = findViewById(R.id.f3);
         G3 = findViewById(R.id.g3);
-        noteIDs = new int[]{R.id.A, R.id.A, R.id.B, R.id.C, R.id.C, R.id.D, R.id.D, R.id.E, R.id.F,
-            R.id.F, R.id.G, R.id.G};
+        noteIDs = new int[]{R.id.a1, R.id.a1, R.id.b1, R.id.c1, R.id.c1, R.id.d1, R.id.d1, R.id.e1, R.id.f1,
+            R.id.f1, R.id.g1, R.id.g1};
         pitch = findViewById(R.id.txtFrequency);
         note = findViewById(R.id.txtNote);
         tempoInputButton = findViewById(R.id.TempoInputButton);

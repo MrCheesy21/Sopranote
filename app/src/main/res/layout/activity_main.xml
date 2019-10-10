@@ -22,60 +22,95 @@
         app:srcCompat="@drawable/staff" />
 
     <ImageView
-        android:id="@+id/F"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="8dp"
-        app:layout_constraintBottom_toBottomOf="@+id/staff"
-        app:layout_constraintEnd_toEndOf="@+id/staff"
-        app:layout_constraintHorizontal_bias="0.501"
-        app:layout_constraintStart_toStartOf="@+id/staff"
-        app:layout_constraintTop_toTopOf="@+id/staff"
-        app:layout_constraintVertical_bias="0.261"
-        app:srcCompat="@drawable/backwards_note" />
-
-    <ImageView
-        android:id="@+id/E"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="8dp"
-        app:layout_constraintBottom_toBottomOf="@+id/staff"
-        app:layout_constraintEnd_toEndOf="@+id/staff"
-        app:layout_constraintHorizontal_bias="0.501"
-        app:layout_constraintStart_toStartOf="@+id/staff"
-        app:layout_constraintTop_toTopOf="@+id/staff"
-        app:layout_constraintVertical_bias="0.355"
-        app:srcCompat="@drawable/backwards_note" />
-
-    <ImageView
-        android:id="@+id/D"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        app:layout_constraintBottom_toBottomOf="@+id/staff"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
-        app:layout_constraintStart_toStartOf="@+id/staff"
-        app:layout_constraintTop_toTopOf="@+id/staff"
-        app:layout_constraintVertical_bias="0.45"
-        app:srcCompat="@drawable/backwards_note" />
-
-    <ImageView
-        android:id="@+id/B"
+        android:id="@+id/g1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         app:layout_constraintBottom_toBottomOf="@+id/staff"
         app:layout_constraintEnd_toEndOf="@+id/staff"
-        app:layout_constraintHorizontal_bias="0.515"
+        app:layout_constraintHorizontal_bias="0.250"
+        app:layout_constraintStart_toStartOf="@+id/staff"
+        app:layout_constraintTop_toTopOf="@+id/staff"
+        app:layout_constraintVertical_bias="0.43"
+        app:srcCompat="@drawable/quarter_note" />
+
+    <ImageView
+        android:id="@+id/a1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        app:layout_constraintBottom_toBottomOf="@+id/staff"
+        app:layout_constraintEnd_toEndOf="@+id/staff"
+        app:layout_constraintHorizontal_bias="0.250"
+        app:layout_constraintStart_toStartOf="@+id/staff"
+        app:layout_constraintTop_toTopOf="@+id/staff"
+        app:layout_constraintVertical_bias="0.345"
+        app:srcCompat="@drawable/quarter_note" />
+
+    <ImageView
+        android:id="@+id/b1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        app:layout_constraintBottom_toBottomOf="@+id/staff"
+        app:layout_constraintEnd_toEndOf="@+id/staff"
+        app:layout_constraintHorizontal_bias="0.250"
         app:layout_constraintStart_toStartOf="@+id/staff"
         app:layout_constraintTop_toTopOf="@+id/staff"
         app:layout_constraintVertical_bias="0.261"
         app:srcCompat="@drawable/quarter_note" />
+
+    <ImageView
+        android:id="@+id/c1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        app:layout_constraintBottom_toBottomOf="@+id/staff"
+        app:layout_constraintEnd_toEndOf="@+id/staff"
+        app:layout_constraintHorizontal_bias="0.250"
+        app:layout_constraintStart_toStartOf="@+id/staff"
+        app:layout_constraintTop_toTopOf="@+id/staff"
+        app:layout_constraintVertical_bias="0.518"
+        app:srcCompat="@drawable/backwards_note" />
+
+    <ImageView
+        android:id="@+id/d1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        app:layout_constraintBottom_toBottomOf="@+id/staff"
+        app:layout_constraintEnd_toEndOf="@id/staff"
+        app:layout_constraintHorizontal_bias="0.250"
+        app:layout_constraintStart_toStartOf="@+id/staff"
+        app:layout_constraintTop_toTopOf="@+id/staff"
+        app:layout_constraintVertical_bias="0.43"
+        app:srcCompat="@drawable/backwards_note" />
+
+    <ImageView
+        android:id="@+id/e1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        app:layout_constraintBottom_toBottomOf="@+id/staff"
+        app:layout_constraintEnd_toEndOf="@id/staff"
+        app:layout_constraintHorizontal_bias="0.250"
+        app:layout_constraintStart_toStartOf="@+id/staff"
+        app:layout_constraintTop_toTopOf="@+id/staff"
+        app:layout_constraintVertical_bias="0.345"
+        app:srcCompat="@drawable/backwards_note" />
+
+    <ImageView
+        android:id="@+id/f1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        app:layout_constraintBottom_toBottomOf="@+id/staff"
+        app:layout_constraintEnd_toEndOf="@id/staff"
+        app:layout_constraintHorizontal_bias="0.250"
+        app:layout_constraintStart_toStartOf="@+id/staff"
+        app:layout_constraintTop_toTopOf="@+id/staff"
+        app:layout_constraintVertical_bias="0.261"
+        app:srcCompat="@drawable/backwards_note" />
 
     <ImageView
         android:id="@+id/g2"
@@ -84,10 +119,10 @@
         android:layout_centerHorizontal="true"
         app:layout_constraintBottom_toBottomOf="@+id/staff"
         app:layout_constraintEnd_toEndOf="@+id/staff"
-        app:layout_constraintHorizontal_bias="0.714"
+        app:layout_constraintHorizontal_bias="0.450"
         app:layout_constraintStart_toStartOf="@+id/staff"
         app:layout_constraintTop_toTopOf="@+id/staff"
-        app:layout_constraintVertical_bias="0.45"
+        app:layout_constraintVertical_bias="0.43"
         app:srcCompat="@drawable/quarter_note" />
 
     <ImageView
@@ -97,10 +132,10 @@
         android:layout_centerHorizontal="true"
         app:layout_constraintBottom_toBottomOf="@+id/staff"
         app:layout_constraintEnd_toEndOf="@+id/staff"
-        app:layout_constraintHorizontal_bias="0.714"
+        app:layout_constraintHorizontal_bias="0.450"
         app:layout_constraintStart_toStartOf="@+id/staff"
         app:layout_constraintTop_toTopOf="@+id/staff"
-        app:layout_constraintVertical_bias="0.355"
+        app:layout_constraintVertical_bias="0.345"
         app:srcCompat="@drawable/quarter_note" />
 
     <ImageView
@@ -110,11 +145,63 @@
         android:layout_centerHorizontal="true"
         app:layout_constraintBottom_toBottomOf="@+id/staff"
         app:layout_constraintEnd_toEndOf="@+id/staff"
-        app:layout_constraintHorizontal_bias="0.714"
+        app:layout_constraintHorizontal_bias="0.450"
         app:layout_constraintStart_toStartOf="@+id/staff"
         app:layout_constraintTop_toTopOf="@+id/staff"
         app:layout_constraintVertical_bias="0.261"
         app:srcCompat="@drawable/quarter_note" />
+
+    <ImageView
+        android:id="@+id/c2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        app:layout_constraintBottom_toBottomOf="@+id/staff"
+        app:layout_constraintEnd_toEndOf="@+id/staff"
+        app:layout_constraintHorizontal_bias="0.450"
+        app:layout_constraintStart_toStartOf="@+id/staff"
+        app:layout_constraintTop_toTopOf="@+id/staff"
+        app:layout_constraintVertical_bias="0.518"
+        app:srcCompat="@drawable/backwards_note" />
+
+    <ImageView
+        android:id="@+id/d2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        app:layout_constraintBottom_toBottomOf="@+id/staff"
+        app:layout_constraintEnd_toEndOf="@id/staff"
+        app:layout_constraintHorizontal_bias="0.450"
+        app:layout_constraintStart_toStartOf="@+id/staff"
+        app:layout_constraintTop_toTopOf="@+id/staff"
+        app:layout_constraintVertical_bias="0.43"
+        app:srcCompat="@drawable/backwards_note" />
+
+    <ImageView
+        android:id="@+id/e2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        app:layout_constraintBottom_toBottomOf="@+id/staff"
+        app:layout_constraintEnd_toEndOf="@id/staff"
+        app:layout_constraintHorizontal_bias="0.450"
+        app:layout_constraintStart_toStartOf="@+id/staff"
+        app:layout_constraintTop_toTopOf="@+id/staff"
+        app:layout_constraintVertical_bias="0.345"
+        app:srcCompat="@drawable/backwards_note" />
+
+    <ImageView
+        android:id="@+id/f2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        app:layout_constraintBottom_toBottomOf="@+id/staff"
+        app:layout_constraintEnd_toEndOf="@id/staff"
+        app:layout_constraintHorizontal_bias="0.450"
+        app:layout_constraintStart_toStartOf="@+id/staff"
+        app:layout_constraintTop_toTopOf="@+id/staff"
+        app:layout_constraintVertical_bias="0.261"
+        app:srcCompat="@drawable/backwards_note" />
 
     <ImageView
         android:id="@+id/g3"
@@ -123,10 +210,10 @@
         android:layout_centerHorizontal="true"
         app:layout_constraintBottom_toBottomOf="@+id/staff"
         app:layout_constraintEnd_toEndOf="@+id/staff"
-        app:layout_constraintHorizontal_bias="0.888"
+        app:layout_constraintHorizontal_bias="0.650"
         app:layout_constraintStart_toStartOf="@+id/staff"
         app:layout_constraintTop_toTopOf="@+id/staff"
-        app:layout_constraintVertical_bias="0.45"
+        app:layout_constraintVertical_bias="0.43"
         app:srcCompat="@drawable/quarter_note" />
 
     <ImageView
@@ -136,10 +223,10 @@
         android:layout_centerHorizontal="true"
         app:layout_constraintBottom_toBottomOf="@+id/staff"
         app:layout_constraintEnd_toEndOf="@+id/staff"
-        app:layout_constraintHorizontal_bias="0.888"
+        app:layout_constraintHorizontal_bias="0.650"
         app:layout_constraintStart_toStartOf="@+id/staff"
         app:layout_constraintTop_toTopOf="@+id/staff"
-        app:layout_constraintVertical_bias="0.355"
+        app:layout_constraintVertical_bias="0.345"
         app:srcCompat="@drawable/quarter_note" />
 
     <ImageView
@@ -149,114 +236,11 @@
         android:layout_centerHorizontal="true"
         app:layout_constraintBottom_toBottomOf="@+id/staff"
         app:layout_constraintEnd_toEndOf="@+id/staff"
-        app:layout_constraintHorizontal_bias="0.888"
+        app:layout_constraintHorizontal_bias="0.650"
         app:layout_constraintStart_toStartOf="@+id/staff"
         app:layout_constraintTop_toTopOf="@+id/staff"
         app:layout_constraintVertical_bias="0.261"
         app:srcCompat="@drawable/quarter_note" />
-
-    <ImageView
-        android:id="@+id/C"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        app:layout_constraintBottom_toBottomOf="@+id/staff"
-        app:layout_constraintEnd_toEndOf="@+id/staff"
-        app:layout_constraintHorizontal_bias="0.515"
-        app:layout_constraintStart_toStartOf="@+id/staff"
-        app:layout_constraintTop_toTopOf="@+id/staff"
-        app:layout_constraintVertical_bias="0.538"
-        app:srcCompat="@drawable/backwards_note" />
-
-    <ImageView
-        android:id="@+id/f2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        app:layout_constraintBottom_toBottomOf="@+id/staff"
-        app:layout_constraintEnd_toEndOf="@+id/staff"
-        app:layout_constraintHorizontal_bias="0.714"
-        app:layout_constraintStart_toStartOf="@+id/staff"
-        app:layout_constraintTop_toTopOf="@+id/staff"
-        app:layout_constraintVertical_bias="0.216"
-        app:srcCompat="@drawable/backwards_note" />
-
-    <ImageView
-        android:id="@+id/d2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        app:layout_constraintBottom_toBottomOf="@+id/staff"
-        app:layout_constraintEnd_toEndOf="@+id/staff"
-        app:layout_constraintHorizontal_bias="0.714"
-        app:layout_constraintStart_toStartOf="@+id/staff"
-        app:layout_constraintTop_toTopOf="@+id/staff"
-        app:layout_constraintVertical_bias="0.411"
-        app:srcCompat="@drawable/backwards_note" />
-
-    <ImageView
-        android:id="@+id/c2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        app:layout_constraintBottom_toBottomOf="@+id/staff"
-        app:layout_constraintEnd_toEndOf="@+id/staff"
-        app:layout_constraintHorizontal_bias="0.714"
-        app:layout_constraintStart_toStartOf="@+id/staff"
-        app:layout_constraintTop_toTopOf="@+id/staff"
-        app:srcCompat="@drawable/backwards_note" />
-
-    <ImageView
-        android:id="@+id/e2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        app:layout_constraintBottom_toBottomOf="@+id/staff"
-        app:layout_constraintEnd_toEndOf="@+id/staff"
-        app:layout_constraintHorizontal_bias="0.714"
-        app:layout_constraintStart_toStartOf="@+id/staff"
-        app:layout_constraintTop_toTopOf="@+id/staff"
-        app:layout_constraintVertical_bias="0.311"
-        app:srcCompat="@drawable/backwards_note" />
-
-    <ImageView
-        android:id="@+id/f3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        app:layout_constraintBottom_toBottomOf="@+id/staff"
-        app:layout_constraintEnd_toEndOf="@+id/staff"
-        app:layout_constraintHorizontal_bias="0.891"
-        app:layout_constraintStart_toStartOf="@+id/staff"
-        app:layout_constraintTop_toTopOf="@+id/staff"
-        app:layout_constraintVertical_bias="0.216"
-        app:srcCompat="@drawable/backwards_note" />
-
-    <ImageView
-        android:id="@+id/e3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        app:layout_constraintBottom_toBottomOf="@+id/staff"
-        app:layout_constraintEnd_toEndOf="@+id/staff"
-        app:layout_constraintHorizontal_bias="0.888"
-        app:layout_constraintStart_toStartOf="@+id/staff"
-        app:layout_constraintTop_toTopOf="@+id/staff"
-        app:layout_constraintVertical_bias="0.355"
-        app:srcCompat="@drawable/backwards_note" />
-
-    <ImageView
-        android:id="@+id/d3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        app:layout_constraintBottom_toBottomOf="@+id/staff"
-        app:layout_constraintEnd_toEndOf="@+id/staff"
-        app:layout_constraintHorizontal_bias="0.888"
-        app:layout_constraintStart_toStartOf="@+id/staff"
-        app:layout_constraintTop_toTopOf="@+id/staff"
-        app:layout_constraintVertical_bias="0.411"
-        app:srcCompat="@drawable/backwards_note" />
 
     <ImageView
         android:id="@+id/c3"
@@ -265,49 +249,170 @@
         android:layout_centerHorizontal="true"
         app:layout_constraintBottom_toBottomOf="@+id/staff"
         app:layout_constraintEnd_toEndOf="@+id/staff"
-        app:layout_constraintHorizontal_bias="0.888"
+        app:layout_constraintHorizontal_bias="0.650"
         app:layout_constraintStart_toStartOf="@+id/staff"
         app:layout_constraintTop_toTopOf="@+id/staff"
+        app:layout_constraintVertical_bias="0.518"
         app:srcCompat="@drawable/backwards_note" />
 
     <ImageView
-        android:id="@+id/A"
+        android:id="@+id/d3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        app:layout_constraintBottom_toBottomOf="@+id/staff"
+        app:layout_constraintEnd_toEndOf="@id/staff"
+        app:layout_constraintHorizontal_bias="0.650"
+        app:layout_constraintStart_toStartOf="@+id/staff"
+        app:layout_constraintTop_toTopOf="@+id/staff"
+        app:layout_constraintVertical_bias="0.43"
+        app:srcCompat="@drawable/backwards_note" />
+
+    <ImageView
+        android:id="@+id/e3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        app:layout_constraintBottom_toBottomOf="@+id/staff"
+        app:layout_constraintEnd_toEndOf="@id/staff"
+        app:layout_constraintHorizontal_bias="0.650"
+        app:layout_constraintStart_toStartOf="@+id/staff"
+        app:layout_constraintTop_toTopOf="@+id/staff"
+        app:layout_constraintVertical_bias="0.345"
+        app:srcCompat="@drawable/backwards_note" />
+
+    <ImageView
+        android:id="@+id/f3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        app:layout_constraintBottom_toBottomOf="@+id/staff"
+        app:layout_constraintEnd_toEndOf="@id/staff"
+        app:layout_constraintHorizontal_bias="0.650"
+        app:layout_constraintStart_toStartOf="@+id/staff"
+        app:layout_constraintTop_toTopOf="@+id/staff"
+        app:layout_constraintVertical_bias="0.261"
+        app:srcCompat="@drawable/backwards_note" />
+
+    <ImageView
+        android:id="@+id/g4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         app:layout_constraintBottom_toBottomOf="@+id/staff"
         app:layout_constraintEnd_toEndOf="@+id/staff"
-        app:layout_constraintHorizontal_bias="0.515"
+        app:layout_constraintHorizontal_bias="0.850"
         app:layout_constraintStart_toStartOf="@+id/staff"
         app:layout_constraintTop_toTopOf="@+id/staff"
-        app:layout_constraintVertical_bias="0.355"
+        app:layout_constraintVertical_bias="0.43"
         app:srcCompat="@drawable/quarter_note" />
 
     <ImageView
-        android:id="@+id/G"
+        android:id="@+id/a4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         app:layout_constraintBottom_toBottomOf="@+id/staff"
         app:layout_constraintEnd_toEndOf="@+id/staff"
-        app:layout_constraintHorizontal_bias="0.515"
+        app:layout_constraintHorizontal_bias="0.850"
         app:layout_constraintStart_toStartOf="@+id/staff"
         app:layout_constraintTop_toTopOf="@+id/staff"
-        app:layout_constraintVertical_bias="0.411"
+        app:layout_constraintVertical_bias="0.345"
         app:srcCompat="@drawable/quarter_note" />
+
+    <ImageView
+        android:id="@+id/b4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        app:layout_constraintBottom_toBottomOf="@+id/staff"
+        app:layout_constraintEnd_toEndOf="@+id/staff"
+        app:layout_constraintHorizontal_bias="0.850"
+        app:layout_constraintStart_toStartOf="@+id/staff"
+        app:layout_constraintTop_toTopOf="@+id/staff"
+        app:layout_constraintVertical_bias="0.261"
+        app:srcCompat="@drawable/quarter_note" />
+
+    <ImageView
+        android:id="@+id/c4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        app:layout_constraintBottom_toBottomOf="@+id/staff"
+        app:layout_constraintEnd_toEndOf="@+id/staff"
+        app:layout_constraintHorizontal_bias="0.850"
+        app:layout_constraintStart_toStartOf="@+id/staff"
+        app:layout_constraintTop_toTopOf="@+id/staff"
+        app:layout_constraintVertical_bias="0.518"
+        app:srcCompat="@drawable/backwards_note" />
+
+    <ImageView
+        android:id="@+id/d4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        app:layout_constraintBottom_toBottomOf="@+id/staff"
+        app:layout_constraintEnd_toEndOf="@id/staff"
+        app:layout_constraintHorizontal_bias="0.850"
+        app:layout_constraintStart_toStartOf="@+id/staff"
+        app:layout_constraintTop_toTopOf="@+id/staff"
+        app:layout_constraintVertical_bias="0.43"
+        app:srcCompat="@drawable/backwards_note" />
+
+    <ImageView
+        android:id="@+id/e4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        app:layout_constraintBottom_toBottomOf="@+id/staff"
+        app:layout_constraintEnd_toEndOf="@id/staff"
+        app:layout_constraintHorizontal_bias="0.850"
+        app:layout_constraintStart_toStartOf="@+id/staff"
+        app:layout_constraintTop_toTopOf="@+id/staff"
+        app:layout_constraintVertical_bias="0.345"
+        app:srcCompat="@drawable/backwards_note" />
+
+    <ImageView
+        android:id="@+id/f4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        app:layout_constraintBottom_toBottomOf="@+id/staff"
+        app:layout_constraintEnd_toEndOf="@id/staff"
+        app:layout_constraintHorizontal_bias="0.850"
+        app:layout_constraintStart_toStartOf="@+id/staff"
+        app:layout_constraintTop_toTopOf="@+id/staff"
+        app:layout_constraintVertical_bias="0.261"
+        app:srcCompat="@drawable/backwards_note" />
+
+
+
+
+
 
     <TextView
         android:id="@+id/txtNote"
         android:layout_width="61dp"
         android:layout_height="122dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="128dp"
+        android:layout_marginBottom="124dp"
         android:fontFamily="casual"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="72sp"
         app:layout_constraintBottom_toTopOf="@+id/TempoInputButton"
         app:layout_constraintEnd_toEndOf="@+id/staff"
+        app:layout_constraintHorizontal_bias="0.293"
         app:layout_constraintStart_toStartOf="@+id/staff" />
+
+
+
+
+
+
+
+
+
+
 
     <TextView
         android:id="@+id/txtFrequency"
