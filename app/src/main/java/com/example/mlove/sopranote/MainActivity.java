@@ -184,17 +184,17 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
             if (shouldWrite) {
                 melodyList.add(notes[(int) pitchInHz]);
             }
-            if (shouldDisplay) {
-                for (int i = 0; i < noteImages.length; i++) {
-                    if (note.getText().equals(noteVals[i])){
-                        if (tempImage != noteImages[i]) {
-                            tempImage.setVisibility(View.INVISIBLE);
-                            noteImages[i].setVisibility(View.VISIBLE);
-                            tempImage = noteImages[i];
-                        }
-                    }
-                }
-            }
+//            if (shouldDisplay) {
+//                for (int i = 0; i < noteImages.length; i++) {
+//                    if (note.getText().equals(noteVals[i])){
+//                        if (tempImage != noteImages[i]) {
+//                            tempImage.setVisibility(View.INVISIBLE);
+//                            noteImages[i].setVisibility(View.VISIBLE);
+//                            tempImage = noteImages[i];
+//                        }
+//                    }
+//                }
+//            }
 
         } else if (shouldWrite) {
             melodyList.add("Rest");
@@ -241,21 +241,30 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
     }
 
     public void displaySecondThirdNotes(List<Note> noteDisplayList) {
+        clearImages();
         if (!noteDisplayList.isEmpty()) {
-            ImageView firstTempImage = secondNoteImages[0];
+            boolean wroteFirst = false, wroteSecond = false, wroteThird = false;
+            ImageView firstTempImage = noteImages[0];
             ImageView secondTempImage = secondNoteImages[0];
             ImageView thirdTempImage = thirdNoteImages[0];
-            Note firstNote = null, secondNote = null, thirdNote = null;
-            int index = 0;
+            Note firstNote = new Note("Rest", 0), secondNote = new Note("Rest", 0), thirdNote = new Note("Rest", 0);
             if (noteDisplayList.get(0).noteEquals("Rest")) {
                 index++;
             }
-            Log.d("", "We got this far2");
+            int noteDisplayListIndex = 0;
 
-            if ((noteDisplayList.size() - index) >= 3) {
-                firstNote = noteDisplayList.get(index);
-                secondNote = noteDisplayList.get(index + 1);
-                thirdNote = noteDisplayList.get(index + 2);
+            while (noteDisplayListIndex < noteDisplayList.size() && (!wroteFirst || !wroteSecond || !wroteThird)) {
+                if (!wroteFirst && !noteDisplayList.get(noteDisplayListIndex).noteEquals("Rest")) {
+                    wroteFirst = true;
+                    firstNote = noteDisplayList.get(noteDisplayListIndex);
+                } else if (!wroteSecond && !noteDisplayList.get(noteDisplayListIndex).noteEquals("Rest")) {
+                    wroteSecond = true;
+                    secondNote = noteDisplayList.get(noteDisplayListIndex);
+                } else if (!wroteThird && !noteDisplayList.get(noteDisplayListIndex).noteEquals("Rest")) {
+                    wroteThird = true;
+                    thirdNote = noteDisplayList.get(noteDisplayListIndex);
+                }
+                noteDisplayListIndex++;
             }
             for (int i = 0; i < secondNoteImages.length; i++) {
                 if (firstNote.getNote().equals(noteVals[i])) {
@@ -264,22 +273,31 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
                         noteImages[i].setVisibility(View.VISIBLE);
                         firstTempImage = noteImages[i];
                     }
-                    if (secondNote.getNote().equals(noteVals[i])) {
-                        if (secondTempImage != secondNoteImages[i]) {
-                            secondTempImage.setVisibility(View.INVISIBLE);
-                            secondNoteImages[i].setVisibility(View.VISIBLE);
-                            secondTempImage = noteImages[i];
-                        }
-                    }
-                    if (thirdNote.getNote().equals(noteVals[i])) {
-                        if (thirdTempImage != thirdNoteImages[i]) {
-                            thirdTempImage.setVisibility(View.INVISIBLE);
-                            thirdNoteImages[i].setVisibility(View.VISIBLE);
-                            thirdTempImage = thirdNoteImages[i];
-                        }
+                }
+                if (secondNote.getNote().equals(noteVals[i])) {
+                    if (secondTempImage != secondNoteImages[i]) {
+                        secondTempImage.setVisibility(View.INVISIBLE);
+                        secondNoteImages[i].setVisibility(View.VISIBLE);
+                        secondTempImage = noteImages[i];
                     }
                 }
+                if (thirdNote.getNote().equals(noteVals[i])) {
+                    if (thirdTempImage != thirdNoteImages[i]) {
+                        thirdTempImage.setVisibility(View.INVISIBLE);
+                        thirdNoteImages[i].setVisibility(View.VISIBLE);
+                        thirdTempImage = thirdNoteImages[i];
+                        }
+                    }
             }
+
+        }
+    }
+
+    private void clearImages() {
+        for (int i = 0; i < noteImages.length; i++) {
+            noteImages[i].setVisibility(View.GONE);
+            secondNoteImages[i].setVisibility(View.GONE);
+            thirdNoteImages[i].setVisibility(View.GONE);
         }
     }
 
