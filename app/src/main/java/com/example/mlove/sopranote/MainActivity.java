@@ -104,7 +104,6 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
         noteImages = new ImageView[]{A, A, B, C, C, D, D, E, F, F, G, G};
         secondNoteImages = new ImageView[]{A2, A2, B2, C2, C2, D2, D2, E2, F2, F2, G2, G2};
         thirdNoteImages = new ImageView[]{A3, A3, B3, C3, C3, D3, D3, E3, F3, F3, G3, G3};
-
         tempImage = noteImages[0];
         for (int i = 0; i < noteImages.length; i++) {
             noteImages[i].setVisibility(View.GONE);
