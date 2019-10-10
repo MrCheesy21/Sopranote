@@ -1,6 +1,7 @@
 package com.example.mlove.sopranote;
 
 
+import android.media.Image;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 
@@ -13,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import be.tarsos.dsp.AudioDispatcher;
 import be.tarsos.dsp.AudioEvent;
@@ -28,6 +30,9 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
     private final String[] noteVals = {"A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#"};
     private int[] noteIDs;
     private ImageView[] noteImages;
+    private ImageView[] secondNoteImages;
+    private ImageView[] thirdNoteImages;
+
     private ImageView tempImage;
 
     private Button tempoInputButton;
@@ -42,7 +47,7 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
     private ArrayList<String> melodyList;
     private Button writeArray;
     private Button stopWriting;
-    private boolean shouldWrite;
+    private boolean shouldWrite, shouldDisplay;
     private TextView noteDisplay;
 
     private static final String[] notes = new String[10001];
@@ -56,13 +61,13 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        A = findViewById(R.id.A);
-        B = findViewById(R.id.B);
-        C = findViewById(R.id.C);
-        D = findViewById(R.id.D);
-        E = findViewById(R.id.E);
-        F = findViewById(R.id.F);
-        G = findViewById(R.id.G);
+        A = findViewById(R.id.a1);
+        B = findViewById(R.id.b1);
+        C = findViewById(R.id.c1);
+        D = findViewById(R.id.d1);
+        E = findViewById(R.id.e1);
+        F = findViewById(R.id.f1);
+        G = findViewById(R.id.g1);
         A2 = findViewById(R.id.a2);
         B2 = findViewById(R.id.b2);
         C2 = findViewById(R.id.c2);
@@ -77,8 +82,9 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
         E3 = findViewById(R.id.e3);
         F3 = findViewById(R.id.f3);
         G3 = findViewById(R.id.g3);
-        noteIDs = new int[]{R.id.A, R.id.A, R.id.B, R.id.C, R.id.C, R.id.D, R.id.D, R.id.E, R.id.F,
-            R.id.F, R.id.G, R.id.G, R.id.f2, R.id.c3};
+
+        noteIDs = new int[]{R.id.a1, R.id.a1, R.id.b1, R.id.c1, R.id.c1, R.id.d1, R.id.d1, R.id.e1, R.id.f1,
+            R.id.f1, R.id.g1, R.id.g1};
         pitch = findViewById(R.id.txtFrequency);
         note = findViewById(R.id.txtNote);
         tempoInputButton = findViewById(R.id.TempoInputButton);
@@ -95,11 +101,15 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
                 tempoHandler.postDelayed(this, interval);
             }
         };
-
         noteImages = new ImageView[]{A, A, B, C, C, D, D, E, F, F, G, G};
+        secondNoteImages = new ImageView[]{A2, A2, B2, C2, C2, D2, D2, E2, F2, F2, G2, G2};
+        thirdNoteImages = new ImageView[]{A3, A3, B3, C3, C3, D3, D3, E3, F3, F3, G3, G3};
+
         tempImage = noteImages[0];
-        for (ImageView e: noteImages) {
-            e.setVisibility(View.GONE);
+        for (int i = 0; i < noteImages.length; i++) {
+            noteImages[i].setVisibility(View.GONE);
+            secondNoteImages[i].setVisibility(View.GONE);
+            thirdNoteImages[i].setVisibility(View.GONE);
         }
         shiftPitches(noteVals);
 
@@ -131,6 +141,7 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
             @Override
             public void onClick(View v) {
                 shouldWrite = false;
+                shouldDisplay = false;
                 displayNotes();
             }
         });
@@ -140,6 +151,7 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
             public void onClick(View v) {
                 melodyList.clear();
                 shouldWrite = true;
+                shouldDisplay = true;
             }
         });
 
@@ -171,16 +183,17 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
             if (shouldWrite) {
                 melodyList.add(notes[(int) pitchInHz]);
             }
-
-            for (int i = 0; i < noteImages.length; i++) {
-                if (findViewById(noteIDs[i]) == noteImages[i] && note.getText().equals(noteVals[i])){
-                    if (tempImage != noteImages[i]) {
-                        tempImage.setVisibility(View.INVISIBLE);
-                        noteImages[i].setVisibility(View.VISIBLE);
-                        tempImage = noteImages[i];
-                    }
-                }
-            }
+//            if (shouldDisplay) {
+//                for (int i = 0; i < noteImages.length; i++) {
+//                    if (note.getText().equals(noteVals[i])){
+//                        if (tempImage != noteImages[i]) {
+//                            tempImage.setVisibility(View.INVISIBLE);
+//                            noteImages[i].setVisibility(View.VISIBLE);
+//                            tempImage = noteImages[i];
+//                        }
+//                    }
+//                }
+//            }
 
         } else if (shouldWrite) {
             melodyList.add("Rest");
@@ -219,20 +232,79 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
             if (filteredList.get(i).noteEquals(filteredList.get(i + 1).getNote())) {
                 filteredList.get(i + 1).incrementDurationBy(filteredList.get(i).getDuration());
                 filteredList.remove(i);
-                if (i != 0) {
-                    i--;
-                }
             }
-            Log.i(TAG, "index: " + i + " " + filteredList.get(i).toString());
             noteDisplay.append(filteredList.get(i).toString());
         }
+        Log.i(TAG, "We got this far");
+        displaySecondThirdNotes(filteredList);
     }
+
+    public void displaySecondThirdNotes(List<Note> noteDisplayList) {
+        clearImages();
+        if (!noteDisplayList.isEmpty()) {
+            boolean wroteFirst = false, wroteSecond = false, wroteThird = false;
+            ImageView firstTempImage = noteImages[0];
+            ImageView secondTempImage = secondNoteImages[0];
+            ImageView thirdTempImage = thirdNoteImages[0];
+            Note firstNote = new Note("Rest", 0), secondNote = new Note("Rest", 0), thirdNote = new Note("Rest", 0);
+            if (noteDisplayList.get(0).noteEquals("Rest")) {
+                index++;
+            }
+            int noteDisplayListIndex = 0;
+
+            while (noteDisplayListIndex < noteDisplayList.size() && (!wroteFirst || !wroteSecond || !wroteThird)) {
+                if (!wroteFirst && !noteDisplayList.get(noteDisplayListIndex).noteEquals("Rest")) {
+                    wroteFirst = true;
+                    firstNote = noteDisplayList.get(noteDisplayListIndex);
+                } else if (!wroteSecond && !noteDisplayList.get(noteDisplayListIndex).noteEquals("Rest")) {
+                    wroteSecond = true;
+                    secondNote = noteDisplayList.get(noteDisplayListIndex);
+                } else if (!wroteThird && !noteDisplayList.get(noteDisplayListIndex).noteEquals("Rest")) {
+                    wroteThird = true;
+                    thirdNote = noteDisplayList.get(noteDisplayListIndex);
+                }
+                noteDisplayListIndex++;
+            }
+            for (int i = 0; i < secondNoteImages.length; i++) {
+                if (firstNote.getNote().equals(noteVals[i])) {
+                    if (firstTempImage != noteImages[i]) {
+                        firstTempImage.setVisibility(View.INVISIBLE);
+                        noteImages[i].setVisibility(View.VISIBLE);
+                        firstTempImage = noteImages[i];
+                    }
+                }
+                if (secondNote.getNote().equals(noteVals[i])) {
+                    if (secondTempImage != secondNoteImages[i]) {
+                        secondTempImage.setVisibility(View.INVISIBLE);
+                        secondNoteImages[i].setVisibility(View.VISIBLE);
+                        secondTempImage = noteImages[i];
+                    }
+                }
+                if (thirdNote.getNote().equals(noteVals[i])) {
+                    if (thirdTempImage != thirdNoteImages[i]) {
+                        thirdTempImage.setVisibility(View.INVISIBLE);
+                        thirdNoteImages[i].setVisibility(View.VISIBLE);
+                        thirdTempImage = thirdNoteImages[i];
+                        }
+                    }
+            }
+
+        }
+    }
+
+    private void clearImages() {
+        for (int i = 0; i < noteImages.length; i++) {
+            noteImages[i].setVisibility(View.GONE);
+            secondNoteImages[i].setVisibility(View.GONE);
+            thirdNoteImages[i].setVisibility(View.GONE);
+        }
+    }
+
 
     @Override
     public void setTempo(final String tempo) {
         if (!tempo.equals("")) {
             interval = 60000 / Integer.parseInt(tempo);
-            Log.d("da tag", "setTempo: the interval is " + interval);
             TempoView.setText(tempo + " BPM");
             tempoHandler.post(tempoRunner);
         }
