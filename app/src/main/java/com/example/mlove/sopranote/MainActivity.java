@@ -187,21 +187,9 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
 
             if (shouldWrite) {
                 melodyList.add(notes[(int) pitchInHz]);
+            } else if (shouldWrite) {
+                melodyList.add("Rest");
             }
-//            if (shouldDisplay) {
-//                for (int i = 0; i < noteImages.length; i++) {
-//                    if (note.getText().equals(noteVals[i])){
-//                        if (tempImage != noteImages[i]) {
-//                            tempImage.setVisibility(View.INVISIBLE);
-//                            noteImages[i].setVisibility(View.VISIBLE);
-//                            tempImage = noteImages[i];
-//                        }
-//                    }
-//                }
-//            }
-
-        } else if (shouldWrite) {
-            melodyList.add("Rest");
         }
     }
 
@@ -260,7 +248,7 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
                 noteDisplayListIndex++;
             }
 
-            while (noteDisplayListIndex < noteDisplayList.size() && (!wroteFirst || !wroteSecond || !wroteThird)) {
+            while (noteDisplayListIndex < noteDisplayList.size() && (!wroteFirst || !wroteSecond || !wroteThird || !wroteFourth)) {
                 if (!wroteFirst && !noteDisplayList.get(noteDisplayListIndex).noteEquals("Rest")) {
                     wroteFirst = true;
                     firstNote = noteDisplayList.get(noteDisplayListIndex);
@@ -302,11 +290,14 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
                     if (fourthTempImage != fourthNoteImages[i]) {
                         fourthTempImage.setVisibility(View.INVISIBLE);
                         fourthNoteImages[i].setVisibility(View.VISIBLE);
-                        fourthTempImage = thirdNoteImages[i];
+                        fourthTempImage = fourthNoteImages[i];
                     }
                 }
             }
-
+            Log.d("print first note", "firstNote: " + firstNote.getNote());
+            Log.d("print second note", "secondNote: " + secondNote.getNote());
+            Log.d("print third note", "thirdNOte: " + thirdNote.getNote());
+            Log.d("print fourth note", "fourthNote: " + fourthNote.getNote());
         }
     }
 
