@@ -187,9 +187,9 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
 
             if (shouldWrite) {
                 melodyList.add(notes[(int) pitchInHz]);
-            } else if (shouldWrite) {
-                melodyList.add("Rest");
             }
+        } else if (shouldWrite) {
+            melodyList.add("Rest");
         }
     }
 
@@ -235,10 +235,10 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
         clearImages();
         if (!noteDisplayList.isEmpty()) {
             boolean wroteFirst = false, wroteSecond = false, wroteThird = false, wroteFourth = false;
-            ImageView firstTempImage = noteImages[0];
-            ImageView secondTempImage = secondNoteImages[0];
-            ImageView thirdTempImage = thirdNoteImages[0];
-            ImageView fourthTempImage = fourthNoteImages[0];
+            ImageView firstTempImage = null;
+            ImageView secondTempImage = null;
+            ImageView thirdTempImage = null;
+            ImageView fourthTempImage = null;
             Note firstNote = new Note("Rest", 0),
                     secondNote = new Note("Rest", 0),
                     thirdNote = new Note("Rest", 0),
@@ -264,31 +264,39 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
                 }
                 noteDisplayListIndex++;
             }
-            for (int i = 0; i < secondNoteImages.length; i++) {
+            for (int i = 0; i < noteImages.length; i++) {
                 if (firstNote.getNote().equals(noteVals[i])) {
                     if (firstTempImage != noteImages[i]) {
-                        firstTempImage.setVisibility(View.INVISIBLE);
+                        if (firstTempImage != null) {
+                            firstTempImage.setVisibility(View.INVISIBLE);
+                        }
                         noteImages[i].setVisibility(View.VISIBLE);
                         firstTempImage = noteImages[i];
                     }
                 }
                 if (secondNote.getNote().equals(noteVals[i])) {
                     if (secondTempImage != secondNoteImages[i]) {
-                        secondTempImage.setVisibility(View.INVISIBLE);
+                        if (secondTempImage != null) {
+                            secondTempImage.setVisibility(View.INVISIBLE);
+                        }
                         secondNoteImages[i].setVisibility(View.VISIBLE);
                         secondTempImage = noteImages[i];
                     }
                 }
                 if (thirdNote.getNote().equals(noteVals[i])) {
                     if (thirdTempImage != thirdNoteImages[i]) {
-                        thirdTempImage.setVisibility(View.INVISIBLE);
+                        if (thirdTempImage != null) {
+                            thirdTempImage.setVisibility(View.INVISIBLE);
+                        }
                         thirdNoteImages[i].setVisibility(View.VISIBLE);
                         thirdTempImage = thirdNoteImages[i];
                         }
                     }
                 if (fourthNote.getNote().equals(noteVals[i])) {
                     if (fourthTempImage != fourthNoteImages[i]) {
-                        fourthTempImage.setVisibility(View.INVISIBLE);
+                        if (fourthTempImage != null) {
+                            fourthTempImage.setVisibility(View.INVISIBLE);
+                        }
                         fourthNoteImages[i].setVisibility(View.VISIBLE);
                         fourthTempImage = fourthNoteImages[i];
                     }
