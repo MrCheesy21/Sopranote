@@ -5,10 +5,16 @@ import android.support.annotation.NonNull;
 public class Note {
     private int duration;
     private String note;
+    private String quaverType;
 
     public Note(String note, int duration) {
         this.note = note;
         this.duration = duration;
+    }
+
+    public Note(String note, int duration, String quaverType) {
+        this(note, duration);
+        this.quaverType = quaverType;
     }
 
 
@@ -22,6 +28,14 @@ public class Note {
 
     public String getNote() {
         return note;
+    }
+
+    public String getQuaverType() {
+        return quaverType;
+    }
+
+    public void setQuaverType(String quaverType) {
+        this.quaverType = quaverType;
     }
 
     public void setNote(String note) {
