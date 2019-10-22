@@ -25,17 +25,16 @@ import be.tarsos.dsp.pitch.PitchDetectionResult;
 import be.tarsos.dsp.pitch.PitchProcessor;
 
 public class MainActivity extends AppCompatActivity implements TempoInputDialog.TempoInputListener {
-    private TextView note, pitch;
+    private TextView noteTextImage, pitchNumberInHertz;
     private ImageView A, B, C, D, E, F, G, A2, B2, C2, D2, E2, F2, G2, A3, B3, C3, D3, E3, F3, G3, A4, B4, C4, D4, E4, F4, G4;
-    private final String[] noteVals = {"A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#"};
-    private int[] noteIDs;
-    private ImageView[] noteImages;
+    private final String[] trueStringNoteValues = {"A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#"};
+    private ImageView[] noteImageViews;
     private ImageView[] secondNoteImages;
     private ImageView[] thirdNoteImages;
     private ImageView[] fourthNoteImages;
 
 
-    private ImageView tempImage;
+    private ImageView currentDisplayedNote;
 
     private Button tempoInputButton;
     private Button tempoStopButton;
@@ -46,17 +45,17 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
     private int interval;
 
 
-    private ArrayList<String> melodyList;
+    private ArrayList<String> listOfAllStringNotes;
     private Button writeArray;
     private Button stopWriting;
-    private boolean shouldWrite, shouldDisplay;
+    private boolean shouldWrite;
     private TextView noteDisplay;
 
     private static final String[] notes = new String[10001];
     private static double range = 1.225;
     private static int cursor = 7;
-    private static double index = 41;
-    private static double ind = 41;
+    private static double frontIndex = 41;
+    private static double middleIndex = 41;
 
 
     @Override
@@ -91,10 +90,8 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
         E4 = findViewById(R.id.e4);
         F4 = findViewById(R.id.f4);
         G4 = findViewById(R.id.g4);
-        noteIDs = new int[]{R.id.a1, R.id.a1, R.id.b1, R.id.c1, R.id.c1, R.id.d1, R.id.d1, R.id.e1, R.id.f1,
-            R.id.f1, R.id.g1, R.id.g1};
-        pitch = findViewById(R.id.txtFrequency);
-        note = findViewById(R.id.txtNote);
+        pitchNumberInHertz = findViewById(R.id.txtFrequency);
+        noteTextImage = findViewById(R.id.txtNote);
         tempoInputButton = findViewById(R.id.TempoInputButton);
         TempoView = findViewById(R.id.tempo);
         tempoStopButton = findViewById(R.id.tempoStopButton);
@@ -109,16 +106,16 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
                 tempoHandler.postDelayed(this, interval);
             }
         };
-        noteImages = new ImageView[]{A, A, B, C, C, D, D, E, F, F, G, G};
+
+        noteImageViews = new ImageView[]{A, A, B, C, C, D, D, E, F, F, G, G};
         secondNoteImages = new ImageView[]{A2, A2, B2, C2, C2, D2, D2, E2, F2, F2, G2, G2};
         thirdNoteImages = new ImageView[]{A3, A3, B3, C3, C3, D3, D3, E3, F3, F3, G3, G3};
         fourthNoteImages = new ImageView[]{A4, A4, B4, C4, C4, D4, D4, E4, F4, F4, G4, G4};
-
-        tempImage = noteImages[0];
+        currentDisplayedNote = noteImageViews[0];
         clearImages();
-        shiftPitches(noteVals);
+        shiftPitches(trueStringNoteValues);
 
-        melodyList = new ArrayList<>(10000);
+        listOfAllStringNotes = new ArrayList<>(10000);
         writeArray = findViewById(R.id.WriteArrayButton);
         stopWriting = findViewById(R.id.StopRecording);
         shouldWrite = false;
@@ -146,7 +143,6 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
             @Override
             public void onClick(View v) {
                 shouldWrite = false;
-                shouldDisplay = false;
                 filterMelodyList();
             }
         });
@@ -154,9 +150,8 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
         writeArray.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                melodyList.clear();
+                listOfAllStringNotes.clear();
                 shouldWrite = true;
-                shouldDisplay = true;
             }
         });
 
@@ -182,14 +177,14 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
 
     private void processPitch(float pitchInHz) {
         if (pitchInHz != -1.0) {
-            pitch.setText(String.format("%.2f", pitchInHz));
-            note.setText(notes[(int) pitchInHz]);
+            pitchNumberInHertz.setText(String.format("%.2f", pitchInHz));
+            noteTextImage.setText(notes[(int) pitchInHz]);
 
             if (shouldWrite) {
-                melodyList.add(notes[(int) pitchInHz]);
+                listOfAllStringNotes.add(notes[(int) pitchInHz]);
+            } else if (shouldWrite) {
+                listOfAllStringNotes.add("Rest");
             }
-        } else if (shouldWrite) {
-            melodyList.add("Rest");
         }
     }
 
@@ -199,36 +194,36 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
         Note tempNote = new Note("", 0);
 
         int startIndex = 0;
-        while(startIndex < melodyList.size() && melodyList.get(startIndex).equals("Rest")) {
+        while(startIndex < listOfAllStringNotes.size() && listOfAllStringNotes.get(startIndex).equals("Rest")) {
             startIndex++;
         }
-        ArrayList<Note> filteredList = new ArrayList<>();
-        for (int i = startIndex; i < melodyList.size() - 1; i++) {
-            Log.i(TAG, "Note at time " + i * 50 + ": " + melodyList.get(i));
-            if (!tempNote.equals(melodyList.get(i))) {
-                tempNote = new Note(melodyList.get(i), 0);
-                if (i != 0 && !(tempNote.noteEquals(melodyList.get(i - 1)))
-                        && !(tempNote.noteEquals(melodyList.get(i + 1)))) {
-                    tempNote = new Note(melodyList.get(i + 1), 1);
+        ArrayList<Note> notesWithDurations = new ArrayList<>();
+        for (int i = startIndex; i < listOfAllStringNotes.size() - 1; i++) {
+            Log.i(TAG, "Note at time " + i * 50 + ": " + listOfAllStringNotes.get(i));
+            if (!tempNote.equals(listOfAllStringNotes.get(i))) {
+                tempNote = new Note(listOfAllStringNotes.get(i), 0);
+                if (i != 0 && !(tempNote.noteEquals(listOfAllStringNotes.get(i - 1)))
+                        && !(tempNote.noteEquals(listOfAllStringNotes.get(i + 1)))) {
+                    tempNote = new Note(listOfAllStringNotes.get(i + 1), 1);
                 }
-                while(i + tempNote.getDuration() < melodyList.size()
-                        && tempNote.noteEquals(melodyList.get(i + tempNote.getDuration()))) {
+                while(i + tempNote.getDuration() < listOfAllStringNotes.size()
+                        && tempNote.noteEquals(listOfAllStringNotes.get(i + tempNote.getDuration()))) {
                     tempNote.incrementDurationBy(1);
                 }
                 if (tempNote.getDuration() > 2) {
-                    filteredList.add(tempNote);
+                    notesWithDurations.add(tempNote);
                 }
                 i += tempNote.getDuration();
             }
         }
-        for (int i = 0; i < filteredList.size() - 1; i++) {
-            if (filteredList.get(i).noteEquals(filteredList.get(i + 1).getNote())) {
-                filteredList.get(i + 1).incrementDurationBy(filteredList.get(i).getDuration());
-                filteredList.remove(i);
+        for (int i = 0; i < notesWithDurations.size() - 1; i++) {
+            if (notesWithDurations.get(i).noteEquals(notesWithDurations.get(i + 1).getNote())) {
+                notesWithDurations.get(i + 1).incrementDurationBy(notesWithDurations.get(i).getDuration());
+                notesWithDurations.remove(i);
             }
-            noteDisplay.append(filteredList.get(i).toString());
+            noteDisplay.append(notesWithDurations.get(i).toString());
         }
-        displayAllNotes(filteredList);
+        displayAllNotes(notesWithDurations);
     }
 
     public void displayAllNotes(List<Note> noteDisplayList) {
@@ -264,26 +259,26 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
                 }
                 noteDisplayListIndex++;
             }
-            for (int i = 0; i < noteImages.length; i++) {
-                if (firstNote.getNote().equals(noteVals[i])) {
-                    if (firstTempImage != noteImages[i]) {
+            for (int i = 0; i < secondNoteImages.length; i++) {
+                if (firstNote.getNote().equals(trueStringNoteValues[i])) {
+                    if (firstTempImage != noteImageViews[i]) {
                         if (firstTempImage != null) {
                             firstTempImage.setVisibility(View.INVISIBLE);
                         }
-                        noteImages[i].setVisibility(View.VISIBLE);
-                        firstTempImage = noteImages[i];
+                        noteImageViews[i].setVisibility(View.VISIBLE);
+                        firstTempImage = noteImageViews[i];
                     }
                 }
-                if (secondNote.getNote().equals(noteVals[i])) {
+                if (secondNote.getNote().equals(trueStringNoteValues[i])) {
                     if (secondTempImage != secondNoteImages[i]) {
                         if (secondTempImage != null) {
                             secondTempImage.setVisibility(View.INVISIBLE);
                         }
                         secondNoteImages[i].setVisibility(View.VISIBLE);
-                        secondTempImage = noteImages[i];
+                        secondTempImage = noteImageViews[i];
                     }
                 }
-                if (thirdNote.getNote().equals(noteVals[i])) {
+                if (thirdNote.getNote().equals(trueStringNoteValues[i])) {
                     if (thirdTempImage != thirdNoteImages[i]) {
                         if (thirdTempImage != null) {
                             thirdTempImage.setVisibility(View.INVISIBLE);
@@ -292,7 +287,7 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
                         thirdTempImage = thirdNoteImages[i];
                         }
                     }
-                if (fourthNote.getNote().equals(noteVals[i])) {
+                if (fourthNote.getNote().equals(trueStringNoteValues[i])) {
                     if (fourthTempImage != fourthNoteImages[i]) {
                         if (fourthTempImage != null) {
                             fourthTempImage.setVisibility(View.INVISIBLE);
@@ -310,8 +305,8 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
     }
 
     private void clearImages() {
-        for (int i = 0; i < noteImages.length; i++) {
-            noteImages[i].setVisibility(View.GONE);
+        for (int i = 0; i < noteImageViews.length; i++) {
+            noteImageViews[i].setVisibility(View.GONE);
             secondNoteImages[i].setVisibility(View.GONE);
             thirdNoteImages[i].setVisibility(View.GONE);
             fourthNoteImages[i].setVisibility(View.GONE);
@@ -334,16 +329,16 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
     times the 12th root of 2. Since there are 12 possible notes in an octave, A4 will be exactly
     double the frequency of A3.
      */
-    private void shiftPitches(String[] noteVals) {
-        while (index < notes.length) {
-            while (ind < index + range) {
-                if (ind < notes.length) {
-                    notes[(int) ind] =  noteVals[cursor % 12];
+    private void shiftPitches(String[] trueStringNoteValues) {
+        while (frontIndex < notes.length) {
+            while (middleIndex < frontIndex + range) {
+                if (middleIndex < notes.length) {
+                    notes[(int) middleIndex] =  trueStringNoteValues[cursor % 12];
                 }
-                ind++;
+                middleIndex++;
             }
             cursor++;
-            index += range * 2;
+            frontIndex += range * 2;
             nextRange();
         }
     }
