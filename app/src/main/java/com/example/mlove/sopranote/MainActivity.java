@@ -322,9 +322,13 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
                 }
             }
             Log.d("print first note", "firstNote: " + firstNote.getNote());
+            Log.d("print duration", "firstNote: " + firstNote.getDuration());
             Log.d("print second note", "secondNote: " + secondNote.getNote());
-            Log.d("print third note", "thirdNOte: " + thirdNote.getNote());
+            Log.d("print duration", "secondNote: " + secondNote.getDuration());
+            Log.d("print third note", "thirdNote: " + thirdNote.getNote());
+            Log.d("print duration", "thirdNote: " + thirdNote.getDuration());
             Log.d("print fourth note", "fourthNote: " + fourthNote.getNote());
+            Log.d("print duration", "fourthNote: " + fourthNote.getDuration());
         }
     }
 
@@ -375,7 +379,7 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
         double doubleInterval = (double) interval;
         int duration = note.getDuration();
         String quaverType = "Quarter";
-        if (duration < (doubleInterval * .6)) {
+        if (duration * 50 < (doubleInterval * .6)) {
             quaverType = "Eighth";
         }
         note.setQuaverType(quaverType);

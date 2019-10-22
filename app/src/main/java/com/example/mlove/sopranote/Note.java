@@ -9,7 +9,7 @@ public class Note {
 
     public Note(String note, int duration) {
         this.note = note;
-        this.duration = duration * 50;
+        this.duration = duration;
     }
 
     public Note(String note, int duration, String quaverType) {
@@ -23,7 +23,7 @@ public class Note {
     }
 
     public void incrementDurationBy(int duration) {
-        this.duration += duration * 50;
+        this.duration += duration ;
     }
 
     public String getNote() {
