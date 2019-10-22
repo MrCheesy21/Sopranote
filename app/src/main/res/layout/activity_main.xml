@@ -386,33 +386,19 @@
         app:srcCompat="@drawable/backwards_note" />
 
 
-
-
-
-
     <TextView
         android:id="@+id/txtNote"
         android:layout_width="61dp"
         android:layout_height="122dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="124dp"
+        android:layout_marginBottom="100dp"
         android:fontFamily="casual"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="72sp"
         app:layout_constraintBottom_toTopOf="@+id/TempoInputButton"
         app:layout_constraintEnd_toEndOf="@+id/staff"
-        app:layout_constraintHorizontal_bias="0.293"
+        app:layout_constraintHorizontal_bias="0.526"
         app:layout_constraintStart_toStartOf="@+id/staff" />
-
-
-
-
-
-
-
-
-
-
 
     <TextView
         android:id="@+id/txtFrequency"
@@ -544,5 +530,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="82dp"
+        android:layout_height="125dp"
+        app:srcCompat="@drawable/eighth_note"
+        tools:layout_editor_absoluteX="154dp"
+        tools:layout_editor_absoluteY="390dp" />
 
 </android.support.constraint.ConstraintLayout>
