@@ -532,7 +532,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/eighth_note"
         android:layout_width="82dp"
         android:layout_height="125dp"
         app:srcCompat="@drawable/eighth_note"

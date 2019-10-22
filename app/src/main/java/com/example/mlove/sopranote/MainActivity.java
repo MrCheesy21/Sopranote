@@ -246,15 +246,19 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
             while (noteDisplayListIndex < noteDisplayList.size() && (!wroteFirst || !wroteSecond || !wroteThird || !wroteFourth)) {
                 if (!wroteFirst && !noteDisplayList.get(noteDisplayListIndex).noteEquals("Rest")) {
                     wroteFirst = true;
+                    calculateQuaverType(noteDisplayList.get(noteDisplayListIndex));
                     firstNote = noteDisplayList.get(noteDisplayListIndex);
                 } else if (!wroteSecond && !noteDisplayList.get(noteDisplayListIndex).noteEquals("Rest")) {
                     wroteSecond = true;
+                    calculateQuaverType(noteDisplayList.get(noteDisplayListIndex));
                     secondNote = noteDisplayList.get(noteDisplayListIndex);
                 } else if (!wroteThird && !noteDisplayList.get(noteDisplayListIndex).noteEquals("Rest")) {
                     wroteThird = true;
+                    calculateQuaverType(noteDisplayList.get(noteDisplayListIndex));
                     thirdNote = noteDisplayList.get(noteDisplayListIndex);
                 } else if (!wroteFourth && !noteDisplayList.get(noteDisplayListIndex).noteEquals("Rest")) {
                     wroteFourth = true;
+                    calculateQuaverType(noteDisplayList.get(noteDisplayListIndex));
                     fourthNote = noteDisplayList.get(noteDisplayListIndex);
                 }
                 noteDisplayListIndex++;
@@ -265,6 +269,11 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
                         if (firstTempImage != null) {
                             firstTempImage.setVisibility(View.INVISIBLE);
                         }
+                        if (firstNote.getQuaverType().equals("Eighth")) {
+                            noteImageViews[i].setImageResource(R.drawable.eighth_note);
+                        } else {
+                            noteImageViews[i].setImageResource(R.drawable.backwards_note);
+                        }
                         noteImageViews[i].setVisibility(View.VISIBLE);
                         firstTempImage = noteImageViews[i];
                     }
@@ -273,6 +282,11 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
                     if (secondTempImage != secondNoteImages[i]) {
                         if (secondTempImage != null) {
                             secondTempImage.setVisibility(View.INVISIBLE);
+                        }
+                        if (secondNote.getQuaverType().equals("Eighth")) {
+                            secondNoteImages[i].setImageResource(R.drawable.eighth_note);
+                        } else {
+                            secondNoteImages[i].setImageResource(R.drawable.backwards_note);
                         }
                         secondNoteImages[i].setVisibility(View.VISIBLE);
                         secondTempImage = noteImageViews[i];
@@ -283,6 +297,11 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
                         if (thirdTempImage != null) {
                             thirdTempImage.setVisibility(View.INVISIBLE);
                         }
+                        if (thirdNote.getQuaverType().equals("Eighth")) {
+                            thirdNoteImages[i].setImageResource(R.drawable.eighth_note);
+                        } else {
+                            thirdNoteImages[i].setImageResource(R.drawable.backwards_note);
+                        }
                         thirdNoteImages[i].setVisibility(View.VISIBLE);
                         thirdTempImage = thirdNoteImages[i];
                         }
@@ -291,6 +310,11 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
                     if (fourthTempImage != fourthNoteImages[i]) {
                         if (fourthTempImage != null) {
                             fourthTempImage.setVisibility(View.INVISIBLE);
+                        }
+                        if (fourthNote.getQuaverType().equals("Eighth")) {
+                            fourthNoteImages[i].setImageResource(R.drawable.eighth_note);
+                        } else {
+                            fourthNoteImages[i].setImageResource(R.drawable.backwards_note);
                         }
                         fourthNoteImages[i].setVisibility(View.VISIBLE);
                         fourthTempImage = fourthNoteImages[i];
