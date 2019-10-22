@@ -346,5 +346,16 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
     private static void nextRange() {
         range *= Math.cbrt(Math.sqrt(Math.sqrt(2)));
     }
+
+    private void calculateQuaverType(Note note) {
+        double doubleInterval = (double) interval;
+        int duration = note.getDuration();
+        String quaverType = "Quarter";
+        if (duration < (doubleInterval * .6)) {
+            quaverType = "Eighth";
+        }
+        note.setQuaverType(quaverType);
+    }
+
 }
 
