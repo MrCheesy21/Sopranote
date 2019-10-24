@@ -1,6 +1,7 @@
 package com.example.mlove.sopranote;
 
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 public class Note {
     private int duration;
@@ -9,7 +10,7 @@ public class Note {
 
     public Note(String note, int duration) {
         this.note = note;
-        this.duration = duration * 50;
+        this.duration = duration;
     }
 
     public Note(String note, int duration, String quaverType) {
@@ -23,7 +24,7 @@ public class Note {
     }
 
     public void incrementDurationBy(int duration) {
-        this.duration += duration * 50;
+        this.duration += duration ;
     }
 
     public String getNote() {
@@ -40,6 +41,10 @@ public class Note {
 
     public void setNote(String note) {
         this.note = note;
+    }
+
+    public boolean forwards() {
+        return this.note.equals("A") || this.note.equals("A#") || this.note.equals("B") || this.note.equals("G") || this.note.equals("G#");
     }
 
     public boolean noteEquals(String other) {

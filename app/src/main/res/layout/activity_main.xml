@@ -531,12 +531,4 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <ImageView
-        android:id="@+id/eighth_note"
-        android:layout_width="82dp"
-        android:layout_height="125dp"
-        app:srcCompat="@drawable/eighth_note"
-        tools:layout_editor_absoluteX="154dp"
-        tools:layout_editor_absoluteY="390dp" />
-
 </android.support.constraint.ConstraintLayout>
