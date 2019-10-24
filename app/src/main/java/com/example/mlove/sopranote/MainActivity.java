@@ -179,12 +179,11 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
         if (pitchInHz != -1.0) {
             pitchNumberInHertz.setText(String.format("%.2f", pitchInHz));
             noteTextImage.setText(notes[(int) pitchInHz]);
-
             if (shouldWrite) {
                 listOfAllStringNotes.add(notes[(int) pitchInHz]);
-            } else if (shouldWrite) {
-                listOfAllStringNotes.add("Rest");
             }
+        } else if (shouldWrite) {
+            listOfAllStringNotes.add("Rest");
         }
     }
 
@@ -202,10 +201,6 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
             Log.i(TAG, "Note at time " + i * 50 + ": " + listOfAllStringNotes.get(i));
             if (!tempNote.equals(listOfAllStringNotes.get(i))) {
                 tempNote = new Note(listOfAllStringNotes.get(i), 0);
-                if (i != 0 && !(tempNote.noteEquals(listOfAllStringNotes.get(i - 1)))
-                        && !(tempNote.noteEquals(listOfAllStringNotes.get(i + 1)))) {
-                    tempNote = new Note(listOfAllStringNotes.get(i + 1), 1);
-                }
                 while(i + tempNote.getDuration() < listOfAllStringNotes.size()
                         && tempNote.noteEquals(listOfAllStringNotes.get(i + tempNote.getDuration()))) {
                     tempNote.incrementDurationBy(1);
@@ -323,7 +318,7 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
             }
             Log.d("print first note", "firstNote: " + firstNote.getNote());
             Log.d("print second note", "secondNote: " + secondNote.getNote());
-            Log.d("print third note", "thirdNOte: " + thirdNote.getNote());
+            Log.d("print third note", "thirdNote: " + thirdNote.getNote());
             Log.d("print fourth note", "fourthNote: " + fourthNote.getNote());
         }
     }
@@ -375,7 +370,7 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
         double doubleInterval = (double) interval;
         int duration = note.getDuration();
         String quaverType = "Quarter";
-        if (duration < (doubleInterval * .6)) {
+        if (duration * 50 < (doubleInterval * .6)) {
             quaverType = "Eighth";
         }
         note.setQuaverType(quaverType);
