@@ -1,11 +1,11 @@
 package com.example.mlove.sopranote;
 
 
-import android.media.Image;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 
 import android.os.Handler;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -269,10 +269,18 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
                         if (firstTempImage != null) {
                             firstTempImage.setVisibility(View.INVISIBLE);
                         }
-                        if (firstNote.getQuaverType().equals("Eighth")) {
-                            noteImageViews[i].setImageResource(R.drawable.eighth_note);
+                        if (firstNote.forwards()) {
+                            if (firstNote.getQuaverType().equals("Eighth")) {
+                                noteImageViews[i].setImageResource(R.drawable.eighth_note);
+                            } else {
+                                noteImageViews[i].setImageResource(R.drawable.quarter_note);
+                            }
                         } else {
-                            noteImageViews[i].setImageResource(R.drawable.backwards_note);
+                            if (firstNote.getQuaverType().equals("Eighth")) {
+                                noteImageViews[i].setImageResource(R.drawable.backwards_eighth_note);
+                            } else {
+                                noteImageViews[i].setImageResource(R.drawable.backwards_note);
+                            }
                         }
                         noteImageViews[i].setVisibility(View.VISIBLE);
                         firstTempImage = noteImageViews[i];
@@ -283,10 +291,18 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
                         if (secondTempImage != null) {
                             secondTempImage.setVisibility(View.INVISIBLE);
                         }
-                        if (secondNote.getQuaverType().equals("Eighth")) {
-                            secondNoteImages[i].setImageResource(R.drawable.eighth_note);
+                        if (secondNote.forwards()) {
+                            if (secondNote.getQuaverType().equals("Eighth")) {
+                                secondNoteImages[i].setImageResource(R.drawable.eighth_note);
+                            } else {
+                                secondNoteImages[i].setImageResource(R.drawable.quarter_note);
+                            }
                         } else {
-                            secondNoteImages[i].setImageResource(R.drawable.backwards_note);
+                            if (secondNote.getQuaverType().equals("Eighth")) {
+                                secondNoteImages[i].setImageResource(R.drawable.backwards_eighth_note);
+                            } else {
+                                secondNoteImages[i].setImageResource(R.drawable.backwards_note);
+                            }
                         }
                         secondNoteImages[i].setVisibility(View.VISIBLE);
                         secondTempImage = noteImageViews[i];
@@ -297,10 +313,18 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
                         if (thirdTempImage != null) {
                             thirdTempImage.setVisibility(View.INVISIBLE);
                         }
-                        if (thirdNote.getQuaverType().equals("Eighth")) {
-                            thirdNoteImages[i].setImageResource(R.drawable.eighth_note);
+                        if (thirdNote.forwards()) {
+                            if (thirdNote.getQuaverType().equals("Eighth")) {
+                                thirdNoteImages[i].setImageResource(R.drawable.eighth_note);
+                            } else {
+                                thirdNoteImages[i].setImageResource(R.drawable.quarter_note);
+                            }
                         } else {
-                            thirdNoteImages[i].setImageResource(R.drawable.backwards_note);
+                            if (thirdNote.getQuaverType().equals("Eighth")) {
+                                thirdNoteImages[i].setImageResource(R.drawable.backwards_eighth_note);
+                            } else {
+                                thirdNoteImages[i].setImageResource(R.drawable.backwards_note);
+                            }
                         }
                         thirdNoteImages[i].setVisibility(View.VISIBLE);
                         thirdTempImage = thirdNoteImages[i];
@@ -311,16 +335,27 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
                         if (fourthTempImage != null) {
                             fourthTempImage.setVisibility(View.INVISIBLE);
                         }
-                        if (fourthNote.getQuaverType().equals("Eighth")) {
-                            fourthNoteImages[i].setImageResource(R.drawable.eighth_note);
+                        if (fourthNote.forwards()) {
+                            if (fourthNote.getQuaverType().equals("Eighth")) {
+                                fourthNoteImages[i].setImageResource(R.drawable.eighth_note);
+                            } else {
+                                fourthNoteImages[i].setImageResource(R.drawable.quarter_note);
+                            }
                         } else {
-                            fourthNoteImages[i].setImageResource(R.drawable.backwards_note);
+                            if (fourthNote.getQuaverType().equals("Eighth")) {
+                                fourthNoteImages[i].setImageResource(R.drawable.backwards_eighth_note);
+                            } else {
+                                fourthNoteImages[i].setImageResource(R.drawable.backwards_note);
+                            }
                         }
                         fourthNoteImages[i].setVisibility(View.VISIBLE);
                         fourthTempImage = fourthNoteImages[i];
                     }
                 }
             }
+            ConstraintLayout.LayoutParams layoutParams = (ConstraintLayout.LayoutParams) A.getLayoutParams();
+            ConstraintLayout.LayoutParams layoutParams1 = (ConstraintLayout.LayoutParams) noteImageViews[0].getLayoutParams();
+            Log.d("layout stuff", "vertical bias of nIV: " + layoutParams1.verticalBias + ", should be: " + layoutParams.verticalBias);
             Log.d("print first note", "firstNote: " + firstNote.getNote());
             Log.d("print duration", "firstNote: " + firstNote.getDuration());
             Log.d("print second note", "secondNote: " + secondNote.getNote());
