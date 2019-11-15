@@ -27,6 +27,7 @@ import be.tarsos.dsp.pitch.PitchProcessor;
 public class MainActivity extends AppCompatActivity implements TempoInputDialog.TempoInputListener {
     private TextView noteTextImage, pitchNumberInHertz;
     private ImageView A, B, C, D, E, F, G, A2, B2, C2, D2, E2, F2, G2, A3, B3, C3, D3, E3, F3, G3, A4, B4, C4, D4, E4, F4, G4;
+    private ImageView Asharp, Csharp, Dsharp, Fsharp, Gsharp, Asharp2, Csharp2, Dsharp2, Fsharp2, Gsharp2, Asharp3, Csharp3, Dsharp3, Fsharp3, Gsharp3, Asharp4, Csharp4, Dsharp4, Fsharp4, Gsharp4;
     private final String[] trueStringNoteValues = {"A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#"};
     private ImageView[] noteImageViews;
     private ImageView[] secondNoteImages;
@@ -90,6 +91,28 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
         E4 = findViewById(R.id.e4);
         F4 = findViewById(R.id.f4);
         G4 = findViewById(R.id.g4);
+
+        Asharp = findViewById(R.id.a_sharp1);
+        Csharp = findViewById(R.id.c_sharp1);
+        Dsharp = findViewById(R.id.d_sharp1);
+        Fsharp = findViewById(R.id.f_sharp1);
+        Gsharp = findViewById(R.id.g_sharp1);
+        Asharp2 = findViewById(R.id.a_sharp2);
+        Csharp2 = findViewById(R.id.c_sharp2);
+        Dsharp2 = findViewById(R.id.d_sharp2);
+        Fsharp2 = findViewById(R.id.f_sharp2);
+        Gsharp2 = findViewById(R.id.g_sharp2);
+        Asharp3 = findViewById(R.id.a_sharp3);
+        Csharp3 = findViewById(R.id.c_sharp3);
+        Dsharp3 = findViewById(R.id.d_sharp3);
+        Fsharp3 = findViewById(R.id.f_sharp3);
+        Gsharp3 = findViewById(R.id.g_sharp3);
+        Asharp4 = findViewById(R.id.a_sharp4);
+        Csharp4 = findViewById(R.id.c_sharp4);
+        Dsharp4 = findViewById(R.id.d_sharp4);
+        Fsharp4 = findViewById(R.id.f_sharp4);
+        Gsharp4 = findViewById(R.id.g_sharp4);
+
         pitchNumberInHertz = findViewById(R.id.txtFrequency);
         noteTextImage = findViewById(R.id.txtNote);
         tempoInputButton = findViewById(R.id.TempoInputButton);
@@ -137,6 +160,8 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
         };
         AudioProcessor p = new PitchProcessor(PitchProcessor.PitchEstimationAlgorithm.FFT_YIN, 22050, 1024, pdh);
         dispatcher.addAudioProcessor(p);
+
+
         new Thread(dispatcher,"Audio Dispatcher").start();
 
         stopWriting.setOnClickListener(new View.OnClickListener() {
