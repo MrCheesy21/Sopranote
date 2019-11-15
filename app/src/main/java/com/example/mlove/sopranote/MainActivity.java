@@ -34,6 +34,10 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
     private ImageView[] thirdNoteImages;
     private ImageView[] fourthNoteImages;
 
+    private ImageView[] firstSharpImages;
+    private ImageView[] secondSharpImages;
+    private ImageView[] thirdSharpImages;
+    private ImageView[] fourthSharpImages;
 
     private ImageView currentDisplayedNote;
 
@@ -134,6 +138,12 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
         secondNoteImages = new ImageView[]{A2, A2, B2, C2, C2, D2, D2, E2, F2, F2, G2, G2};
         thirdNoteImages = new ImageView[]{A3, A3, B3, C3, C3, D3, D3, E3, F3, F3, G3, G3};
         fourthNoteImages = new ImageView[]{A4, A4, B4, C4, C4, D4, D4, E4, F4, F4, G4, G4};
+        firstSharpImages = new ImageView[] {Asharp, Csharp, Dsharp, Fsharp, Gsharp};
+        secondSharpImages = new ImageView[] {Asharp2, Csharp2, Dsharp2, Fsharp2, Gsharp2};
+        thirdSharpImages = new ImageView[] {Asharp3, Csharp3, Dsharp3, Fsharp3, Gsharp3};
+        fourthSharpImages = new ImageView[] {Asharp4, Csharp4, Dsharp4, Fsharp4, Gsharp4};
+
+
         currentDisplayedNote = noteImageViews[0];
         clearImages();
         shiftPitches(trueStringNoteValues);
@@ -400,6 +410,12 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
             secondNoteImages[i].setVisibility(View.GONE);
             thirdNoteImages[i].setVisibility(View.GONE);
             fourthNoteImages[i].setVisibility(View.GONE);
+        }
+        for (int i = 0; i < firstSharpImages.length; i++) {
+            firstSharpImages[i].setVisibility(View.GONE);
+            secondSharpImages[i].setVisibility(View.GONE);
+            thirdSharpImages[i].setVisibility(View.GONE);
+            fourthSharpImages[i].setVisibility(View.GONE);
         }
     }
 
