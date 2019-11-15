@@ -278,6 +278,9 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
                         } else {
                             if (firstNote.getQuaverType().equals("Eighth")) {
                                 noteImageViews[i].setImageResource(R.drawable.backwards_eighth_note);
+                                ConstraintLayout.LayoutParams layoutParams = (ConstraintLayout.LayoutParams) noteImageViews[i].getLayoutParams();
+                                layoutParams.verticalBias += 0.030;
+                                noteImageViews[i].setLayoutParams(layoutParams);
                             } else {
                                 noteImageViews[i].setImageResource(R.drawable.backwards_note);
                             }
@@ -300,6 +303,9 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
                         } else {
                             if (secondNote.getQuaverType().equals("Eighth")) {
                                 secondNoteImages[i].setImageResource(R.drawable.backwards_eighth_note);
+                                ConstraintLayout.LayoutParams layoutParams = (ConstraintLayout.LayoutParams) secondNoteImages[i].getLayoutParams();
+                                layoutParams.verticalBias += 0.030;
+                                secondNoteImages[i].setLayoutParams(layoutParams);
                             } else {
                                 secondNoteImages[i].setImageResource(R.drawable.backwards_note);
                             }
@@ -322,6 +328,9 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
                         } else {
                             if (thirdNote.getQuaverType().equals("Eighth")) {
                                 thirdNoteImages[i].setImageResource(R.drawable.backwards_eighth_note);
+                                ConstraintLayout.LayoutParams layoutParams = (ConstraintLayout.LayoutParams) thirdNoteImages[i].getLayoutParams();
+                                layoutParams.verticalBias += 0.030;
+                                thirdNoteImages[i].setLayoutParams(layoutParams);
                             } else {
                                 thirdNoteImages[i].setImageResource(R.drawable.backwards_note);
                             }
@@ -344,6 +353,9 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
                         } else {
                             if (fourthNote.getQuaverType().equals("Eighth")) {
                                 fourthNoteImages[i].setImageResource(R.drawable.backwards_eighth_note);
+                                ConstraintLayout.LayoutParams layoutParams = (ConstraintLayout.LayoutParams) fourthNoteImages[i].getLayoutParams();
+                                layoutParams.verticalBias += 0.030;
+                                fourthNoteImages[i].setLayoutParams(layoutParams);
                             } else {
                                 fourthNoteImages[i].setImageResource(R.drawable.backwards_note);
                             }
