@@ -27,12 +27,16 @@ import be.tarsos.dsp.pitch.PitchProcessor;
 public class MainActivity extends AppCompatActivity implements TempoInputDialog.TempoInputListener {
     private TextView noteTextImage, pitchNumberInHertz;
     private ImageView A, B, C, D, E, F, G, A2, B2, C2, D2, E2, F2, G2, A3, B3, C3, D3, E3, F3, G3, A4, B4, C4, D4, E4, F4, G4;
+    private ImageView Asharp1, Csharp1, Dsharp1, Fsharp1, Gsharp1, Asharp2, Csharp2, Dsharp2, Fsharp2, Gsharp2, Asharp3, Csharp3, Dsharp3, Fsharp3, Gsharp3, Asharp4, Csharp4, Dsharp4, Fsharp4, Gsharp4;
     private final String[] trueStringNoteValues = {"A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#"};
     private ImageView[] noteImageViews;
     private ImageView[] secondNoteImages;
     private ImageView[] thirdNoteImages;
     private ImageView[] fourthNoteImages;
-
+    private ImageView[] firstNoteSharps;
+    private ImageView[] secondNoteSharps;
+    private ImageView[] thirdNoteSharps;
+    private ImageView[] fourthNoteSharps;
 
     private ImageView currentDisplayedNote;
 
@@ -90,6 +94,26 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
         E4 = findViewById(R.id.e4);
         F4 = findViewById(R.id.f4);
         G4 = findViewById(R.id.g4);
+        Asharp1 = findViewById(R.id.a_sharp1);
+        Csharp1 = findViewById(R.id.c_sharp1);
+        Dsharp1 = findViewById(R.id.d_sharp1);
+        Fsharp1 = findViewById(R.id.f_sharp1);
+        Gsharp1 = findViewById(R.id.g_sharp1);
+        Asharp2 = findViewById(R.id.a_sharp2);
+        Csharp2 = findViewById(R.id.c_sharp2);
+        Dsharp2 = findViewById(R.id.d_sharp2);
+        Fsharp2 = findViewById(R.id.f_sharp2);
+        Gsharp2 = findViewById(R.id.g_sharp2);
+        Asharp3 = findViewById(R.id.a_sharp3);
+        Csharp3 = findViewById(R.id.c_sharp3);
+        Dsharp3 = findViewById(R.id.d_sharp3);
+        Fsharp3 = findViewById(R.id.f_sharp3);
+        Gsharp3 = findViewById(R.id.g_sharp3);
+        Asharp4 = findViewById(R.id.a_sharp4);
+        Csharp4 = findViewById(R.id.c_sharp4);
+        Dsharp4 = findViewById(R.id.d_sharp4);
+        Fsharp4 = findViewById(R.id.f_sharp4);
+        Gsharp4 = findViewById(R.id.g_sharp4);
         pitchNumberInHertz = findViewById(R.id.txtFrequency);
         noteTextImage = findViewById(R.id.txtNote);
         tempoInputButton = findViewById(R.id.TempoInputButton);
@@ -107,10 +131,10 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
             }
         };
 
-        noteImageViews = new ImageView[]{A, A, B, C, C, D, D, E, F, F, G, G};
-        secondNoteImages = new ImageView[]{A2, A2, B2, C2, C2, D2, D2, E2, F2, F2, G2, G2};
-        thirdNoteImages = new ImageView[]{A3, A3, B3, C3, C3, D3, D3, E3, F3, F3, G3, G3};
-        fourthNoteImages = new ImageView[]{A4, A4, B4, C4, C4, D4, D4, E4, F4, F4, G4, G4};
+        noteImageViews = new ImageView[]{A, Asharp1, B, C, Csharp1, D, Dsharp1, E, F, Fsharp1, G, Gsharp1};
+        secondNoteImages = new ImageView[]{A2, Asharp2, B2, C2, Csharp2, D2, Dsharp2, E2, F2, Fsharp2, G2, Gsharp2};
+        thirdNoteImages = new ImageView[]{A3, Asharp3, B3, C3, Csharp3, D3, Dsharp3, E3, F3, Fsharp3, G3, Gsharp3};
+        fourthNoteImages = new ImageView[]{A4, Asharp4, B4, C4, Csharp4, D4, Dsharp4, E4, F4, Fsharp4, G4, Gsharp4};
         currentDisplayedNote = noteImageViews[0];
         clearImages();
         shiftPitches(trueStringNoteValues);
@@ -228,6 +252,7 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
             ImageView firstTempImage = null;
             ImageView secondTempImage = null;
             ImageView thirdTempImage = null;
+
             ImageView fourthTempImage = null;
             Note firstNote = new Note("Rest", 0),
                     secondNote = new Note("Rest", 0),
@@ -260,24 +285,33 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
             }
             for (int i = 0; i < secondNoteImages.length; i++) {
                 if (firstNote.getNote().equals(trueStringNoteValues[i])) {
+                    Log.d("checking note", "firstNote = " + firstNote.getNote() + " trueStringVal " + trueStringNoteValues[i]);
                     if (firstTempImage != noteImageViews[i]) {
                         if (firstTempImage != null) {
                             firstTempImage.setVisibility(View.INVISIBLE);
                         }
-                        if (firstNote.forwards()) {
-                            if (firstNote.getQuaverType().equals("Eighth")) {
-                                noteImageViews[i].setImageResource(R.drawable.eighth_note);
+                        if (isSharp(trueStringNoteValues[i])) {
+                            if (firstNote.forwards()) {
+                                noteImageViews[i].setImageResource(R.drawable.quarter_note_sharp);
                             } else {
-                                noteImageViews[i].setImageResource(R.drawable.quarter_note);
+                                noteImageViews[i].setImageResource(R.drawable.backwards_quarter_note_sharp);
                             }
                         } else {
-                            if (firstNote.getQuaverType().equals("Eighth")) {
-                                noteImageViews[i].setImageResource(R.drawable.backwards_eighth_note);
-                                ConstraintLayout.LayoutParams layoutParams = (ConstraintLayout.LayoutParams) noteImageViews[i].getLayoutParams();
-                                layoutParams.verticalBias += 0.030;
-                                noteImageViews[i].setLayoutParams(layoutParams);
+                            if (firstNote.forwards()) {
+                                if (firstNote.getQuaverType().equals("Eighth")) {
+                                    noteImageViews[i].setImageResource(R.drawable.eighth_note);
+                                } else {
+                                    noteImageViews[i].setImageResource(R.drawable.quarter_note);
+                                }
                             } else {
-                                noteImageViews[i].setImageResource(R.drawable.backwards_note);
+                                if (firstNote.getQuaverType().equals("Eighth")) {
+                                    noteImageViews[i].setImageResource(R.drawable.backwards_eighth_note);
+                                    ConstraintLayout.LayoutParams layoutParams = (ConstraintLayout.LayoutParams) noteImageViews[i].getLayoutParams();
+                                    layoutParams.verticalBias += 0.030;
+                                    noteImageViews[i].setLayoutParams(layoutParams);
+                                } else {
+                                    noteImageViews[i].setImageResource(R.drawable.backwards_note);
+                                }
                             }
                         }
                         noteImageViews[i].setVisibility(View.VISIBLE);
@@ -285,24 +319,34 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
                     }
                 }
                 if (secondNote.getNote().equals(trueStringNoteValues[i])) {
+                    Log.d("checking note", "secondNote = " + secondNote.getNote() + " trueStringVal " + trueStringNoteValues[i]);
+
                     if (secondTempImage != secondNoteImages[i]) {
                         if (secondTempImage != null) {
                             secondTempImage.setVisibility(View.INVISIBLE);
                         }
-                        if (secondNote.forwards()) {
-                            if (secondNote.getQuaverType().equals("Eighth")) {
-                                secondNoteImages[i].setImageResource(R.drawable.eighth_note);
+                        if (isSharp(trueStringNoteValues[i])) {
+                            if (secondNote.forwards()) {
+                                noteImageViews[i].setImageResource(R.drawable.quarter_note_sharp);
                             } else {
-                                secondNoteImages[i].setImageResource(R.drawable.quarter_note);
+                                noteImageViews[i].setImageResource(R.drawable.backwards_quarter_note_sharp);
                             }
                         } else {
-                            if (secondNote.getQuaverType().equals("Eighth")) {
-                                secondNoteImages[i].setImageResource(R.drawable.backwards_eighth_note);
-                                ConstraintLayout.LayoutParams layoutParams = (ConstraintLayout.LayoutParams) secondNoteImages[i].getLayoutParams();
-                                layoutParams.verticalBias += 0.030;
-                                secondNoteImages[i].setLayoutParams(layoutParams);
+                            if (secondNote.forwards()) {
+                                if (secondNote.getQuaverType().equals("Eighth")) {
+                                    secondNoteImages[i].setImageResource(R.drawable.eighth_note);
+                                } else {
+                                    secondNoteImages[i].setImageResource(R.drawable.quarter_note);
+                                }
                             } else {
-                                secondNoteImages[i].setImageResource(R.drawable.backwards_note);
+                                if (secondNote.getQuaverType().equals("Eighth")) {
+                                    secondNoteImages[i].setImageResource(R.drawable.backwards_eighth_note);
+                                    ConstraintLayout.LayoutParams layoutParams = (ConstraintLayout.LayoutParams) secondNoteImages[i].getLayoutParams();
+                                    layoutParams.verticalBias += 0.030;
+                                    secondNoteImages[i].setLayoutParams(layoutParams);
+                                } else {
+                                    secondNoteImages[i].setImageResource(R.drawable.backwards_note);
+                                }
                             }
                         }
                         secondNoteImages[i].setVisibility(View.VISIBLE);
@@ -310,24 +354,33 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
                     }
                 }
                 if (thirdNote.getNote().equals(trueStringNoteValues[i])) {
+                    Log.d("checking note", "thirdNote = " + thirdNote.getNote() + " trueStringVal " + trueStringNoteValues[i]);
                     if (thirdTempImage != thirdNoteImages[i]) {
                         if (thirdTempImage != null) {
                             thirdTempImage.setVisibility(View.INVISIBLE);
                         }
-                        if (thirdNote.forwards()) {
-                            if (thirdNote.getQuaverType().equals("Eighth")) {
-                                thirdNoteImages[i].setImageResource(R.drawable.eighth_note);
+                        if (isSharp(trueStringNoteValues[i])) {
+                            if (thirdNote.forwards()) {
+                                noteImageViews[i].setImageResource(R.drawable.quarter_note_sharp);
                             } else {
-                                thirdNoteImages[i].setImageResource(R.drawable.quarter_note);
+                                noteImageViews[i].setImageResource(R.drawable.backwards_quarter_note_sharp);
                             }
                         } else {
-                            if (thirdNote.getQuaverType().equals("Eighth")) {
-                                thirdNoteImages[i].setImageResource(R.drawable.backwards_eighth_note);
-                                ConstraintLayout.LayoutParams layoutParams = (ConstraintLayout.LayoutParams) thirdNoteImages[i].getLayoutParams();
-                                layoutParams.verticalBias += 0.030;
-                                thirdNoteImages[i].setLayoutParams(layoutParams);
+                            if (thirdNote.forwards()) {
+                                if (thirdNote.getQuaverType().equals("Eighth")) {
+                                    thirdNoteImages[i].setImageResource(R.drawable.eighth_note);
+                                } else {
+                                    thirdNoteImages[i].setImageResource(R.drawable.quarter_note);
+                                }
                             } else {
-                                thirdNoteImages[i].setImageResource(R.drawable.backwards_note);
+                                if (thirdNote.getQuaverType().equals("Eighth")) {
+                                    thirdNoteImages[i].setImageResource(R.drawable.backwards_eighth_note);
+                                    ConstraintLayout.LayoutParams layoutParams = (ConstraintLayout.LayoutParams) thirdNoteImages[i].getLayoutParams();
+                                    layoutParams.verticalBias += 0.030;
+                                    thirdNoteImages[i].setLayoutParams(layoutParams);
+                                } else {
+                                    thirdNoteImages[i].setImageResource(R.drawable.backwards_note);
+                                }
                             }
                         }
                         thirdNoteImages[i].setVisibility(View.VISIBLE);
@@ -335,24 +388,33 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
                         }
                     }
                 if (fourthNote.getNote().equals(trueStringNoteValues[i])) {
+                    Log.d("checking note", "fourthNote = " + fourthNote.getNote() + " trueStringVal " + trueStringNoteValues[i]);
                     if (fourthTempImage != fourthNoteImages[i]) {
                         if (fourthTempImage != null) {
                             fourthTempImage.setVisibility(View.INVISIBLE);
                         }
-                        if (fourthNote.forwards()) {
-                            if (fourthNote.getQuaverType().equals("Eighth")) {
-                                fourthNoteImages[i].setImageResource(R.drawable.eighth_note);
+                        if (isSharp(trueStringNoteValues[i])) {
+                            if (fourthNote.forwards()) {
+                                noteImageViews[i].setImageResource(R.drawable.quarter_note_sharp);
                             } else {
-                                fourthNoteImages[i].setImageResource(R.drawable.quarter_note);
+                                noteImageViews[i].setImageResource(R.drawable.backwards_quarter_note_sharp);
                             }
                         } else {
-                            if (fourthNote.getQuaverType().equals("Eighth")) {
-                                fourthNoteImages[i].setImageResource(R.drawable.backwards_eighth_note);
-                                ConstraintLayout.LayoutParams layoutParams = (ConstraintLayout.LayoutParams) fourthNoteImages[i].getLayoutParams();
-                                layoutParams.verticalBias += 0.030;
-                                fourthNoteImages[i].setLayoutParams(layoutParams);
+                            if (fourthNote.forwards()) {
+                                if (fourthNote.getQuaverType().equals("Eighth")) {
+                                    fourthNoteImages[i].setImageResource(R.drawable.eighth_note);
+                                } else {
+                                    fourthNoteImages[i].setImageResource(R.drawable.quarter_note);
+                                }
                             } else {
-                                fourthNoteImages[i].setImageResource(R.drawable.backwards_note);
+                                if (fourthNote.getQuaverType().equals("Eighth")) {
+                                    fourthNoteImages[i].setImageResource(R.drawable.backwards_eighth_note);
+                                    ConstraintLayout.LayoutParams layoutParams = (ConstraintLayout.LayoutParams) fourthNoteImages[i].getLayoutParams();
+                                    layoutParams.verticalBias += 0.030;
+                                    fourthNoteImages[i].setLayoutParams(layoutParams);
+                                } else {
+                                    fourthNoteImages[i].setImageResource(R.drawable.backwards_note);
+                                }
                             }
                         }
                         fourthNoteImages[i].setVisibility(View.VISIBLE);
@@ -362,7 +424,7 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
             }
             ConstraintLayout.LayoutParams layoutParams = (ConstraintLayout.LayoutParams) A.getLayoutParams();
             ConstraintLayout.LayoutParams layoutParams1 = (ConstraintLayout.LayoutParams) noteImageViews[0].getLayoutParams();
-            Log.d("layout stuff", "vertical bias of nIV: " + layoutParams1.verticalBias + ", should be: " + layoutParams.verticalBias);
+            Log.d("note stuff", "firstNote");
             Log.d("print first note", "firstNote: " + firstNote.getNote());
             Log.d("print duration", "firstNote: " + firstNote.getDuration());
             Log.d("print second note", "secondNote: " + secondNote.getNote());
@@ -420,6 +482,27 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
             quaverType = "Eighth";
         }
         note.setQuaverType(quaverType);
+    }
+
+    private boolean isSharp(String note) {
+        return note.length() > 1;
+    }
+
+    private int getSharpIndex(char firstNoteChar) {
+        switch (firstNoteChar){
+            case 'A':
+                return 0;
+            case 'C':
+                return 1;
+            case 'D':
+                return 2;
+            case 'F':
+                return 3;
+            case 'G':
+                return 4;
+            default:
+                return -1;
+        }
     }
 
 }
