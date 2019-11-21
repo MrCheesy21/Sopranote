@@ -27,12 +27,17 @@ import be.tarsos.dsp.pitch.PitchProcessor;
 public class MainActivity extends AppCompatActivity implements TempoInputDialog.TempoInputListener {
     private TextView noteTextImage, pitchNumberInHertz;
     private ImageView A, B, C, D, E, F, G, A2, B2, C2, D2, E2, F2, G2, A3, B3, C3, D3, E3, F3, G3, A4, B4, C4, D4, E4, F4, G4;
+    private ImageView Asharp, Csharp, Dsharp, Fsharp, Gsharp, Asharp2, Csharp2, Dsharp2, Fsharp2, Gsharp2, Asharp3, Csharp3, Dsharp3, Fsharp3, Gsharp3, Asharp4, Csharp4, Dsharp4, Fsharp4, Gsharp4;
     private final String[] trueStringNoteValues = {"A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#"};
     private ImageView[] noteImageViews;
     private ImageView[] secondNoteImages;
     private ImageView[] thirdNoteImages;
     private ImageView[] fourthNoteImages;
 
+    private ImageView[] firstSharpImages;
+    private ImageView[] secondSharpImages;
+    private ImageView[] thirdSharpImages;
+    private ImageView[] fourthSharpImages;
 
     private ImageView currentDisplayedNote;
 
@@ -90,6 +95,28 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
         E4 = findViewById(R.id.e4);
         F4 = findViewById(R.id.f4);
         G4 = findViewById(R.id.g4);
+
+        Asharp = findViewById(R.id.a_sharp1);
+        Csharp = findViewById(R.id.c_sharp1);
+        Dsharp = findViewById(R.id.d_sharp1);
+        Fsharp = findViewById(R.id.f_sharp1);
+        Gsharp = findViewById(R.id.g_sharp1);
+        Asharp2 = findViewById(R.id.a_sharp2);
+        Csharp2 = findViewById(R.id.c_sharp2);
+        Dsharp2 = findViewById(R.id.d_sharp2);
+        Fsharp2 = findViewById(R.id.f_sharp2);
+        Gsharp2 = findViewById(R.id.g_sharp2);
+        Asharp3 = findViewById(R.id.a_sharp3);
+        Csharp3 = findViewById(R.id.c_sharp3);
+        Dsharp3 = findViewById(R.id.d_sharp3);
+        Fsharp3 = findViewById(R.id.f_sharp3);
+        Gsharp3 = findViewById(R.id.g_sharp3);
+        Asharp4 = findViewById(R.id.a_sharp4);
+        Csharp4 = findViewById(R.id.c_sharp4);
+        Dsharp4 = findViewById(R.id.d_sharp4);
+        Fsharp4 = findViewById(R.id.f_sharp4);
+        Gsharp4 = findViewById(R.id.g_sharp4);
+
         pitchNumberInHertz = findViewById(R.id.txtFrequency);
         noteTextImage = findViewById(R.id.txtNote);
         tempoInputButton = findViewById(R.id.TempoInputButton);
@@ -111,6 +138,12 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
         secondNoteImages = new ImageView[]{A2, A2, B2, C2, C2, D2, D2, E2, F2, F2, G2, G2};
         thirdNoteImages = new ImageView[]{A3, A3, B3, C3, C3, D3, D3, E3, F3, F3, G3, G3};
         fourthNoteImages = new ImageView[]{A4, A4, B4, C4, C4, D4, D4, E4, F4, F4, G4, G4};
+        firstSharpImages = new ImageView[] {Asharp, Csharp, Dsharp, Fsharp, Gsharp};
+        secondSharpImages = new ImageView[] {Asharp2, Csharp2, Dsharp2, Fsharp2, Gsharp2};
+        thirdSharpImages = new ImageView[] {Asharp3, Csharp3, Dsharp3, Fsharp3, Gsharp3};
+        fourthSharpImages = new ImageView[] {Asharp4, Csharp4, Dsharp4, Fsharp4, Gsharp4};
+
+
         currentDisplayedNote = noteImageViews[0];
         clearImages();
         shiftPitches(trueStringNoteValues);
@@ -137,6 +170,8 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
         };
         AudioProcessor p = new PitchProcessor(PitchProcessor.PitchEstimationAlgorithm.FFT_YIN, 22050, 1024, pdh);
         dispatcher.addAudioProcessor(p);
+
+
         new Thread(dispatcher,"Audio Dispatcher").start();
 
         stopWriting.setOnClickListener(new View.OnClickListener() {
@@ -179,12 +214,11 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
         if (pitchInHz != -1.0) {
             pitchNumberInHertz.setText(String.format("%.2f", pitchInHz));
             noteTextImage.setText(notes[(int) pitchInHz]);
-
             if (shouldWrite) {
                 listOfAllStringNotes.add(notes[(int) pitchInHz]);
-            } else if (shouldWrite) {
-                listOfAllStringNotes.add("Rest");
             }
+        } else if (shouldWrite) {
+            listOfAllStringNotes.add("Rest");
         }
     }
 
@@ -202,10 +236,6 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
             Log.i(TAG, "Note at time " + i * 50 + ": " + listOfAllStringNotes.get(i));
             if (!tempNote.equals(listOfAllStringNotes.get(i))) {
                 tempNote = new Note(listOfAllStringNotes.get(i), 0);
-                if (i != 0 && !(tempNote.noteEquals(listOfAllStringNotes.get(i - 1)))
-                        && !(tempNote.noteEquals(listOfAllStringNotes.get(i + 1)))) {
-                    tempNote = new Note(listOfAllStringNotes.get(i + 1), 1);
-                }
                 while(i + tempNote.getDuration() < listOfAllStringNotes.size()
                         && tempNote.noteEquals(listOfAllStringNotes.get(i + tempNote.getDuration()))) {
                     tempNote.incrementDurationBy(1);
@@ -371,11 +401,6 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
             Log.d("print first note", "firstNote: " + firstNote.getNote());
             Log.d("print duration", "firstNote: " + firstNote.getDuration());
             Log.d("print second note", "secondNote: " + secondNote.getNote());
-            Log.d("print duration", "secondNote: " + secondNote.getDuration());
-            Log.d("print third note", "thirdNote: " + thirdNote.getNote());
-            Log.d("print duration", "thirdNote: " + thirdNote.getDuration());
-            Log.d("print fourth note", "fourthNote: " + fourthNote.getNote());
-            Log.d("print duration", "fourthNote: " + fourthNote.getDuration());
         }
     }
 
@@ -385,6 +410,12 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
             secondNoteImages[i].setVisibility(View.GONE);
             thirdNoteImages[i].setVisibility(View.GONE);
             fourthNoteImages[i].setVisibility(View.GONE);
+        }
+        for (int i = 0; i < firstSharpImages.length; i++) {
+            firstSharpImages[i].setVisibility(View.GONE);
+            secondSharpImages[i].setVisibility(View.GONE);
+            thirdSharpImages[i].setVisibility(View.GONE);
+            fourthSharpImages[i].setVisibility(View.GONE);
         }
     }
 
