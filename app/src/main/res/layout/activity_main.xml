@@ -151,6 +151,8 @@
         app:layout_constraintVertical_bias="0.345"
         app:srcCompat="@drawable/backwards_note" />
 
+
+
     <ImageView
         android:id="@+id/f1"
         android:layout_width="wrap_content"

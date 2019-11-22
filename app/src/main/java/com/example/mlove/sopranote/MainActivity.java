@@ -27,16 +27,13 @@ import be.tarsos.dsp.pitch.PitchProcessor;
 public class MainActivity extends AppCompatActivity implements TempoInputDialog.TempoInputListener {
     private TextView noteTextImage, pitchNumberInHertz;
     private ImageView A, B, C, D, E, F, G, A2, B2, C2, D2, E2, F2, G2, A3, B3, C3, D3, E3, F3, G3, A4, B4, C4, D4, E4, F4, G4;
+
     private ImageView Asharp1, Csharp1, Dsharp1, Fsharp1, Gsharp1, Asharp2, Csharp2, Dsharp2, Fsharp2, Gsharp2, Asharp3, Csharp3, Dsharp3, Fsharp3, Gsharp3, Asharp4, Csharp4, Dsharp4, Fsharp4, Gsharp4;
     private final String[] trueStringNoteValues = {"A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#"};
     private ImageView[] noteImageViews;
     private ImageView[] secondNoteImages;
     private ImageView[] thirdNoteImages;
     private ImageView[] fourthNoteImages;
-    private ImageView[] firstNoteSharps;
-    private ImageView[] secondNoteSharps;
-    private ImageView[] thirdNoteSharps;
-    private ImageView[] fourthNoteSharps;
 
     private ImageView currentDisplayedNote;
 
@@ -114,6 +111,7 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
         Dsharp4 = findViewById(R.id.d_sharp4);
         Fsharp4 = findViewById(R.id.f_sharp4);
         Gsharp4 = findViewById(R.id.g_sharp4);
+
         pitchNumberInHertz = findViewById(R.id.txtFrequency);
         noteTextImage = findViewById(R.id.txtNote);
         tempoInputButton = findViewById(R.id.TempoInputButton);
@@ -161,6 +159,8 @@ public class MainActivity extends AppCompatActivity implements TempoInputDialog.
         };
         AudioProcessor p = new PitchProcessor(PitchProcessor.PitchEstimationAlgorithm.FFT_YIN, 22050, 1024, pdh);
         dispatcher.addAudioProcessor(p);
+
+
         new Thread(dispatcher,"Audio Dispatcher").start();
 
         stopWriting.setOnClickListener(new View.OnClickListener() {
